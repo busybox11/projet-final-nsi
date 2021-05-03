@@ -1,0 +1,19 @@
+{
+  "name": "projet-final-nsi",
+  "version": "1.0.0",
+  "description": "Projet final de NSI de Première avec Josselin GAUTIER",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/busybox11/projet-final-nsi.git"
+  },
+  "author": "rchartier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/busybox11/projet-final-nsi/issues"
+  },
+  "homepage": "https://github.com/busybox11/projet-final-nsi#readme"
+}
