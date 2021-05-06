@@ -4,7 +4,8 @@
   "description": "Projet final de NSI de Première avec Josselin GAUTIER",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "node server",
+    "build:css": "postcss public/css/tailwind.css -o public/css/style.css"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,12 @@
   "homepage": "https://github.com/busybox11/projet-final-nsi#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.14",
+    "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.0.1",
+    "tailwindcss": "^2.1.2"
   }
 }

@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReJo - Home</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body >
+
+    <!-- Fonts -->
+    <link href="https://db.onlinewebfonts.com/c/a17af96c10647b3403e18a0e94283536?family=Joystix" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
     <script id="canvas" src="./tetris.js"></script>
+    <title>Twotris</title>
+</head>
+<body class="bg-black text-white h-full">
+    <div class="flex flex-col align-center justify-center text-center h-screen">
+        <h1 class="text-8xl font-bold font-joystix">Twotris</h1>
+        <h4 class="text-2xl font-semibold font-joystix text-gray-500 mb-8">Affrontez une personne à Tetris</h4>
+
+        <div class="flex mx-auto">
+            <a href="#" class="bg-indigo-900 rounded-lg px-8 py-4 text-center font-joystix">Commencer à jouer</a>
+        </div>
+    </div>
 </body>
 </html>
