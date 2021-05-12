@@ -4,7 +4,7 @@ var grid = []
 var size = 20
 var canPushPiece = true
 var pieceFalling
-var timeLapseFall = 10
+var timeLapseFall = 15
 
 var L = [
     [0, 0, 1],
@@ -14,28 +14,35 @@ var L = [
 
 var I = [
     [0, 0, 0, 0],
-    [1, 1, 1, 1],
+    [2, 2, 2, 2],
     [0, 0, 0, 0],
     [0, 0, 0, 0]
 ]
 
 var J = [
-    [1, 0, 0],
-    [1, 1, 1],
+    [3, 0, 0],
+    [3, 3, 3],
     [0, 0, 0]
 ]
 
 var S = [
-    [0, 1, 1],
-    [1, 1, 0],
+    [0, 4, 4],
+    [4, 4, 0],
     [0, 0, 0]
 ]
 
 var T = [
-    [0, 1, 0],
-    [1, 1, 1],
+    [0, 5, 0],
+    [5, 5, 5],
     [0, 0, 0]
 ]
+
+var Q = [
+    [6, 6],
+    [6, 6]
+]
+
+var pieces = [L, I, J, S, T, Q]
 
 //function executed one time before the first frame
 function setup() {
@@ -47,16 +54,32 @@ function setup() {
             grid[y][x] = 0
         }
     }
-    pieceFalling = new Piece(L)
+    stroke(200)
+    pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
 }
 
 //function executed every frame
 function draw() {
+    keydown()
     background(255)
         //draw the grid
     for (let y = 0; y < grid.length; y++) {
         for (let x = 0; x < grid[y].length; x++) {
-            fill(255 - grid[y][x] * 255)
+            if (grid[y][x] == 1) {
+                fill(0, 70, 200)
+            } else if (grid[y][x] == 2) {
+                fill(0, 100, 0)
+            } else if (grid[y][x] == 3) {
+                fill(200, 80, 0)
+            } else if (grid[y][x] == 4) {
+                fill(100, 0, 100)
+            } else if (grid[y][x] == 5) {
+                fill(100, 100, 0)
+            } else if (grid[y][x] == 6) {
+                fill(10, 100, 200)
+            } else {
+                fill(255, 255, 255)
+            }
             rect(x * size, y * size, size, size)
         }
     }
@@ -65,6 +88,15 @@ function draw() {
             pieceFalling.drop(0, 1)
         }
     }
+}
+
+function keydown() {
+    if (keyIsDown(DOWN_ARROW)) {
+        timeLapseFall = 2
+    } else {
+        timeLapseFall = 15
+    }
+
 }
 
 function keyPressed() {
@@ -77,10 +109,10 @@ function keyPressed() {
             pieceFalling.drop(1, 0)
         }
     }
-    if (keyCode === DOWN_ARROW) {
-        timeLapseFall = 2
-    } else {
-        timeLapseFall = 10
+    if (keyCode === UP_ARROW) {
+        if (pieceFalling) {
+            pieceFalling.rotate()
+        }
     }
 }
 
@@ -89,13 +121,15 @@ class Piece {
         this.shape = shape;
         this.x = 3;
         this.y = 0;
-        this.color = color(random(0, 255), random(0, 255), random(0, 255))
-        var newgrid = Array.from(grid)
+        this.colorNb = 0
+        var newgrid = copy2Darr(grid)
         for (let y = 0; y < this.shape.length; y++) {
             for (let x = 0; x < this.shape[y].length; x++) {
                 if (this.shape[y][x]) {
+                    this.colorNb = this.shape[y][x]
+                    this.colorNb = this.shape[y][x]
                     if (newgrid[y + this.y][x + this.x] == 0) {
-                        newgrid[y + this.y][x + this.x] = 1
+                        newgrid[y + this.y][x + this.x] = this.shape[y][x]
                     } else {
                         gameover()
                     }
@@ -109,17 +143,17 @@ class Piece {
         if (result) {
             grid = result
         } else {
-            pieceFalling = new Piece(I)
+            pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
         }
     }
     canDrop(addx, addy) {
         var pastshape = copy2Darr(this.shape)
         var newgrid = copy2Darr(grid)
-        if (this.x + addx < 0 || this.x + addx + pastshape[0].length > gridW) {
+        if (this.x + addx + (pastshape - cutShape(pastshape)[0]) < 0 || this.x + addx + cutShape(pastshape)[0].length > gridW) {
             addx = 0
         }
         //check if is in the grid else return false
-        if (pastshape.length - 1 + this.y + addy < grid.length) {
+        if (cutShape(pastshape).length - 1 + this.y + addy < grid.length) {
             //remove the piece of the grid to not check itself 
             for (let y = 0; y < pastshape.length; y++) {
                 for (let x = 0; x < pastshape[y].length; x++) {
@@ -132,9 +166,13 @@ class Piece {
                 for (let x = 0; x < pastshape[y].length; x++) {
                     if (pastshape[y][x]) {
                         if (newgrid[y + this.y + addy][x + this.x + addx] == 0) {
-                            newgrid[y + this.y + addy][x + this.x + addx] = 1
+                            newgrid[y + this.y + addy][x + this.x + addx] = this.colorNb
                         } else {
-                            return false
+                            if (addx != 0) {
+                                return this.canDrop(0, addy)
+                            } else {
+                                return false
+                            }
                         }
                     }
                 }
@@ -146,32 +184,54 @@ class Piece {
             return false
         }
     }
+    rotate() {
+        this.shape = rotateArr(this.shape);
+        var newgrid = copy2Darr(grid)
+        for (let y = 0; y < this.shape.length; y++) {
+            for (let x = 0; x < this.shape[y].length; x++) {
+                if (newgrid[y + this.y][x + this.x] == this.colorNb) {
+                    newgrid[y + this.y][x + this.x] = 0
+                }
+            }
+        }
+        for (let y = 0; y < this.shape.length; y++) {
+            for (let x = 0; x < this.shape[y].length; x++) {
+                if (this.shape[y][x]) {
+                    if (newgrid[y + this.y][x + this.x] == 0) {
+                        newgrid[y + this.y][x + this.x] = this.colorNb
+                    } else {
+                        return false
+                    }
+                }
+            }
+        }
+        grid = newgrid
+    }
 }
 
 function gameover() {
     console.log("perdu")
+    throw new Error("Stop script");
 }
 
 const allEqual = arr => arr.every(val => val === arr[0]);
 
 function cutShape(arr) {
+    var newarr = copy2Darr(arr)
     var arrVertical = copy2Darr(arr)
-    console.table(arr)
-    console.table(rotateArr(arrVertical))
-    console.table(arrVertical)
-    for (let y = 0; y < arr.length; y++) {
-        if (allEqual(arr[y]) && arr[y][0] == 0) {
-            arr.splice(y, 1)
+    for (let y = 0; y < newarr.length; y++) {
+        if (allEqual(newarr[y]) && newarr[y][0] == 0) {
+            newarr.splice(y, 1)
         }
     }
     for (let x = 0; x < arrVertical.length; x++) {
         if (allEqual(arrVertical[x]) && arrVertical[x][0] == 0) {
-            for (let y = 0; y < arr.length; y++) {
-                arr[y].splice(x, 1)
+            for (let y = 0; y < newarr.length; y++) {
+                newarr[y].splice(x, 1)
             }
         }
     }
-    return arr
+    return newarr
 }
 
 function rotateArr(matrix) {
@@ -197,4 +257,99 @@ function copy2Darr(arr) {
         newArr.push(Array.from(arr[i]))
     }
     return newArr
+}
+
+
+
+class Piece2 {
+    constructor(shape) {
+        this.shape = shape;
+        this.x = 3;
+        this.y = 0;
+        this.colorNb = 0;
+        var newgrid = copy2Darr(grid)
+        for (let y = 0; y < this.shape.length; y++) {
+            for (let x = 0; x < this.shape[y].length; x++) {
+                if (this.shape[y][x]) {
+                    this.colorNb = this.shape[y][x]
+                    this.colorNb = this.shape[y][x]
+                    if (newgrid[y + this.y][x + this.x] == 0) {
+                        newgrid[y + this.y][x + this.x] = this.shape[y][x]
+                    } else {
+                        gameover()
+                    }
+                }
+            }
+        }
+        grid = Array.from(newgrid)
+    }
+    drop(addx, addy) {
+        var result = this.canDrop(addx, addy)
+        if (result) {
+            grid = result
+        } else {
+            pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
+        }
+    }
+    canDrop(addx, addy) {
+        var pastshape = copy2Darr(this.shape)
+        var newgrid = copy2Darr(grid)
+        if (this.x + addx + (pastshape - cutShape(pastshape)[0]) < 0 || this.x + addx + cutShape(pastshape)[0].length > gridW) {
+            addx = 0
+        }
+        //check if is in the grid else return false
+        if (cutShape(pastshape).length - 1 + this.y + addy < grid.length) {
+            //remove the piece of the grid to not check itself 
+            for (let y = 0; y < pastshape.length; y++) {
+                for (let x = 0; x < pastshape[y].length; x++) {
+                    if (pastshape[y][x]) {
+                        newgrid[y + this.y][x + this.x] = 0
+                    }
+                }
+            }
+            for (let y = 0; y < pastshape.length; y++) {
+                for (let x = 0; x < pastshape[y].length; x++) {
+                    if (pastshape[y][x]) {
+                        if (newgrid[y + this.y + addy][x + this.x + addx] == 0) {
+                            newgrid[y + this.y + addy][x + this.x + addx] = this.colorNb
+                        } else {
+                            if (addx != 0) {
+                                return this.canDrop(0, addy)
+                            } else {
+                                return false
+                            }
+                        }
+                    }
+                }
+            }
+            this.y += addy;
+            this.x += addx;
+            return newgrid
+        } else {
+            return false
+        }
+    }
+    rotate() {
+        this.shape = rotateArr(this.shape);
+        var newgrid = copy2Darr(grid)
+        for (let y = 0; y < this.shape.length; y++) {
+            for (let x = 0; x < this.shape[y].length; x++) {
+                if (newgrid[y + this.y][x + this.x] == this.colorNb) {
+                    newgrid[y + this.y][x + this.x] = 0
+                }
+            }
+        }
+        for (let y = 0; y < this.shape.length; y++) {
+            for (let x = 0; x < this.shape[y].length; x++) {
+                if (this.shape[y][x]) {
+                    if (newgrid[y + this.y][x + this.x] == 0) {
+                        newgrid[y + this.y][x + this.x] = this.colorNb
+                    } else {
+                        return false
+                    }
+                }
+            }
+        }
+        grid = newgrid
+    }
 }
