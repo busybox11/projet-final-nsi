@@ -5,6 +5,7 @@ var size = 20
 var canPushPiece = true
 var pieceFalling
 var timeLapseFall = 15
+var ws = new WebSocket("ws://localhost:3000", "protocolOne");
 
 var L = [
     [0, 0, 1],
@@ -54,7 +55,6 @@ function setup() {
             grid[y][x] = 0
         }
     }
-    stroke(200)
     pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
 }
 
@@ -65,6 +65,7 @@ function draw() {
         //draw the grid
     for (let y = 0; y < grid.length; y++) {
         for (let x = 0; x < grid[y].length; x++) {
+            noStroke()
             if (grid[y][x] == 1) {
                 fill(0, 70, 200)
             } else if (grid[y][x] == 2) {
@@ -78,6 +79,7 @@ function draw() {
             } else if (grid[y][x] == 6) {
                 fill(10, 100, 200)
             } else {
+                stroke(200)
                 fill(255, 255, 255)
             }
             rect(x * size, y * size, size, size)
@@ -186,6 +188,10 @@ class Piece {
     }
     rotate() {
         this.shape = rotateArr(this.shape);
+        if (this.canDrop(0, 0) == false) {
+            this.shape = rotateArr(rotateArr(rotateArr(this.shape)));
+            return
+        }
         var newgrid = copy2Darr(grid)
         for (let y = 0; y < this.shape.length; y++) {
             for (let x = 0; x < this.shape[y].length; x++) {
@@ -352,4 +358,12 @@ class Piece2 {
         }
         grid = newgrid
     }
+}
+
+setInterval(function() {
+    ws.send(JSON.stringify(grid));
+}, 1000)
+
+ws.onmessage = function(event) {
+    console.log(JSON.parse(event.data));
 }

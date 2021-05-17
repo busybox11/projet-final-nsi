@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/busybox11/projet-final-nsi#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "ws": "^7.4.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
