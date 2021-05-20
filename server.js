@@ -83,6 +83,10 @@ app.get("/tetris", (req, res) => {
     res.sendFile(__dirname + '/views/tetris.html')
 });
 
+app.get("/training", (req, res) => {
+    res.sendFile(__dirname + '/views/training.html')
+});
+
 app.get("/lobby", (req, res) => {
     res.sendFile(__dirname + '/views/lobby.html')
 });
