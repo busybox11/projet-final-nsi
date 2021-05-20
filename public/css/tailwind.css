@@ -3,5 +3,5 @@
 @import "tailwindcss/utilities";
 
 .tetromino-block {
-    @apply h-5 w-5 border border-gray-600;
+    @apply h-8 w-8 ring-4 ring-inset;
 }
