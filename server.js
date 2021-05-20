@@ -106,6 +106,16 @@ server.listen(PORT, () => {
 
 function launchGame(){
     gameCode = generate_token(10)
+    var itt = 0;
+    var tokenLenght = 10
+    while (games[gameCode]){
+        if (itt>10) {
+            tokenLenght++
+            itt=0
+        }
+        gameCode = generate_token(tokenLenght)
+        itt++
+    }
     //choisis un premier joueur aleatoirement
     player1 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
     playerInLobby.splice(playerInLobby.indexOf(player1), 1)

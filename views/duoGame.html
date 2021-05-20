@@ -4,10 +4,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://db.onlinewebfonts.com/c/a17af96c10647b3403e18a0e94283536?family=Joystix" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="css/style.css">
     <title>Twotris - Game</title>
 </head>
-<body>
+<body class="bg-black text-white h-screen w-screen p-16">
     <p>playing with : </p><p id="opponentName"></p>
+    <div class="flex inline-flex">
+    <div id="tetris-game">
+        <div class="grid grid-cols-10 w-80 gap-0 border border-gray-600">
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div>1</div><div>1</div>
+            <div>1</div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div>1</div><div>1</div>
+            <div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div>1</div>
+        </div>
+    </div>
+    
+    <div id="opponent-tetris-game">
+        <div class="grid grid-cols-10 w-80 gap-0 border border-gray-600">
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div>
+            <div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div>1</div><div>1</div>
+            <div>1</div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div>1</div><div>1</div><div>1</div><div>1</div><div>1</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div>1</div><div>1</div>
+            <div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div>1</div>
+        </div>
+    </div>
+</div>
     <script src="./duoGame.js"></script>
 </body>
 </html>
