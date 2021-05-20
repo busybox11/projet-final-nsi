@@ -5,7 +5,8 @@ module.exports = {
     fontFamily: {
       'joystix': ['Joystix', 'monospace'],
     },
-    extend: {},
+    extend: {
+    },
   },
   variants: {
     extend: {},

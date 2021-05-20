@@ -31823,6 +31823,14 @@ video {
   --tw-backdrop-sepia: sepia(100%);
 }
 
+.tetromino-block {
+  --tw-border-opacity: 1;
+  border-color: rgba(75, 85, 99, var(--tw-border-opacity));
+  border-width: 1px;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
