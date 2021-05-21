@@ -1,5 +1,5 @@
 var gridW = 10
-var gridH = 20
+var gridH = 24
 var grid = []
 var size = 20
 var canPushPiece = true
@@ -63,7 +63,7 @@ function draw() {
     keydown()
     background(255)
         //draw the grid
-    for (let y = 0; y < grid.length; y++) {
+    for (let y = 3; y < grid.length; y++) {
         for (let x = 0; x < grid[y].length; x++) {
             noStroke()
             if (grid[y][x] == 1) {
@@ -145,6 +145,11 @@ class Piece {
         if (result) {
             grid = result
         } else {
+            for (let y = 3; y < grid.length; y++) {
+                if(allEqual(grid[y]) && grid[y][0]){
+                    console.log("make a line !")
+                }
+            }
             pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
         }
     }
@@ -225,6 +230,7 @@ const allEqual = arr => arr.every(val => val === arr[0]);
 function cutShape(arr) {
     var newarr = copy2Darr(arr)
     var arrVertical = copy2Darr(arr)
+    rotateArr(arrVertical)
     for (let y = 0; y < newarr.length; y++) {
         if (allEqual(newarr[y]) && newarr[y][0] == 0) {
             newarr.splice(y, 1)

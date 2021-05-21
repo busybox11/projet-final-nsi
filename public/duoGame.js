@@ -3,17 +3,20 @@ var ws = new WebSocket("ws://localhost:3000", "protocolOne");
 ws.onopen = function(){
     var url = new URL(window.location.href);
     var gameCode = url.searchParams.get("code");
+    var userName = localStorage.getItem("userName")
+    if(!userName){
+        userName = "anonymous"
+    }
     ws.send(JSON.stringify({
         title: "connectToTheDuoGame",
         body: {
             gameCode: gameCode,
-            playerName: "playerName"
+            playerName: userName
         }
     }))
 }
 ws.onmessage = function(message){
     message = JSON.parse(message.data)
-    console.log(message)
     switch (message.title) {
         case "opponentName":
             document.getElementById("opponentName").innerHTML = message.body;

@@ -62,7 +62,8 @@ wss.on('connection', (ws) => {
         //eject from the lobby players array when he leave the lobby page
         if(playerInLobby.indexOf(ws)>=0){
             playerInLobby.splice(playerInLobby.indexOf(ws), 1)
-        }else if(ws.gameCode && games[gameCode]){
+        }else if(ws.gameCode && games[ws.gameCode]){
+            var gameCode = ws.gameCode
             games[gameCode].splice(games[gameCode].indexOf(ws), 1)
             games[gameCode][0].send(JSON.stringify({
                 title: "opponentLeftGame"
