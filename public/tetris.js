@@ -4,7 +4,7 @@ var grid = []
 var size = 20
 var canPushPiece = true
 var pieceFalling
-var timeLapseFall = 15
+var timeLapseFall = 20
 var ws = new WebSocket("ws://localhost:3000", "protocolOne");
 
 var L = [
@@ -145,9 +145,26 @@ class Piece {
         if (result) {
             grid = result
         } else {
+            var godown = false;
             for (let y = 3; y < grid.length; y++) {
-                if(allEqual(grid[y]) && grid[y][0]){
-                    console.log("make a line !")
+                var itt = 0
+                while(itt < grid[y].length && grid[y][itt] > 0){
+                    itt++
+                }
+                if(itt>= grid[y].length){
+                    grid[y] = Array(grid[y].length).fill(0)
+                    godown = true
+                    console.log("you make a line !")
+                }
+            }
+            if (godown) {
+                for (let y = grid.length - 1; y > 0 ; y--) {
+                    if (allEqual(grid[y]) && grid[y][0] == 0) {
+                        for (let i = y; i > 0; i--) {
+                            var tempArr = Array.from(grid[i-1])
+                            grid[i] = Array.from(tempArr)
+                        }
+                    }
                 }
             }
             pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
