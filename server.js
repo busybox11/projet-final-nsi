@@ -21,7 +21,7 @@ wss.on('connection', (ws) => {
                 ws.send(JSON.stringify({
                     title: "playerInLobbyNb",
                     body: playerInLobby.length
-                }))
+                }));
                 if (playerInLobby.length >= 2) {
                     launchGame()
                 }
@@ -92,7 +92,7 @@ app.get("/lobby", (req, res) => {
 });
 
 app.get("/duoGame", (req, res) => {
-    gameCode = req.query.code
+    var gameCode = req.query.code
     if (games[gameCode]) {
         res.sendFile(__dirname + '/views/duoGame.html')
     }else{
@@ -105,7 +105,7 @@ server.listen(PORT, () => {
 });
 
 function launchGame(){
-    gameCode = generate_token(10)
+    var gameCode = generate_token(10)
     var itt = 0;
     var tokenLenght = 10
     while (games[gameCode]){
@@ -117,9 +117,9 @@ function launchGame(){
         itt++
     }
     //choisis un premier joueur aleatoirement
-    player1 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
+    var player1 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
     playerInLobby.splice(playerInLobby.indexOf(player1), 1)
-    player2 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
+    var player2 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
 
     games[gameCode] = [0, 0]
 
