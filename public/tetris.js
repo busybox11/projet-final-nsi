@@ -1,5 +1,5 @@
 var gridW = 10
-var gridH = 24
+var gridH = 21
 var grid = []
 var size = 20
 var canPushPiece = true
@@ -45,79 +45,6 @@ var Q = [
 
 var pieces = [L, I, J, S, T, Q]
 
-//function executed one time before the first frame
-function setup() {
-    createCanvas(windowWidth, windowHeight)
-        //init the grid
-    for (let y = 0; y < gridH; y++) {
-        grid[y] = []
-        for (let x = 0; x < gridW; x++) {
-            grid[y][x] = 0
-        }
-    }
-    pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
-}
-
-//function executed every frame
-function draw() {
-    keydown()
-    background(255)
-        //draw the grid
-    for (let y = 3; y < grid.length; y++) {
-        for (let x = 0; x < grid[y].length; x++) {
-            noStroke()
-            if (grid[y][x] == 1) {
-                fill(0, 70, 200)
-            } else if (grid[y][x] == 2) {
-                fill(0, 100, 0)
-            } else if (grid[y][x] == 3) {
-                fill(200, 80, 0)
-            } else if (grid[y][x] == 4) {
-                fill(100, 0, 100)
-            } else if (grid[y][x] == 5) {
-                fill(100, 100, 0)
-            } else if (grid[y][x] == 6) {
-                fill(10, 100, 200)
-            } else {
-                stroke(200)
-                fill(255, 255, 255)
-            }
-            rect(x * size, y * size, size, size)
-        }
-    }
-    if (frameCount % timeLapseFall == 0) {
-        if (pieceFalling) {
-            pieceFalling.drop(0, 1)
-        }
-    }
-}
-
-function keydown() {
-    if (keyIsDown(DOWN_ARROW)) {
-        timeLapseFall = 2
-    } else {
-        timeLapseFall = 15
-    }
-
-}
-
-function keyPressed() {
-    if (keyCode === LEFT_ARROW) {
-        if (pieceFalling) {
-            pieceFalling.drop(-1, 0)
-        }
-    } else if (keyCode === RIGHT_ARROW) {
-        if (pieceFalling) {
-            pieceFalling.drop(1, 0)
-        }
-    }
-    if (keyCode === UP_ARROW) {
-        if (pieceFalling) {
-            pieceFalling.rotate()
-        }
-    }
-}
-
 class Piece {
     constructor(shape) {
         this.shape = shape;
@@ -145,24 +72,26 @@ class Piece {
         if (result) {
             grid = result
         } else {
-            var godown = false;
-            for (let y = 3; y < grid.length; y++) {
+            var godown = 0;
+            for (let y = 1; y < grid.length; y++) {
                 var itt = 0
-                while(itt < grid[y].length && grid[y][itt] > 0){
+                while (itt < grid[y].length && grid[y][itt] > 0) {
                     itt++
                 }
-                if(itt>= grid[y].length){
+                if (itt >= grid[y].length) {
                     grid[y] = Array(grid[y].length).fill(0)
-                    godown = true
+                    godown++
                     console.log("you make a line !")
                 }
             }
             if (godown) {
-                for (let y = grid.length - 1; y > 0 ; y--) {
-                    if (allEqual(grid[y]) && grid[y][0] == 0) {
-                        for (let i = y; i > 0; i--) {
-                            var tempArr = Array.from(grid[i-1])
-                            grid[i] = Array.from(tempArr)
+                for (let j = 0; j < godown; j++) {
+                    for (let y = grid.length - 1; y > 0; y--) {
+                        if (allEqual(grid[y]) && grid[y][0] == 0) {
+                            for (let i = y; i > 0; i--) {
+                                var tempArr = Array.from(grid[i - 1])
+                                grid[i] = Array.from(tempArr)
+                            }
                         }
                     }
                 }
@@ -236,10 +165,70 @@ class Piece {
         grid = newgrid
     }
 }
+//init the grid
+for (let y = 0; y < gridH; y++) {
+    grid[y] = []
+    for (let x = 0; x < gridW; x++) {
+        grid[y][x] = 0
+    }
+}
+pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
+
+
+document.addEventListener("keydown", function(event) {
+    if (event.code == "ArrowDown") {
+        timeLapseFall = 2
+    }
+    if (event.code === 'ArrowLeft' && pieceFalling) {
+        pieceFalling.drop(-1, 0)
+    } else if (event.code === "ArrowRight" && pieceFalling) {
+        pieceFalling.drop(1, 0)
+    }
+    if (event.code === "ArrowUp" && pieceFalling) {
+        pieceFalling.rotate()
+    }
+});
+
+var frameCount = 0;
+
+//function executed every frame
+setInterval(function() {
+    timeLapseFall = 20
+        //draw the grid
+        // for (let y = 1; y < grid.length; y++) {
+        //     for (let x = 0; x < grid[y].length; x++) {
+        //         noStroke()
+        //         if (grid[y][x] == 1) {
+        //             fill(0, 70, 200)
+        //         } else if (grid[y][x] == 2) {
+        //             fill(0, 100, 0)
+        //         } else if (grid[y][x] == 3) {
+        //             fill(200, 80, 0)
+        //         } else if (grid[y][x] == 4) {
+        //             fill(100, 0, 100)
+        //         } else if (grid[y][x] == 5) {
+        //             fill(100, 100, 0)
+        //         } else if (grid[y][x] == 6) {
+        //             fill(10, 100, 200)
+        //         } else {
+        //             stroke(200)
+        //             fill(255, 255, 255)
+        //         }
+        //         rect(x * size, y * size, size, size)
+        //     }
+        // }
+    if (frameCount % timeLapseFall == 0) {
+        if (pieceFalling) {
+            pieceFalling.drop(0, 1)
+        }
+        if (frameCount > 100) frameCount = 0
+    }
+    frameCount++
+}, 10)
+
 
 function gameover() {
-    console.log("perdu")
-    throw new Error("Stop script");
+    //console.log("perdu")
 }
 
 const allEqual = arr => arr.every(val => val === arr[0]);
@@ -290,7 +279,7 @@ function copy2Darr(arr) {
 
 setInterval(function() {
     ws.send(JSON.stringify(grid));
-}, 1000)
+}, 10000)
 
 ws.onmessage = function(event) {
     console.log(JSON.parse(event.data));
