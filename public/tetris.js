@@ -3,7 +3,6 @@ js.type = "text/javascript";
 js.src = "./tetrominos.js";
 document.body.appendChild(js);
 
-
 var L = [
     [0, 0, 1],
     [1, 1, 1],
@@ -42,12 +41,45 @@ var Q = [
 
 var pieces = [L, I, J, S, T, Q]
 var gridW = 10
+var score = 0
+var currentLevel = 0
+var levelsInfos = [
+    48,
+    43,
+    38,
+    33,
+    28,
+    23,
+    18,
+    13,
+    8,
+    6,
+    5,
+    5,
+    5,
+    4,
+    4,
+    4,
+    3,
+    3,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1
+]
 var gridH = 21
 var grid = []
-var size = 20
 var canPushPiece = true
 var pieceFalling
-var timeLapseFall = 20
+var timeLapseFall = levelsInfos[currentLevel]
 var ws = new WebSocket("ws://localhost:3000", "protocolOne");
 var isgameover = false;
 
@@ -87,10 +119,18 @@ class Piece {
                 if (itt >= grid[y].length) {
                     grid[y] = Array(grid[y].length).fill(0)
                     godown++
-                    console.log("you make a line !")
                 }
             }
             if (godown) {
+                if (godown == 1) {
+                    score += 40 * (currentLevel + 1)
+                } else if (godown == 2) {
+                    score += 100 * (currentLevel + 1)
+                } else if (godown == 3) {
+                    score += 300 * (currentLevel + 1)
+                } else {
+                    score += 1200 * (currentLevel + 1)
+                }
                 for (let j = 0; j < godown; j++) {
                     for (let y = grid.length - 1; y > 0; y--) {
                         if (allEqual(grid[y]) && grid[y][0] == 0) {
@@ -101,6 +141,7 @@ class Piece {
                         }
                     }
                 }
+                updateScore()
             }
             pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
         }
@@ -145,10 +186,6 @@ class Piece {
     }
     rotate() {
         this.shape = rotateArr(this.shape);
-        if (this.canDrop(0, 0) == false) {
-            this.shape = rotateArr(rotateArr(rotateArr(this.shape)));
-            return
-        }
         var newgrid = copy2Darr(grid)
         for (let y = 0; y < this.shape.length; y++) {
             for (let x = 0; x < this.shape[y].length; x++) {
@@ -167,6 +204,10 @@ class Piece {
                     }
                 }
             }
+        }
+        if (this.canDrop(0, 0) == false) {
+            this.shape = rotateArr(rotateArr(rotateArr(this.shape)));
+            return false
         }
         grid = newgrid
     }
@@ -196,7 +237,7 @@ document.addEventListener("keydown", function(event) {
 
 document.addEventListener("keyup", event => {
     if (event.code == "ArrowDown") {
-        timeLapseFall = 20
+        timeLapseFall = levelsInfos[currentLevel]
     }
 })
 
@@ -208,10 +249,12 @@ setInterval(function() {
         if (pieceFalling) {
             pieceFalling.drop(0, 1)
         }
-        if (frameCount > 100) frameCount = 0
+        if (frameCount > 1000) {
+            frameCount = 0
+            if (currentLevel < levelsInfos.length - 1) currentLevel++
+        }
     }
     frameCount++
-
 }, 10)
 
 const allEqual = arr => arr.every(val => val === arr[0]);
@@ -258,12 +301,4 @@ function copy2Darr(arr) {
         newArr.push(Array.from(arr[i]))
     }
     return newArr
-}
-
-setInterval(function() {
-    ws.send(JSON.stringify(grid));
-}, 10000)
-
-ws.onmessage = function(event) {
-    console.log(JSON.parse(event.data));
 }

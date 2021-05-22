@@ -15,3 +15,7 @@ function gameover() {
     isgameover = true;
     alert("perdu")
 }
+
+function updateScore() {
+    document.getElementById("score").innerHTML = `${score} pts`
+}
