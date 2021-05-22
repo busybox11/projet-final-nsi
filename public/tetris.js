@@ -1,11 +1,8 @@
-var gridW = 10
-var gridH = 21
-var grid = []
-var size = 20
-var canPushPiece = true
-var pieceFalling
-var timeLapseFall = 20
-var ws = new WebSocket("ws://localhost:3000", "protocolOne");
+var js = document.createElement("script");
+js.type = "text/javascript";
+js.src = "./tetrominos.js";
+document.body.appendChild(js);
+
 
 var L = [
     [0, 0, 1],
@@ -44,6 +41,15 @@ var Q = [
 ]
 
 var pieces = [L, I, J, S, T, Q]
+var gridW = 10
+var gridH = 21
+var grid = []
+var size = 20
+var canPushPiece = true
+var pieceFalling
+var timeLapseFall = 20
+var ws = new WebSocket("ws://localhost:3000", "protocolOne");
+var isgameover = false;
 
 class Piece {
     constructor(shape) {
@@ -174,7 +180,6 @@ for (let y = 0; y < gridH; y++) {
 }
 pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
 
-
 document.addEventListener("keydown", function(event) {
     if (event.code == "ArrowDown") {
         timeLapseFall = 2
@@ -189,47 +194,25 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+document.addEventListener("keyup", event => {
+    if (event.code == "ArrowDown") {
+        timeLapseFall = 20
+    }
+})
+
 var frameCount = 0;
 
 //function executed every frame
 setInterval(function() {
-    timeLapseFall = 20
-        //draw the grid
-        // for (let y = 1; y < grid.length; y++) {
-        //     for (let x = 0; x < grid[y].length; x++) {
-        //         noStroke()
-        //         if (grid[y][x] == 1) {
-        //             fill(0, 70, 200)
-        //         } else if (grid[y][x] == 2) {
-        //             fill(0, 100, 0)
-        //         } else if (grid[y][x] == 3) {
-        //             fill(200, 80, 0)
-        //         } else if (grid[y][x] == 4) {
-        //             fill(100, 0, 100)
-        //         } else if (grid[y][x] == 5) {
-        //             fill(100, 100, 0)
-        //         } else if (grid[y][x] == 6) {
-        //             fill(10, 100, 200)
-        //         } else {
-        //             stroke(200)
-        //             fill(255, 255, 255)
-        //         }
-        //         rect(x * size, y * size, size, size)
-        //     }
-        // }
-    if (frameCount % timeLapseFall == 0) {
+    if (frameCount % timeLapseFall == 0 && !isgameover) {
         if (pieceFalling) {
             pieceFalling.drop(0, 1)
         }
         if (frameCount > 100) frameCount = 0
     }
     frameCount++
+
 }, 10)
-
-
-function gameover() {
-    //console.log("perdu")
-}
 
 const allEqual = arr => arr.every(val => val === arr[0]);
 
