@@ -78,7 +78,7 @@ var levelsInfos = [
 var gridH = 21
 var grid = []
 var canPushPiece = true
-var pieceFalling
+var pieceFalling, nextPiece
 var timeLapseFall = levelsInfos[currentLevel]
 var ws = new WebSocket("ws://localhost:3000", "protocolOne");
 var isgameover = false;
@@ -143,7 +143,8 @@ class Piece {
                 }
                 updateScore()
             }
-            pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
+            pieceFalling = new Piece(nextPiece)
+            nextPiece = pieces[Math.floor(Math.random() * pieces.length)]
         }
     }
     canDrop(addx, addy) {
@@ -220,6 +221,7 @@ for (let y = 0; y < gridH; y++) {
     }
 }
 pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
+nextPiece = pieces[Math.floor(Math.random() * pieces.length)]
 
 document.addEventListener("keydown", function(event) {
     if (event.code == "ArrowDown") {
