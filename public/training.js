@@ -18,7 +18,18 @@ setInterval(function() {
                 }
             }
         }
-        document.getElementById("level").innerHTML = `level ${currentLevel + 1}`
+        for (let y = 0; y < 4; y++) {
+            for (let x = 0; x < 5; x++) {
+                document.getElementById("tetris-nextPiece").children[y * 5 + x].className = ""
+            }
+        }
+        for (let y = 0; y < nextPiece.length; y++) {
+            for (let x = 0; x < nextPiece[y].length; x++) {
+                var index = y * 5 + x
+                document.getElementById("tetris-nextPiece").children[index].className = tetrominosColors[nextPiece[y][x]]
+            }
+        }
+        document.getElementById("level").innerHTML = `level ${currentLevel + 1}`;
     }
 }, 10)
 

@@ -175,6 +175,11 @@ class Piece {
             for (let y = 0; y < pastshape.length; y++) {
                 for (let x = 0; x < pastshape[y].length; x++) {
                     if (pastshape[y][x]) {
+                        try {
+                            newgrid[y + this.y + addy][x + this.x + addx]
+                        } catch (error) {
+                            alert(error)
+                        }
                         if (newgrid[y + this.y + addy][x + this.x + addx] == 0) {
                             newgrid[y + this.y + addy][x + this.x + addx] = this.colorNb
                         } else {
@@ -232,17 +237,17 @@ class Piece {
         }
         //écart entre la grille coupé et non coupé
         var space = 0
-            // for (let x = fallingLineGrid[0].length - 1; x >= 0; x--) {
-            //     var arrVertical = []
-            //     for (let y = 0; y < fallingLineGrid.length; y++) {
-            //         arrVertical.push(fallingLineGrid[y][x])
-            //     }
-            //     if (allEqual(arrVertical) && arrVertical[0] == 0) {
-            //         space++
-            //     } else {
-            //         x = 0
-            //     }
-            // }
+        for (let x = 0; x < this.shape[0].length; x++) {
+            var arrVertical = []
+            for (let y = 0; y < this.shape.length; y++) {
+                arrVertical.push(this.shape[y][x])
+            }
+            if (allEqual(arrVertical) && arrVertical[0] == 0) {
+                space++
+            } else {
+                x = this.shape[0].length;
+            }
+        }
         for (let x = 0; x < cutShape(this.shape)[0].length; x++) {
             for (let i = this.y; i < gridH; i++) {
                 fallingLineGrid[i][x + this.x + space] = 1
