@@ -1,7 +1,12 @@
-var js = document.createElement("script");
-js.type = "text/javascript";
-js.src = "./tetrominos.js";
-document.body.appendChild(js);
+var tetrominosColors = [
+    "h-8 w-8",
+    "tetromino-block ring-yellow-700 bg-yellow-900",
+    "tetromino-block ring-red-700 bg-red-900",
+    "tetromino-block ring-blue-700 bg-blue-900",
+    "tetromino-block ring-purple-700 bg-purple-900",
+    "tetromino-block ring-indigo-700 bg-indigo-900",
+    "tetromino-block ring-green-700 bg-green-900"
+]
 
 var L = [
     [0, 0, 1],
@@ -40,7 +45,6 @@ var Q = [
 ]
 
 var pieces = [L, I, J, S, T, Q]
-var gridW = 10
 var score = 0
 var currentLevel = 0
 var levelsInfos = [
@@ -76,12 +80,15 @@ var levelsInfos = [
     1
 ]
 var gridH = 21
+var gridW = 10
 var grid = []
+var fallingLineGrid = []
 var canPushPiece = true
 var pieceFalling, nextPiece
 var timeLapseFall = levelsInfos[currentLevel]
 var ws = new WebSocket("ws://localhost:3000", "protocolOne");
-var isgameover = false;
+var isgameover = true;
+var frameCount = 0;
 
 class Piece {
     constructor(shape) {
@@ -99,6 +106,8 @@ class Piece {
                         newgrid[y + this.y][x + this.x] = this.shape[y][x]
                     } else {
                         gameover()
+                        document.removeEventListener("keydown", keydown)
+                        document.removeEventListener("keyup", keyup)
                     }
                 }
             }
@@ -180,6 +189,7 @@ class Piece {
             }
             this.y += addy;
             this.x += addx;
+            this.drawFallingLine()
             return newgrid
         } else {
             return false
@@ -206,24 +216,59 @@ class Piece {
                 }
             }
         }
-        if (this.canDrop(0, 0) == false) {
+        if (this.shape.length + this.y >= gridH || this.canDrop(0, 0) == false) {
             this.shape = rotateArr(rotateArr(rotateArr(this.shape)));
             return false
         }
         grid = newgrid
+        this.drawFallingLine()
+    }
+    drawFallingLine() {
+        for (let y = 0; y < gridH; y++) {
+            fallingLineGrid[y] = []
+            for (let x = 0; x < gridW; x++) {
+                fallingLineGrid[y][x] = 0
+            }
+        }
+        //écart entre la grille coupé et non coupé
+        var space = 0
+            // for (let x = fallingLineGrid[0].length - 1; x >= 0; x--) {
+            //     var arrVertical = []
+            //     for (let y = 0; y < fallingLineGrid.length; y++) {
+            //         arrVertical.push(fallingLineGrid[y][x])
+            //     }
+            //     if (allEqual(arrVertical) && arrVertical[0] == 0) {
+            //         space++
+            //     } else {
+            //         x = 0
+            //     }
+            // }
+        for (let x = 0; x < cutShape(this.shape)[0].length; x++) {
+            for (let i = this.y; i < gridH; i++) {
+                fallingLineGrid[i][x + this.x + space] = 1
+            }
+        }
     }
 }
-//init the grid
-for (let y = 0; y < gridH; y++) {
-    grid[y] = []
-    for (let x = 0; x < gridW; x++) {
-        grid[y][x] = 0
-    }
-}
-pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
-nextPiece = pieces[Math.floor(Math.random() * pieces.length)]
 
-document.addEventListener("keydown", function(event) {
+function beginTetrisGame() {
+    //init the grid
+    for (let y = 0; y < gridH; y++) {
+        grid[y] = []
+        fallingLineGrid[y] = []
+        for (let x = 0; x < gridW; x++) {
+            grid[y][x] = 0
+            fallingLineGrid[y][x] = 0
+        }
+    }
+    pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
+    nextPiece = pieces[Math.floor(Math.random() * pieces.length)]
+    document.addEventListener("keydown", keydown);
+    document.addEventListener("keyup", keyup)
+    isgameover = false;
+}
+
+function keydown(event) {
     if (event.code == "ArrowDown") {
         timeLapseFall = 2
     }
@@ -235,43 +280,51 @@ document.addEventListener("keydown", function(event) {
     if (event.code === "ArrowUp" && pieceFalling) {
         pieceFalling.rotate()
     }
-});
+    if (event.code === "Space" && pieceFalling) {
+        var pastPiece = pieceFalling
+        while (pastPiece == pieceFalling) {
+            pieceFalling.drop(0, 1)
+        }
+    }
+}
 
-document.addEventListener("keyup", event => {
+function keyup(event) {
     if (event.code == "ArrowDown") {
         timeLapseFall = levelsInfos[currentLevel]
     }
-})
-
-var frameCount = 0;
+}
 
 //function executed every frame
 setInterval(function() {
-    if (frameCount % timeLapseFall == 0 && !isgameover) {
-        if (pieceFalling) {
-            pieceFalling.drop(0, 1)
+    if (!isgameover) {
+        if (frameCount % timeLapseFall == 0) {
+            if (pieceFalling) {
+                pieceFalling.drop(0, 1)
+            }
+            if (frameCount > 3000) {
+                frameCount = 0
+                if (currentLevel < levelsInfos.length - 1) currentLevel++
+            }
         }
-        if (frameCount > 1000) {
-            frameCount = 0
-            if (currentLevel < levelsInfos.length - 1) currentLevel++
-        }
+        frameCount++
     }
-    frameCount++
 }, 10)
 
 const allEqual = arr => arr.every(val => val === arr[0]);
 
 function cutShape(arr) {
     var newarr = copy2Darr(arr)
-    var arrVertical = copy2Darr(arr)
-    rotateArr(arrVertical)
-    for (let y = 0; y < newarr.length; y++) {
+    for (let y = newarr.length - 1; y >= 0; y--) {
         if (allEqual(newarr[y]) && newarr[y][0] == 0) {
             newarr.splice(y, 1)
         }
     }
-    for (let x = 0; x < arrVertical.length; x++) {
-        if (allEqual(arrVertical[x]) && arrVertical[x][0] == 0) {
+    for (let x = newarr[0].length - 1; x >= 0; x--) {
+        var arrVertical = []
+        for (let y = 0; y < newarr.length; y++) {
+            arrVertical.push(newarr[y][x])
+        }
+        if (allEqual(arrVertical) && arrVertical[0] == 0) {
             for (let y = 0; y < newarr.length; y++) {
                 newarr[y].splice(x, 1)
             }
