@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,59 +10,419 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Twotris - Game</title>
 </head>
+
 <body class="bg-black text-white h-screen w-screen p-16">
-    <p>playing with : </p><p id="opponentName"></p>
+    <p>playing with : </p>
+    <p id="opponentName"></p>
     <div class="flex inline-flex">
-    <div id="tetris-game">
-        <div class="grid grid-cols-10 w-80 gap-0 border border-gray-600">
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div class="tetromino-block"></div>
+        <div id="tetris-game" class="grid grid-cols-10 w-80 gap-0 border border-gray-600">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="w-10"></div>
+        <div id="opponent-tetris-game" class="grid grid-cols-10 w-80 gap-0 border border-gray-600">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
     </div>
-    <div class="w-10"></div>
-    <div id="opponent-tetris-game">
-        <div class="grid grid-cols-10 w-80 gap-0 border border-gray-600">
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block"></div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block"></div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div class="tetromino-block"></div><div class="tetromino-block"></div>
-            <div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-purple-700 bg-purple-900">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-blue-700 bg-blue-800">🍆</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div class="tetromino-block ring-yellow-700 bg-yellow-900">🍆</div><div class="tetromino-block"></div>
-        </div>
-    </div>
-</div>
+    <script src="./tetris.js"></script>
     <script src="./duoGame.js"></script>
 </body>
+
 </html>

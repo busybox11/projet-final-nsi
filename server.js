@@ -26,7 +26,7 @@ wss.on('connection', (ws) => {
                     launchGame()
                 }
                 break;
-        
+
             case "connectToTheDuoGame":
                 //si le code exist
                 if (games[body.gameCode]) {
@@ -34,7 +34,7 @@ wss.on('connection', (ws) => {
                     ws.gameCode = body.gameCode
                     if (!games[body.gameCode][0]) {
                         games[body.gameCode][0] = ws
-                    }else if(!games[body.gameCode][1]){
+                    } else if (!games[body.gameCode][1]) {
                         games[body.gameCode][1] = ws
                         games[body.gameCode][0].send(JSON.stringify({
                             title: "opponentName",
@@ -44,13 +44,16 @@ wss.on('connection', (ws) => {
                             title: "opponentName",
                             body: games[body.gameCode][0].playerName
                         }))
-                    }else{
+                    } else {
                         console.log("partie pleine")
                         ws.close()
                     }
-                }else{
+                } else {
                     ws.close()
                 }
+                break;
+
+            case "gridInGame":
                 break;
 
             default:
@@ -58,11 +61,11 @@ wss.on('connection', (ws) => {
                 break;
         }
     });
-    ws.on("close", ()=> {
+    ws.on("close", () => {
         //eject from the lobby players array when he leave the lobby page
-        if(playerInLobby.indexOf(ws)>=0){
+        if (playerInLobby.indexOf(ws) >= 0) {
             playerInLobby.splice(playerInLobby.indexOf(ws), 1)
-        }else if(ws.gameCode && games[ws.gameCode]){
+        } else if (ws.gameCode && games[ws.gameCode]) {
             var gameCode = ws.gameCode
             games[gameCode].splice(games[gameCode].indexOf(ws), 1)
             games[gameCode][0].send(JSON.stringify({
@@ -96,7 +99,7 @@ app.get("/duoGame", (req, res) => {
     var gameCode = req.query.code
     if (games[gameCode]) {
         res.sendFile(__dirname + '/views/duoGame.html')
-    }else{
+    } else {
         res.redirect("/lobby")
     }
 });
@@ -105,14 +108,14 @@ server.listen(PORT, () => {
     console.log(`Server is running on PORT: ${PORT}`);
 });
 
-function launchGame(){
+function launchGame() {
     var gameCode = generate_token(10)
     var itt = 0;
     var tokenLenght = 10
-    while (games[gameCode]){
-        if (itt>10) {
+    while (games[gameCode]) {
+        if (itt > 10) {
             tokenLenght++
-            itt=0
+            itt = 0
         }
         gameCode = generate_token(tokenLenght)
         itt++
@@ -134,12 +137,12 @@ function launchGame(){
     }))
 }
 
-function generate_token(length){
+function generate_token(length) {
     //edit the token allowed characters
     var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
-    var b = [];  
-    for (var i=0; i<length; i++) {
-        var j = (Math.random() * (a.length-1)).toFixed(0);
+    var b = [];
+    for (var i = 0; i < length; i++) {
+        var j = (Math.random() * (a.length - 1)).toFixed(0);
         b[i] = a[j];
     }
     return b.join("");

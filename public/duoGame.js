@@ -38,7 +38,6 @@ ws.onclose = function() {
     window.location.replace("/")
 }
 
-
 // setInterval(function() {
 //     ws.send(JSON.stringify(grid));
 // }, 10000)
