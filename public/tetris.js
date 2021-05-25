@@ -164,7 +164,7 @@ class Piece {
             addx = 0
         }
         //check if is in the grid else return false
-        if (cutShape(pastshape).length - 1 + this.y + addy < grid.length) {
+        if (cutBottomShape(pastshape).length - 1 + this.y + addy < grid.length) {
             //remove the piece of the grid to not check itself 
             for (let y = 0; y < pastshape.length; y++) {
                 for (let x = 0; x < pastshape[y].length; x++) {
@@ -335,6 +335,18 @@ function cutShape(arr) {
             for (let y = 0; y < newarr.length; y++) {
                 newarr[y].splice(x, 1)
             }
+        }
+    }
+    return newarr
+}
+
+function cutBottomShape(arr) {
+    var newarr = copy2Darr(arr)
+    for (let y = newarr.length - 1; y >= 0; y--) {
+        if (allEqual(newarr[y]) && newarr[y][0] == 0) {
+            newarr.splice(y, 1)
+        } else {
+            y = 0
         }
     }
     return newarr
