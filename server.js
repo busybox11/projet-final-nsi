@@ -37,11 +37,11 @@ wss.on('connection', (ws) => {
                     } else if (!games[body.gameCode][1]) {
                         games[body.gameCode][1] = ws
                         games[body.gameCode][0].send(JSON.stringify({
-                            title: "opponentName",
+                            title: "beginGame",
                             body: ws.playerName
                         }))
                         ws.send(JSON.stringify({
-                            title: "opponentName",
+                            title: "beginGame",
                             body: games[body.gameCode][0].playerName
                         }))
                     } else {
@@ -53,7 +53,15 @@ wss.on('connection', (ws) => {
                 }
                 break;
 
-            case "gridInGame":
+            case "opponentGame":
+                for (let i = 0; i < games[ws.gameCode].length; i++) {
+                    if (games[ws.gameCode][i] != ws){
+                        games[ws.gameCode][i].send(JSON.stringify({
+                            title: "opponentGame",
+                            body: body
+                        }))
+                    }
+                }
                 break;
 
             default:

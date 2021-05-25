@@ -89,6 +89,7 @@ var timeLapseFall = levelsInfos[currentLevel]
 var ws = new WebSocket("ws://localhost:3000", "protocolOne");
 var isgameover = true;
 var frameCount = 0;
+var timePast = 0;
 
 class Piece {
     constructor(shape) {
@@ -312,6 +313,7 @@ setInterval(function() {
             }
         }
         frameCount++
+        timePast++
     }
 }, 10)
 
