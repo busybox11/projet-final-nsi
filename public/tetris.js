@@ -222,10 +222,9 @@ class Piece {
         var pastshape = copy2Darr(this.shape)
         this.shape = rotateArr(this.shape);
         var newgrid = copy2Darr(grid)
-        //efface d'abord la piece
+            //efface d'abord la piece
         for (let y = 0; y < this.shape.length; y++) {
             for (let x = 0; x < this.shape[y].length; x++) {
-                console.table(this.shape)
                 if (newgrid[y + this.y][x + this.x] == this.colorNb && pastshape[y][x] == this.colorNb) {
                     newgrid[y + this.y][x + this.x] = 0
                 }
@@ -276,13 +275,50 @@ class Piece {
                 x = this.shape[0].length;
             }
         }
+        //dessine les traits
         for (let x = 0; x < cutShape(this.shape)[0].length; x++) {
             for (let i = this.y; i < gridH; i++) {
                 fallingLineGrid[i][x + this.x + space] = 1
             }
         }
+        var bottomY = []
+            //recherche la partie de la piece la plus basse
+        for (let x = 0; x < this.shape[0].length; x++) {
+            var arrVertical = []
+            for (let y = 0; y < this.shape.length; y++) {
+                arrVertical.push(this.shape[y][x])
+            }
+            if (allEqual(arrVertical) && arrVertical[0] == 0) {
+                bottomY[x] = 0
+            } else {
+                for (let y = arrVertical.length - 1; y >= 0; y--) {
+                    if (arrVertical[y]) {
+                        bottomY[x] = -arrVertical.length + y
+                        y = 0
+                    }
+                }
+            }
+        }
+        var mindist = gridH
+        for (let x = 0; x < bottomY.length; x++) {
+            var dist = 0
+            while (grid[this.y + this.shape.length + bottomY[x] + dist][this.x + x] == 0 && this.y + this.shape.length + bottomY[x] + dist < 20) {
+                dist++
+            }
+            if (dist < mindist) {
+                mindist = dist
+            }
+        }
+        for (let y = 0; y < this.shape.length; y++) {
+            for (let x = 0; x < this.shape[y].length; x++) {
+                if (this.shape[y][x] == this.colorNb) {
+                    fallingLineGrid[y + this.y + mindist][x + this.x] = 2
+                }
+            }
+        }
+
     }
-    erase(){
+    erase() {
         for (let y = 0; y < this.shape.length; y++) {
             for (let x = 0; x < this.shape[y].length; x++) {
                 if (grid[y + this.y][x + this.x] == this.colorNb && this.shape[y][x] == this.colorNb) {
@@ -335,12 +371,12 @@ function keydown(event) {
         pieceFalling.erase()
         canFastDown = false
         timeLapseFall = levelsInfos[currentLevel]
-        if (holdPiece.length <=0) {
+        if (holdPiece.length <= 0) {
             //si il n'y a aucune piece dans le hold
             holdPiece = copy2Darr(pieceFalling.shape)
             pieceFalling = new Piece(nextPiece)
             nextPiece = copy2Darr(pieces[Math.floor(Math.random() * pieces.length)])
-        }else{
+        } else {
             var mem = copy2Darr(holdPiece)
             holdPiece = copy2Darr(pieceFalling.shape)
             pieceFalling = new Piece(mem)

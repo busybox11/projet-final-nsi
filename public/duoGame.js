@@ -19,7 +19,7 @@ ws.onmessage = function(message) {
     message = JSON.parse(message.data)
     switch (message.title) {
         case "beginGame":
-            document.getElementById("opponentName").innerHTML = message.body;//opponent name
+            document.getElementById("opponentName").innerHTML = message.body; //opponent name
             beginTetrisGame()
             break;
 
@@ -42,14 +42,14 @@ ws.onmessage = function(message) {
     }
 }
 ws.onclose = function() {
-    window.location.replace("/")
-}
-//show the player grid
+        window.location.replace("/")
+    }
+    //show the player grid
 var pastgrid = []
 setInterval(function() {
     if (!isgameover && pastgrid != grid) {
         pastgrid = copy2Darr(grid)
-        //show the grid
+            //show the grid
         for (let y = 1; y < grid.length; y++) {
             for (let x = 0; x < grid[y].length; x++) {
                 var index = (y - 1) * (grid[y].length) + x
@@ -78,16 +78,12 @@ setInterval(function() {
             }
         }
         document.getElementById("level").innerHTML = `level ${currentLevel + 1}`;
+        ws.send(JSON.stringify({
+            title: "opponentGame",
+            body: grid
+        }));
     }
 }, 10)
-
-setInterval(function() {
-    //send the grid to opponent
-    ws.send(JSON.stringify({
-        title: "opponentGame",
-        body: grid
-    }));
-}, 500)
 
 function gameover() {
     isgameover = true;

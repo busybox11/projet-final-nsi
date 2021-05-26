@@ -4,7 +4,7 @@ beginTetrisGame()
 setInterval(function() {
     if (!isgameover && pastgrid != grid) {
         pastgrid = copy2Darr(grid)
-        //show the grid
+            //show the grid
         for (let y = 1; y < grid.length; y++) {
             for (let x = 0; x < grid[y].length; x++) {
                 var index = (y - 1) * (grid[y].length) + x
@@ -16,7 +16,11 @@ setInterval(function() {
             for (let x = 0; x < fallingLineGrid[y].length; x++) {
                 var index = (y - 1) * (grid[y].length) + x
                 if (fallingLineGrid[y][x] && !document.getElementById("tetris-game").children[index].className.includes("tetromino-block")) {
-                    document.getElementById("tetris-game").children[index].className = "h-8 w-8 bg-gray-900"
+                    if (fallingLineGrid[y][x] == 2) {
+                        document.getElementById("tetris-game").children[index].className = "h-8 w-8 bg-green-900"
+                    } else {
+                        document.getElementById("tetris-game").children[index].className = "h-8 w-8 bg-gray-900"
+                    }
                 }
             }
         }
