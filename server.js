@@ -54,7 +54,6 @@ wss.on('connection', (ws) => {
                 break;
 
             case "opponentGame":
-
                 for (let i = 0; i < games[ws.gameCode].length; i++) {
                     if (!games[ws.gameCode][i]) {
                         console.log("error in games list")
@@ -99,6 +98,10 @@ app.get("/", (req, res) => {
 
 app.get("/tetris", (req, res) => {
     res.sendFile(__dirname + '/views/tetris.html')
+});
+
+app.get("/params", (req, res) => {
+    res.sendFile(__dirname + '/views/params.html')
 });
 
 app.get("/training", (req, res) => {

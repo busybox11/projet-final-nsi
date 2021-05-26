@@ -44,6 +44,17 @@ var Q = [
     [6, 6]
 ]
 
+var keys = {
+    "left": 37,
+    "right": 39,
+    "down": 40,
+    "rotate": 38,
+    "place": 32
+}
+if (localStorage.getItem("inputTetris")) {
+    keys = localStorage.getItem("inputTetris")
+}
+
 var pieces = [L, I, J, S, T, Q]
 var score = 0
 var currentLevel = 0
@@ -90,6 +101,7 @@ var ws = new WebSocket("ws://localhost:3000", "protocolOne");
 var isgameover = true;
 var frameCount = 0;
 var timePast = 0;
+var canFastDown = true
 
 class Piece {
     constructor(shape) {
@@ -120,7 +132,7 @@ class Piece {
         if (result) {
             grid = result
         } else {
-            var godown = 0;
+            var linesCut = 0;
             for (let y = 1; y < grid.length; y++) {
                 var itt = 0
                 while (itt < grid[y].length && grid[y][itt] > 0) {
@@ -128,20 +140,20 @@ class Piece {
                 }
                 if (itt >= grid[y].length) {
                     grid[y] = Array(grid[y].length).fill(0)
-                    godown++
+                    linesCut++
                 }
             }
-            if (godown) {
-                if (godown == 1) {
+            if (linesCut) {
+                if (linesCut == 1) {
                     score += 40 * (currentLevel + 1)
-                } else if (godown == 2) {
+                } else if (linesCut == 2) {
                     score += 100 * (currentLevel + 1)
-                } else if (godown == 3) {
+                } else if (linesCut == 3) {
                     score += 300 * (currentLevel + 1)
                 } else {
                     score += 1200 * (currentLevel + 1)
                 }
-                for (let j = 0; j < godown; j++) {
+                for (let j = 0; j < linesCut; j++) {
                     for (let y = grid.length - 1; y > 0; y--) {
                         if (allEqual(grid[y]) && grid[y][0] == 0) {
                             for (let i = y; i > 0; i--) {
@@ -154,6 +166,8 @@ class Piece {
                 updateScore()
             }
             pieceFalling = new Piece(nextPiece)
+            canFastDown = false
+            timeLapseFall = levelsInfos[currentLevel]
             nextPiece = pieces[Math.floor(Math.random() * pieces.length)]
         }
     }
@@ -180,6 +194,7 @@ class Piece {
                             newgrid[y + this.y + addy][x + this.x + addx]
                         } catch (error) {
                             alert(error)
+                            gameover()
                         }
                         if (newgrid[y + this.y + addy][x + this.x + addx] == 0) {
                             newgrid[y + this.y + addy][x + this.x + addx] = this.colorNb
@@ -214,6 +229,10 @@ class Piece {
         for (let y = 0; y < this.shape.length; y++) {
             for (let x = 0; x < this.shape[y].length; x++) {
                 if (this.shape[y][x]) {
+                    if (x + this.x < 0 || x + this.x >= gridW) {
+                        this.shape = rotateArr(rotateArr(rotateArr(this.shape)));
+                        return false
+                    }
                     if (newgrid[y + this.y][x + this.x] == 0) {
                         newgrid[y + this.y][x + this.x] = this.colorNb
                     } else {
@@ -275,28 +294,31 @@ function beginTetrisGame() {
 }
 
 function keydown(event) {
-    if (event.code == "ArrowDown") {
+    if (event.keyCode == keys["down"] && canFastDown) {
         timeLapseFall = 2
     }
-    if (event.code === 'ArrowLeft' && pieceFalling) {
+    if (event.keyCode == keys["left"] && pieceFalling) {
         pieceFalling.drop(-1, 0)
-    } else if (event.code === "ArrowRight" && pieceFalling) {
+    } else if (event.keyCode == keys["right"] && pieceFalling) {
         pieceFalling.drop(1, 0)
     }
-    if (event.code === "ArrowUp" && pieceFalling) {
+    if (event.keyCode == keys["rotate"] && pieceFalling) {
         pieceFalling.rotate()
     }
-    if (event.code === "Space" && pieceFalling) {
+    if (event.keyCode == keys["place"] && pieceFalling) {
         var pastPiece = pieceFalling
-        while (pastPiece == pieceFalling) {
+        var itt = 0
+        while (pastPiece == pieceFalling && itt < gridH + 3) {
             pieceFalling.drop(0, 1)
+            itt++
         }
     }
 }
 
 function keyup(event) {
-    if (event.code == "ArrowDown") {
+    if (event.keyCode == keys["down"]) {
         timeLapseFall = levelsInfos[currentLevel]
+        canFastDown = true
     }
 }
 
