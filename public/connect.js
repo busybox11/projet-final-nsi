@@ -2,12 +2,12 @@ window.onload = function() {
     loadUserName()
     if (!localStorage.getItem("inputTetris")) {
         localStorage.setItem("inputTetris", JSON.stringify({
-            "left": 37,
-            "right": 39,
-            "down": 40,
-            "rotate": 38,
-            "place": 32,
-            "hold": 80
+            "left": [37, "ArrowLeft"],
+            "right": [39, "ArrowRight"],
+            "down": [40, "ArrowDown"],
+            "rotate": [38, "ArrowUp"],
+            "place": [32, "Space"],
+            "hold": [46, "U"]
         }))
     }
 

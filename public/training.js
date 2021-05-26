@@ -1,4 +1,5 @@
 var pastgrid = []
+var pasthold = []
 beginTetrisGame()
 setInterval(function() {
     if (!isgameover && pastgrid != grid) {
@@ -29,6 +30,21 @@ setInterval(function() {
             for (let x = 0; x < nextPiece[y].length; x++) {
                 var index = y * 5 + x
                 document.getElementById("tetris-nextPiece").children[index].className = tetrominosColors[nextPiece[y][x]]
+            }
+        }
+        //affiche la hold piece
+        if (pasthold != holdPiece) {
+            pasthold = copy2Darr(holdPiece)
+            for (let y = 0; y < 4; y++) {
+                for (let x = 0; x < 5; x++) {
+                    document.getElementById("tetris-hold").children[y * 5 + x].className = "";
+                }
+            }
+            for (let y = 0; y < holdPiece.length; y++) {
+                for (let x = 0; x < holdPiece[y].length; x++) {
+                    var index = y * 5 + x
+                    document.getElementById("tetris-hold").children[index].className = tetrominosColors[holdPiece[y][x]]
+                }
             }
         }
         document.getElementById("level").innerHTML = `level ${currentLevel + 1}`;

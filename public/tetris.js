@@ -275,6 +275,15 @@ class Piece {
             }
         }
     }
+    erase(){
+        for (let y = 0; y < this.shape.length; y++) {
+            for (let x = 0; x < this.shape[y].length; x++) {
+                if (grid[y + this.y][x + this.x] == this.colorNb) {
+                    grid[y + this.y][x + this.x] = 0
+                }
+            }
+        }
+    }
 }
 
 function beginTetrisGame() {
@@ -296,18 +305,18 @@ function beginTetrisGame() {
 }
 
 function keydown(event) {
-    if (event.keyCode == keys["down"] && canFastDown) {
+    if (event.keyCode == keys["down"][0] && canFastDown) {
         timeLapseFall = 2
     }
-    if (event.keyCode == keys["left"] && pieceFalling) {
+    if (event.keyCode == keys["left"][0] && pieceFalling) {
         pieceFalling.drop(-1, 0)
-    } else if (event.keyCode == keys["right"] && pieceFalling) {
+    } else if (event.keyCode == keys["right"][0] && pieceFalling) {
         pieceFalling.drop(1, 0)
     }
-    if (event.keyCode == keys["rotate"] && pieceFalling) {
+    if (event.keyCode == keys["rotate"][0] && pieceFalling) {
         pieceFalling.rotate()
     }
-    if (event.keyCode == keys["place"] && pieceFalling) {
+    if (event.keyCode == keys["place"][0] && pieceFalling) {
         var pastPiece = pieceFalling
         var itt = 0
         while (pastPiece == pieceFalling && itt < gridH + 3) {
@@ -315,15 +324,29 @@ function keydown(event) {
             itt++
         }
     }
+    if (event.keyCode == keys["hold"][0] && pieceFalling) {
+        pieceFalling.erase()
+        canFastDown = false
+        timeLapseFall = levelsInfos[currentLevel]
+        if (holdPiece.length <=0) {
+            //si il n'y a aucune piece dans le hold
+            holdPiece = copy2Darr(pieceFalling.shape)
+            pieceFalling = new Piece(nextPiece)
+            nextPiece = copy2Darr(pieces[Math.floor(Math.random() * pieces.length)])
+        }else{
+            var mem = copy2Darr(holdPiece)
+            holdPiece = copy2Darr(pieceFalling.shape)
+            pieceFalling = new Piece(mem)
+        }
+    }
 }
 
 function keyup(event) {
-    if (event.keyCode == keys["down"]) {
+    if (event.keyCode == keys["down"][0]) {
         timeLapseFall = levelsInfos[currentLevel]
         canFastDown = true
     }
 }
-
 //function executed every frame
 setInterval(function() {
     if (!isgameover) {
