@@ -53,7 +53,7 @@ var keys = {
     "hold": 80
 }
 if (localStorage.getItem("inputTetris")) {
-    keys = localStorage.getItem("inputTetris")
+    keys = JSON.parse(localStorage.getItem("inputTetris"))
 }
 
 var pieces = [L, I, J, S, T, Q]
