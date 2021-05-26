@@ -281,41 +281,41 @@ class Piece {
                 fallingLineGrid[i][x + this.x + space] = 1
             }
         }
-        var bottomY = []
-            //recherche la partie de la piece la plus basse
-        for (let x = 0; x < this.shape[0].length; x++) {
-            var arrVertical = []
-            for (let y = 0; y < this.shape.length; y++) {
-                arrVertical.push(this.shape[y][x])
-            }
-            if (allEqual(arrVertical) && arrVertical[0] == 0) {
-                bottomY[x] = 0
-            } else {
-                for (let y = arrVertical.length - 1; y >= 0; y--) {
-                    if (arrVertical[y]) {
-                        bottomY[x] = -arrVertical.length + y
-                        y = 0
-                    }
-                }
-            }
-        }
-        var mindist = gridH
-        for (let x = 0; x < bottomY.length; x++) {
-            var dist = 0
-            while (grid[this.y + this.shape.length + bottomY[x] + dist][this.x + x] == 0 && this.y + this.shape.length + bottomY[x] + dist < 20) {
-                dist++
-            }
-            if (dist < mindist) {
-                mindist = dist
-            }
-        }
-        for (let y = 0; y < this.shape.length; y++) {
-            for (let x = 0; x < this.shape[y].length; x++) {
-                if (this.shape[y][x] == this.colorNb) {
-                    fallingLineGrid[y + this.y + mindist][x + this.x] = 2
-                }
-            }
-        }
+        // var bottomY = []
+        //     //recherche la partie de la piece la plus basse
+        // for (let x = 0; x < this.shape[0].length; x++) {
+        //     var arrVertical = []
+        //     for (let y = 0; y < this.shape.length; y++) {
+        //         arrVertical.push(this.shape[y][x])
+        //     }
+        //     if (allEqual(arrVertical) && arrVertical[0] == 0) {
+        //         bottomY[x] = 0
+        //     } else {
+        //         for (let y = arrVertical.length - 1; y >= 0; y--) {
+        //             if (arrVertical[y]) {
+        //                 bottomY[x] = -arrVertical.length + y
+        //                 y = 0
+        //             }
+        //         }
+        //     }
+        // }
+        // var mindist = gridH
+        // for (let x = 0; x < bottomY.length; x++) {
+        //     var dist = 0
+        //     while (grid[this.y + this.shape.length + bottomY[x] + dist][this.x + x] == 0 && this.y + this.shape.length + bottomY[x] + dist < 20) {
+        //         dist++
+        //     }
+        //     if (dist < mindist) {
+        //         mindist = dist
+        //     }
+        // }
+        // for (let y = 0; y < this.shape.length; y++) {
+        //     for (let x = 0; x < this.shape[y].length; x++) {
+        //         if (this.shape[y][x] == this.colorNb) {
+        //             fallingLineGrid[y + this.y + mindist][x + this.x] = 2
+        //         }
+        //     }
+        // }
 
     }
     erase() {
