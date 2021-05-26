@@ -316,7 +316,6 @@ class Piece {
         //         }
         //     }
         // }
-
     }
     erase() {
         for (let y = 0; y < this.shape.length; y++) {
