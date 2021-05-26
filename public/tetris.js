@@ -352,6 +352,24 @@ function cutBottomShape(arr) {
     return newarr
 }
 
+function cutRightShape(arr) {
+    var newarr = copy2Darr(arr)
+    for (let x = newarr[0].length - 1; x >= 0; x--) {
+        var arrVertical = []
+        for (let y = 0; y < newarr.length; y++) {
+            arrVertical.push(newarr[y][x])
+        }
+        if (allEqual(arrVertical) && arrVertical[0] == 0) {
+            for (let y = 0; y < newarr.length; y++) {
+                newarr[y].splice(x, 1)
+            }
+        } else {
+            x = 0
+        }
+    }
+    return newarr
+}
+
 function rotateArr(matrix) {
     var newArr = Array.from(matrix)
     const n = newArr.length;
