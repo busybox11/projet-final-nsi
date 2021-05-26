@@ -49,7 +49,8 @@ var keys = {
     "right": 39,
     "down": 40,
     "rotate": 38,
-    "place": 32
+    "place": 32,
+    "hold": 80
 }
 if (localStorage.getItem("inputTetris")) {
     keys = localStorage.getItem("inputTetris")
@@ -95,7 +96,7 @@ var gridW = 10
 var grid = []
 var fallingLineGrid = []
 var canPushPiece = true
-var pieceFalling, nextPiece
+var pieceFalling, nextPiece, holdPiece
 var timeLapseFall = levelsInfos[currentLevel]
 var ws = new WebSocket("ws://localhost:3000", "protocolOne");
 var isgameover = true;
@@ -168,7 +169,7 @@ class Piece {
             pieceFalling = new Piece(nextPiece)
             canFastDown = false
             timeLapseFall = levelsInfos[currentLevel]
-            nextPiece = pieces[Math.floor(Math.random() * pieces.length)]
+            nextPiece = copy2Darr(pieces[Math.floor(Math.random() * pieces.length)])
         }
     }
     canDrop(addx, addy) {
@@ -287,7 +288,8 @@ function beginTetrisGame() {
         }
     }
     pieceFalling = new Piece(pieces[Math.floor(Math.random() * pieces.length)])
-    nextPiece = pieces[Math.floor(Math.random() * pieces.length)]
+    nextPiece = copy2Darr(pieces[Math.floor(Math.random() * pieces.length)])
+    holdPiece = []
     document.addEventListener("keydown", keydown);
     document.addEventListener("keyup", keyup)
     isgameover = false;
