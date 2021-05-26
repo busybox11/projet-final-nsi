@@ -126,6 +126,7 @@ class Piece {
                 }
             }
         }
+        this.drawFallingLine()
         grid = Array.from(newgrid)
     }
     drop(addx, addy) {
@@ -218,11 +219,14 @@ class Piece {
         }
     }
     rotate() {
+        var pastshape = copy2Darr(this.shape)
         this.shape = rotateArr(this.shape);
         var newgrid = copy2Darr(grid)
+        //efface d'abord la piece
         for (let y = 0; y < this.shape.length; y++) {
             for (let x = 0; x < this.shape[y].length; x++) {
-                if (newgrid[y + this.y][x + this.x] == this.colorNb) {
+                console.table(this.shape)
+                if (newgrid[y + this.y][x + this.x] == this.colorNb && pastshape[y][x] == this.colorNb) {
                     newgrid[y + this.y][x + this.x] = 0
                 }
             }
@@ -230,6 +234,7 @@ class Piece {
         for (let y = 0; y < this.shape.length; y++) {
             for (let x = 0; x < this.shape[y].length; x++) {
                 if (this.shape[y][x]) {
+                    //si la piece depasse de la grille
                     if (x + this.x < 0 || x + this.x >= gridW) {
                         this.shape = rotateArr(rotateArr(rotateArr(this.shape)));
                         return false
@@ -237,6 +242,7 @@ class Piece {
                     if (newgrid[y + this.y][x + this.x] == 0) {
                         newgrid[y + this.y][x + this.x] = this.colorNb
                     } else {
+                        this.shape = rotateArr(rotateArr(rotateArr(this.shape)));
                         return false
                     }
                 }
@@ -250,6 +256,7 @@ class Piece {
         this.drawFallingLine()
     }
     drawFallingLine() {
+        //reinitilise toutes les cases
         for (let y = 0; y < gridH; y++) {
             fallingLineGrid[y] = []
             for (let x = 0; x < gridW; x++) {
@@ -278,7 +285,7 @@ class Piece {
     erase(){
         for (let y = 0; y < this.shape.length; y++) {
             for (let x = 0; x < this.shape[y].length; x++) {
-                if (grid[y + this.y][x + this.x] == this.colorNb) {
+                if (grid[y + this.y][x + this.x] == this.colorNb && this.shape[y][x] == this.colorNb) {
                     grid[y + this.y][x + this.x] = 0
                 }
             }
