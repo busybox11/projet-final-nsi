@@ -50,7 +50,7 @@ var keys = {
     "down": 40,
     "rotate": 38,
     "place": 32,
-    "hold": 80
+    "hold": 16
 }
 if (localStorage.getItem("inputTetris")) {
     keys = JSON.parse(localStorage.getItem("inputTetris"))
@@ -281,33 +281,35 @@ class Piece {
                 fallingLineGrid[i][x + this.x + space] = 1
             }
         }
-        // var bottomY = []
-        //     //recherche la partie de la piece la plus basse
-        // for (let x = 0; x < this.shape[0].length; x++) {
-        //     var arrVertical = []
-        //     for (let y = 0; y < this.shape.length; y++) {
-        //         arrVertical.push(this.shape[y][x])
-        //     }
-        //     if (allEqual(arrVertical) && arrVertical[0] == 0) {
-        //         bottomY[x] = 0
-        //     } else {
-        //         for (let y = arrVertical.length - 1; y >= 0; y--) {
-        //             if (arrVertical[y]) {
-        //                 bottomY[x] = -arrVertical.length + y
-        //                 y = 0
-        //             }
-        //         }
-        //     }
-        // }
-        // var mindist = gridH
+        var bottomY = []
+            //recherche la partie de la piece la plus basse
+        for (let x = 0; x < this.shape[0].length; x++) {
+            var arrVertical = []
+            for (let y = 0; y < this.shape.length; y++) {
+                arrVertical.push(this.shape[y][x])
+            }
+            if (allEqual(arrVertical) && arrVertical[0] == 0) {
+                bottomY[x] = 0
+            } else {
+                for (let y = arrVertical.length - 1; y >= 0; y--) {
+                    if (arrVertical[y]) {
+                        bottomY[x] = -arrVertical.length + y
+                        y = 0
+                    }
+                }
+            }
+        }
+        console.log(bottomY)
+        // var mindist = 10
         // for (let x = 0; x < bottomY.length; x++) {
         //     var dist = 0
-        //     while (grid[this.y + this.shape.length + bottomY[x] + dist][this.x + x] == 0 && this.y + this.shape.length + bottomY[x] + dist < 20) {
-        //         dist++
-        //     }
-        //     if (dist < mindist) {
-        //         mindist = dist
-        //     }
+            // while (grid[this.y + this.shape.length + bottomY[x] + dist][this.x + x] == 0 && this.y + this.shape.length + bottomY[x] + dist < gridH - 1) {
+            //     dist++
+            // }
+            // if (dist < mindist) {
+            //     mindist = dist
+            // }
+
         // }
         // for (let y = 0; y < this.shape.length; y++) {
         //     for (let x = 0; x < this.shape[y].length; x++) {
