@@ -39,6 +39,7 @@ ws.onmessage = function(message) {
 
         case "opponentGameOver":
             alert(`L'adversaire a perdu avec un temps`)
+            isgameover = true
             break;
 
         case "duoMalus":

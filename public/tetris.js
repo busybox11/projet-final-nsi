@@ -105,6 +105,7 @@ var frameCount = 0;
 var timePast = 0;
 var canFastDown = true
 var canHold = true
+var nbCantDrop = 0
 
 class Piece {
     constructor(shape) {
@@ -134,8 +135,12 @@ class Piece {
     drop(addx, addy) {
         var result = this.canDrop(addx, addy)
         if (result) {
+            nbCantDrop = 0
             grid = result
-        } else {
+        }else if(nbCantDrop < 1){
+            nbCantDrop++
+        }else {
+            nbCantDrop = 0
             var linesCut = 0;
             for (let y = 1; y < grid.length; y++) {
                 var itt = 0
