@@ -36,7 +36,7 @@ setInterval(function() {
                 document.getElementById("tetris-nextPiece").children[index].className = tetrominosColors[nextPiece[y][x]]
             }
         }
-        //affiche la hold piece
+        //show the hold piece
         if (pasthold != holdPiece) {
             pasthold = copy2Darr(holdPiece)
             for (let y = 0; y < 4; y++) {
@@ -47,7 +47,11 @@ setInterval(function() {
             for (let y = 0; y < holdPiece.length; y++) {
                 for (let x = 0; x < holdPiece[y].length; x++) {
                     var index = y * 4 + x
-                    document.getElementById("tetris-hold").children[index].className = tetrominosColors[holdPiece[y][x]]
+                    if (!canHold && holdPiece[y][x]) {
+                        document.getElementById("tetris-hold").children[index].className = "tetromino-block ring-gray-500 bg-gray-700"
+                    } else{
+                        document.getElementById("tetris-hold").children[index].className = tetrominosColors[holdPiece[y][x]]
+                    }
                 }
             }
         }
