@@ -27,7 +27,7 @@ setInterval(function() {
         //show the next piece
         for (let y = 0; y < 4; y++) {
             for (let x = 0; x < 5; x++) {
-                document.getElementById("tetris-nextPiece").children[y * 5 + x].className = ""
+                document.getElementById("tetris-nextPiece").children[y * 5 + x].className = "h-8 w-8"
             }
         }
         for (let y = 0; y < nextPiece.length; y++) {
@@ -41,7 +41,7 @@ setInterval(function() {
             pasthold = copy2Darr(holdPiece)
             for (let y = 0; y < 4; y++) {
                 for (let x = 0; x < 5; x++) {
-                    document.getElementById("tetris-hold").children[y * 5 + x].className = "";
+                    document.getElementById("tetris-hold").children[y * 5 + x].className = "h-8 w-8";
                 }
             }
             for (let y = 0; y < holdPiece.length; y++) {
@@ -51,7 +51,7 @@ setInterval(function() {
                 }
             }
         }
-        document.getElementById("level").innerHTML = `level ${currentLevel + 1}`;
+        document.getElementById("level").innerHTML = currentLevel + 1;
     }
 }, 10)
 
@@ -61,5 +61,5 @@ function gameover() {
 }
 
 function updateScore() {
-    document.getElementById("score").innerHTML = `${score} pts`
+    document.getElementById("score").innerHTML = score
 }
