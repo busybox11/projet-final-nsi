@@ -48,7 +48,7 @@ ws.onmessage = function(message) {
                 case "block":
                     grid[infos[0]][infos[1]] = 7
                     break;
-            
+
                 default:
                     break;
             }
@@ -63,6 +63,7 @@ ws.onclose = function() {
     }
     //show the player grid
 var pastgrid = []
+var pasthold = []
 setInterval(function() {
     if (!isgameover && pastgrid != grid) {
         pastgrid = copy2Darr(grid)
@@ -83,18 +84,36 @@ setInterval(function() {
             }
         }
         //show the next piece
-        // for (let y = 0; y < 4; y++) {
-        //     for (let x = 0; x < 5; x++) {
-        //         document.getElementById("tetris-nextPiece").children[y * 5 + x].className = ""
-        //     }
-        // }
-        // for (let y = 0; y < nextPiece.length; y++) {
-        //     for (let x = 0; x < nextPiece[y].length; x++) {
-        //         var index = y * 5 + x
-        //         document.getElementById("tetris-nextPiece").children[index].className = tetrominosColors[nextPiece[y][x]]
-        //     }
-        // }
-        //document.getElementById("level").innerHTML = `level ${currentLevel + 1}`;
+        for (let y = 0; y < 4; y++) {
+            for (let x = 0; x < 4; x++) {
+                document.getElementById("tetris-nextPiece").children[y * 4 + x].className = ""
+            }
+        }
+        for (let y = 0; y < nextPiece.length; y++) {
+            for (let x = 0; x < nextPiece[y].length; x++) {
+                var index = y * 4 + x
+                document.getElementById("tetris-nextPiece").children[index].className = tetrominosColors[nextPiece[y][x]]
+            }
+        }
+        if (pasthold != holdPiece) {
+            pasthold = copy2Darr(holdPiece)
+            for (let y = 0; y < 4; y++) {
+                for (let x = 0; x < 4; x++) {
+                    document.getElementById("tetris-hold").children[y * 4 + x].className = "h-8 w-8";
+                }
+            }
+            for (let y = 0; y < holdPiece.length; y++) {
+                for (let x = 0; x < holdPiece[y].length; x++) {
+                    var index = y * 4 + x
+                    if (!canHold && holdPiece[y][x]) {
+                        document.getElementById("tetris-hold").children[index].className = "tetromino-block ring-gray-500 bg-gray-700"
+                    } else {
+                        document.getElementById("tetris-hold").children[index].className = tetrominosColors[holdPiece[y][x]]
+                    }
+                }
+            }
+        }
+        document.getElementById("level").innerHTML = `level ${currentLevel + 1}`;
         ws.send(JSON.stringify({
             title: "opponentGame",
             body: grid
@@ -119,12 +138,15 @@ function updateScore() {
     document.getElementById("score").innerHTML = score
 }
 
-function sendMalus(){
-    ws.send(JSON.stringify({
-        title: "duoMalus",
-        body: {
-            type: "block",
-            infos: [Math.floor(Math.random() * gridH), Math.floor(Math.random() * gridW) + 1]
-        }
-    }))
+function sendMalus() {
+    if (score >= 1000) {
+        ws.send(JSON.stringify({
+            title: "duoMalus",
+            body: {
+                type: "block",
+                infos: [Math.floor(Math.random() * (gridH - 5)) + 5, Math.floor(Math.random() * gridW)]
+            }
+        }))
+        score -= 1000
+    }
 }
