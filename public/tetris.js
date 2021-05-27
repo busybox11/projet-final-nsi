@@ -103,6 +103,7 @@ var isgameover = true;
 var frameCount = 0;
 var timePast = 0;
 var canFastDown = true
+var canHold = true
 
 class Piece {
     constructor(shape) {
@@ -169,6 +170,7 @@ class Piece {
             }
             pieceFalling = new Piece(nextPiece)
             canFastDown = false
+            canHold = true
             timeLapseFall = levelsInfos[currentLevel]
             nextPiece = copy2Darr(pieces[Math.floor(Math.random() * pieces.length)])
         }
@@ -281,25 +283,25 @@ class Piece {
                 fallingLineGrid[i][x + this.x + space] = 1
             }
         }
-        var bottomY = []
-            //recherche la partie de la piece la plus basse
-        for (let x = 0; x < this.shape[0].length; x++) {
-            var arrVertical = []
-            for (let y = 0; y < this.shape.length; y++) {
-                arrVertical.push(this.shape[y][x])
-            }
-            if (allEqual(arrVertical) && arrVertical[0] == 0) {
-                bottomY[x] = 0
-            } else {
-                for (let y = arrVertical.length - 1; y >= 0; y--) {
-                    if (arrVertical[y]) {
-                        bottomY[x] = -arrVertical.length + y
-                        y = 0
-                    }
-                }
-            }
-        }
-        console.log(bottomY)
+        //previsualise la place de la piece
+        // var bottomY = []
+        //     //recherche la partie de la piece la plus basse
+        // for (let x = 0; x < this.shape[0].length; x++) {
+        //     var arrVertical = []
+        //     for (let y = 0; y < this.shape.length; y++) {
+        //         arrVertical.push(this.shape[y][x])
+        //     }
+        //     if (allEqual(arrVertical) && arrVertical[0] == 0) {
+        //         bottomY[x] = 0
+        //     } else {
+        //         for (let y = arrVertical.length - 1; y >= 0; y--) {
+        //             if (arrVertical[y]) {
+        //                 bottomY[x] = -arrVertical.length + y
+        //                 y = 0
+        //             }
+        //         }
+        //     }
+        // }
         // var mindist = 10
         // for (let x = 0; x < bottomY.length; x++) {
         //     var dist = 0
@@ -368,7 +370,8 @@ function keydown(event) {
             itt++
         }
     }
-    if (event.keyCode == keys["hold"][0] && pieceFalling) {
+    if (event.keyCode == keys["hold"][0] && pieceFalling && canHold) {
+        canHold = false
         pieceFalling.erase()
         canFastDown = false
         timeLapseFall = levelsInfos[currentLevel]

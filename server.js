@@ -45,7 +45,7 @@ wss.on('connection', (ws) => {
                             body: games[body.gameCode][0].playerName
                         }))
                     } else {
-                        console.log("partie pleine")
+                        //partie pleine
                         ws.close()
                     }
                 } else {
@@ -57,7 +57,7 @@ wss.on('connection', (ws) => {
                 if (games[ws.gameCode]){
                     for (let i = 0; i < games[ws.gameCode].length; i++) {
                         if (!games[ws.gameCode][i]) {
-                            console.log("error in games list")
+                            //error in games list
                             ws.close()
                             break;
                         }
@@ -75,7 +75,7 @@ wss.on('connection', (ws) => {
                 if(ws.gameCode){
                     for (let i = 0; i < games[ws.gameCode].length; i++) {
                         if (!games[ws.gameCode][i]) {
-                            console.log("error in games list")
+                            //error in games list
                             ws.close()
                             break;
                         }
