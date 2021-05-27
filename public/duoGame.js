@@ -41,6 +41,18 @@ ws.onmessage = function(message) {
             alert(`L'adversaire a perdu avec un temps`)
             break;
 
+        case "duoMalus":
+            var infos = message.body.infos
+            switch (message.body.type) {
+                case "block":
+                    grid[infos[0]][infos[1]] = 7
+                    break;
+            
+                default:
+                    break;
+            }
+            break;
+
         default:
             break;
     }
@@ -104,4 +116,14 @@ function gameover() {
 
 function updateScore() {
     document.getElementById("score").innerHTML = score
+}
+
+function sendMalus(){
+    ws.send(JSON.stringify({
+        title: "duoMalus",
+        body: {
+            type: "block",
+            infos: [Math.floor(Math.random() * gridH), Math.floor(Math.random() * gridW) + 1]
+        }
+    }))
 }

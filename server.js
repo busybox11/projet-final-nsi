@@ -53,25 +53,7 @@ wss.on('connection', (ws) => {
                 }
                 break;
 
-            case "opponentGame":
-                if (games[ws.gameCode]){
-                    for (let i = 0; i < games[ws.gameCode].length; i++) {
-                        if (!games[ws.gameCode][i]) {
-                            //error in games list
-                            ws.close()
-                            break;
-                        }
-                        if (games[ws.gameCode][i] != ws) {
-                            games[ws.gameCode][i].send(JSON.stringify({
-                                title: "opponentGame",
-                                body: body
-                            }))
-                        }
-                    }
-                }
-                break;
-
-            case "opponentGameOver":
+            default:
                 if(ws.gameCode){
                     for (let i = 0; i < games[ws.gameCode].length; i++) {
                         if (!games[ws.gameCode][i]) {
@@ -81,16 +63,12 @@ wss.on('connection', (ws) => {
                         }
                         if (games[ws.gameCode][i] != ws) {
                             games[ws.gameCode][i].send(JSON.stringify({
-                                title: "opponentGameOver",
+                                title: title,
                                 body: body
                             }))
                         }
                     }
                 }
-                break;
-            
-            default:
-                console.log(message)
                 break;
         }
     });
