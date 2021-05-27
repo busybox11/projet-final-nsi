@@ -103,5 +103,5 @@ function gameover() {
 }
 
 function updateScore() {
-    document.getElementById("score").innerHTML = `${score} pts`
+    document.getElementById("score").innerHTML = score
 }
