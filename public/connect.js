@@ -7,10 +7,9 @@ window.onload = function() {
             "down": [40, "ArrowDown"],
             "rotate": [38, "ArrowUp"],
             "place": [32, "Space"],
-            "hold": [46, "U"]
+            "hold": [16, "Shift"]
         }))
     }
-
 }
 
 function changeName() {

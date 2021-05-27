@@ -1,4 +1,4 @@
-var ws = new WebSocket("ws://localhost:3000", "protocolOne");
+var ws = new WebSocket(`ws:${window.location.host}//`, "protocolOne");
 
 ws.onopen = function(){
     ws.send(JSON.stringify({

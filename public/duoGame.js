@@ -1,4 +1,4 @@
-var ws = new WebSocket("ws://localhost:3000", "protocolOne");
+var ws = new WebSocket(`ws:${window.location.host}//`, "protocolOne");
 var oppponentGrid = []
 ws.onopen = function() {
     var url = new URL(window.location.href);
@@ -35,6 +35,10 @@ ws.onmessage = function(message) {
                     document.getElementById("opponent-tetris-game").children[index].className = tetrominosColors[oppponentGrid[y][x]]
                 }
             }
+            break;
+
+        case "opponentGameOver":
+            alert(`L'adversaire a perdu avec un temps`)
             break;
 
         default:
@@ -87,6 +91,14 @@ setInterval(function() {
 
 function gameover() {
     isgameover = true;
+    ws.send(JSON.stringify({
+        title: "opponentGameOver",
+        body: {
+            score: score,
+            time: timePast,
+            level: currentLevel
+        }
+    }))
     alert(`temps: ${timePast / 100} s`)
 }
 
