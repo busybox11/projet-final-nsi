@@ -26,13 +26,13 @@ setInterval(function() {
         }
         //show the next piece
         for (let y = 0; y < 4; y++) {
-            for (let x = 0; x < 5; x++) {
-                document.getElementById("tetris-nextPiece").children[y * 5 + x].className = "h-8 w-8"
+            for (let x = 0; x < 4; x++) {
+                document.getElementById("tetris-nextPiece").children[y * 4 + x].className = "h-8 w-8"
             }
         }
         for (let y = 0; y < nextPiece.length; y++) {
             for (let x = 0; x < nextPiece[y].length; x++) {
-                var index = y * 5 + x
+                var index = y * 4 + x
                 document.getElementById("tetris-nextPiece").children[index].className = tetrominosColors[nextPiece[y][x]]
             }
         }
@@ -40,13 +40,13 @@ setInterval(function() {
         if (pasthold != holdPiece) {
             pasthold = copy2Darr(holdPiece)
             for (let y = 0; y < 4; y++) {
-                for (let x = 0; x < 5; x++) {
-                    document.getElementById("tetris-hold").children[y * 5 + x].className = "h-8 w-8";
+                for (let x = 0; x < 4; x++) {
+                    document.getElementById("tetris-hold").children[y * 4 + x].className = "h-8 w-8";
                 }
             }
             for (let y = 0; y < holdPiece.length; y++) {
                 for (let x = 0; x < holdPiece[y].length; x++) {
-                    var index = y * 5 + x
+                    var index = y * 4 + x
                     document.getElementById("tetris-hold").children[index].className = tetrominosColors[holdPiece[y][x]]
                 }
             }
