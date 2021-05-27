@@ -5,7 +5,8 @@ var tetrominosColors = [
     "tetromino-block ring-blue-700 bg-blue-900",
     "tetromino-block ring-purple-700 bg-purple-900",
     "tetromino-block ring-indigo-700 bg-indigo-900",
-    "tetromino-block ring-green-700 bg-green-900"
+    "tetromino-block ring-green-700 bg-green-900",
+    "tetromino-block ring-gray-700 bg-gray-900"
 ]
 
 var L = [
