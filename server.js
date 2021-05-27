@@ -4,6 +4,7 @@ const http = require('http');
 const PORT = 3000;
 
 const app = express();
+const bodyParser = require('body-parser')
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
@@ -23,7 +24,7 @@ wss.on('connection', (ws) => {
                     body: playerInLobby.length
                 }));
                 if (playerInLobby.length >= 2) {
-                    launchGame()
+                    launchDuoGame()
                 }
                 break;
 
@@ -53,8 +54,32 @@ wss.on('connection', (ws) => {
                 }
                 break;
 
+            case "connectToTheGame":
+                //si le code exist
+                if (games[body.gameCode]) {
+                    var game = games[body.gameCode]
+                    ws.playerName = body.playerName
+                    ws.gameCode = body.gameCode
+                    if (game.players.length < game.infos.size) {
+                        game.players.push(ws)
+                        for (let i = 0; i < game.players.length; i++) {
+                            game.players[i].send(JSON.stringify({
+                                title: "newPlayer",
+                                body: game.players.length
+                            }))
+                        }
+                    } else {
+                        //partie pleine
+                        ws.close()
+                    }
+                } else {
+                    ws.close()
+                }
+                break;
+
             default:
-                if(ws.gameCode){
+                //renvoie le message aux autres joueurs
+                if (ws.gameCode && games[ws.gameCode]) {
                     for (let i = 0; i < games[ws.gameCode].length; i++) {
                         if (!games[ws.gameCode][i]) {
                             //error in games list
@@ -78,17 +103,32 @@ wss.on('connection', (ws) => {
             playerInLobby.splice(playerInLobby.indexOf(ws), 1)
         } else if (ws.gameCode && games[ws.gameCode]) {
             var gameCode = ws.gameCode
-            games[gameCode].splice(games[gameCode].indexOf(ws), 1)
-            games[gameCode][0].send(JSON.stringify({
-                title: "opponentLeftGame"
-            }))
-            delete games[gameCode][0].gameCode
-            delete games[gameCode]
+                //retire le ws de la partie
+            if (games[gameCode].infos) {
+                games[gameCode].players.splice(games[gameCode].players.indexOf(ws), 1)
+                for (let client of games[gameCode].players) {
+                    client.send(JSON.stringify({
+                        title: "opponentLeftGame"
+                    }))
+                }
+            } else {
+                games[gameCode].splice(games[gameCode].indexOf(ws), 1)
+                for (let client of games[gameCode]) {
+                    client.send(JSON.stringify({
+                        title: "opponentLeftGame"
+                    }))
+                }
+                if (games[ws.gameCode].length <= 1) {
+                    delete games[gameCode][0].gameCode
+                    delete games[gameCode]
+                }
+            }
         }
     });
 });
 
 app.use(express.static(__dirname + '/public/'));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
@@ -119,11 +159,42 @@ app.get("/duoGame", (req, res) => {
     }
 });
 
+app.get("/multi", (req, res) => {
+    var gameCode = req.query.code
+    if (games[gameCode]) {
+        res.sendFile(__dirname + '/views/multi.html')
+    } else {
+        res.redirect("/")
+    }
+});
+
+app.get("/multiCreator", (req, res) => {
+    var gameCode = req.query.code
+    if (games[gameCode]) {
+        if (games[gameCode].players.length <= 0) {
+            return res.sendFile(__dirname + '/views/gameCreator.html')
+        } else {
+            res.redirect(`/multi?code=${gameCode}`)
+        }
+    } else {
+        return res.redirect("/")
+    }
+});
+
+app.post("/createGame", (req, res) => {
+    var gameName = req.body.gameName
+    var gameSize = req.body.gameSize
+        //si ce nom existe deja return
+    if (games[gameName]) return res.redirect('/')
+    gameCode = launchGame(gameName, gameSize)
+    return res.redirect(`/multiCreator?code=${gameCode}`)
+})
+
 server.listen(PORT, () => {
     console.log(`Server is running on PORT: ${PORT}`);
 });
 
-function launchGame() {
+function launchDuoGame() {
     var gameCode = generate_token(10)
     var itt = 0;
     var tokenLenght = 10
@@ -150,6 +221,33 @@ function launchGame() {
         title: "gameUrl",
         body: `/duoGame?code=${gameCode}`
     }))
+}
+
+function launchGame(gameCode, gameSize) {
+    //génère un token inexistant si la partie n'a pas de nom
+    if (!gameCode) {
+        gameCode = generate_token(10)
+        var itt = 0;
+        var tokenLenght = 10
+        while (games[gameCode]) {
+            if (itt > 10) {
+                tokenLenght++
+                itt = 0
+            }
+            gameCode = generate_token(tokenLenght)
+            itt++
+        }
+    }
+    //verifie que la taille de la partie ne soit pas trop grande
+    if (gameSize > 100) gameSize = 100
+    games[gameCode] = {
+        infos: {
+            size: gameSize,
+            mode: "battle"
+        },
+        players: []
+    }
+    return gameCode
 }
 
 function generate_token(length) {
