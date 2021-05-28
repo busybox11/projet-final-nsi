@@ -8,7 +8,7 @@ ws.onopen = function() {
         userName = "anonymous"
     }
     ws.send(JSON.stringify({
-        title: "connectToTheDuoGame",
+        title: "connectToTheGame",
         body: {
             gameCode: gameCode,
             playerName: userName
@@ -46,7 +46,7 @@ ws.onmessage = function(message) {
             var infos = message.body.infos
             switch (message.body.type) {
                 case "block":
-                    grid[infos[0]][infos[1]] = 7
+                    grid[infos[0]][infos[1]] = pieces.length
                     break;
 
                 default:

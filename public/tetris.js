@@ -6,6 +6,7 @@ var tetrominosColors = [
     "tetromino-block ring-purple-700 bg-purple-900",
     "tetromino-block ring-indigo-700 bg-indigo-900",
     "tetromino-block ring-green-700 bg-green-900",
+    "tetromino-block ring-pink-700 bg-pink-900",
     "tetromino-block ring-gray-700 bg-gray-900"
 ]
 
@@ -34,6 +35,12 @@ var S = [
     [0, 0, 0]
 ]
 
+var rS = [
+    [7, 7, 0],
+    [0, 7, 7],
+    [0, 0, 0]
+]
+
 var T = [
     [0, 5, 0],
     [5, 5, 5],
@@ -57,7 +64,7 @@ if (localStorage.getItem("inputTetris")) {
     keys = JSON.parse(localStorage.getItem("inputTetris"))
 }
 
-var pieces = [L, I, J, S, T, Q]
+var pieces = [L, I, J, S, T, Q, rS]
 var score = 0
 var currentLevel = 0
 var levelsInfos = [

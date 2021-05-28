@@ -9,6 +9,23 @@
 <body>
     <div id="gamesList">
     </div>
+    <form action="/createGame" method="post">
+        <div class="">
+            <div class="">
+                <label for="gameName" class="block text-sm font-medium">Nom de la partie</label>
+                <input type="text" name="gameName" id="gameName" class="mt-1 mb-2 px-2 py-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm text-black border-gray-300 rounded-md">
+
+                <label for="gameSize" class="block text-sm font-medium">Taille de la partie</label>
+                <input required type="number" name="gameSize" id="gameSize" min="2" value="2" class="mt-1 mb-2 px-2 py-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm text-black border-gray-300 rounded-md">
+                
+                <label for="private" class="block text-sm font-medium">Private</label>
+                <input type="checkbox" name="private" id="private" class="mt-1 mb-2 px-2 py-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm text-black border-gray-300 rounded-md">
+            </div>
+            <button id="submit" type="submit" class="inline-flex justify-center py-2 px-4 mt-4 md:mt-auto whitespace-nowrap border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Créer
+            </button>
+        </div>
+    </form>
     <script src="./gamesList.js"></script>
 </body>
 </html>

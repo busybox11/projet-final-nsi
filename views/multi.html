@@ -5,14 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://db.onlinewebfonts.com/c/a17af96c10647b3403e18a0e94283536?family=Joystix" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Twotris - Multi</title>
 </head>
 
-<body>
-    <p>players Nb :</p>
-    <p id="playersNb"></p>
+<body class="bg-black text-white h-full relative">
+    <div id="game" class="h-screen relative overflow-hidden">
+        <img src='https://t3.ftcdn.net/jpg/03/24/08/20/360_F_324082017_07zHI5vADcE9XxfIKpdmnJOOrj6HcIRS.jpg' class="h-full w-full object-cover filter blur-md md:blur-lg brightness-75 transform scale-105">
+        <div class="flex flex-col align-center justify-center text-center absolute top-0 left-0 z-10 h-full w-full">
+            <h1 class="text-4xl md:text-8xl font-bold font-joystix">Waiting...</h1>
+            <h3 class="text-xl md:text-2xl font-bold text-gray-300 font-joystix">The creator will launch the game soonly</h3>
+            <h4 id="playersNb" class="text-xl md:text-2xl font-semibold font-joystix text-gray-500 mb-8"></h4>
+        </div>
+    </div>
     <script src="./tetris.js"></script>
     <script src="./multi.js"></script>
 </body>
-
 </html>

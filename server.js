@@ -17,42 +17,42 @@ wss.on('connection', (ws) => {
         var title = message.title
         var body = message.body
         switch (title) {
-            case "newPlayerInLobby":
-                playerInLobby.push(ws)
-                ws.send(JSON.stringify({
-                    title: "playerInLobbyNb",
-                    body: playerInLobby.length
-                }));
-                if (playerInLobby.length >= 2) {
-                    launchDuoGame()
-                }
-                break;
+            // case "newPlayerInLobby":
+            //     playerInLobby.push(ws)
+            //     ws.send(JSON.stringify({
+            //         title: "playerInLobbyNb",
+            //         body: playerInLobby.length
+            //     }));
+            //     if (playerInLobby.length >= 2) {
+            //         launchDuoGame()
+            //     }
+            //     break;
 
-            case "connectToTheDuoGame":
-                //si le code exist
-                if (games[body.gameCode]) {
-                    ws.playerName = body.playerName
-                    ws.gameCode = body.gameCode
-                    if (!games[body.gameCode][0]) {
-                        games[body.gameCode][0] = ws
-                    } else if (!games[body.gameCode][1]) {
-                        games[body.gameCode][1] = ws
-                        games[body.gameCode][0].send(JSON.stringify({
-                            title: "beginGame",
-                            body: ws.playerName
-                        }))
-                        ws.send(JSON.stringify({
-                            title: "beginGame",
-                            body: games[body.gameCode][0].playerName
-                        }))
-                    } else {
-                        //partie pleine
-                        ws.close()
-                    }
-                } else {
-                    ws.close()
-                }
-                break;
+            // case "connectToTheDuoGame":
+            //     //si le code exist
+            //     if (games[body.gameCode]) {
+            //         ws.playerName = body.playerName
+            //         ws.gameCode = body.gameCode
+            //         if (!games[body.gameCode][0]) {
+            //             games[body.gameCode][0] = ws
+            //         } else if (!games[body.gameCode][1]) {
+            //             games[body.gameCode][1] = ws
+            //             games[body.gameCode][0].send(JSON.stringify({
+            //                 title: "beginGame",
+            //                 body: ws.playerName
+            //             }))
+            //             ws.send(JSON.stringify({
+            //                 title: "beginGame",
+            //                 body: games[body.gameCode][0].playerName
+            //             }))
+            //         } else {
+            //             //partie pleine
+            //             ws.close()
+            //         }
+            //     } else {
+            //         ws.close()
+            //     }
+            //     break;
 
             case "connectToTheGame":
                 //si le code exist
@@ -94,17 +94,33 @@ wss.on('connection', (ws) => {
             default:
                 //renvoie le message aux autres joueurs
                 if (ws.gameCode && games[ws.gameCode]) {
-                    for (let i = 0; i < games[ws.gameCode].length; i++) {
-                        if (!games[ws.gameCode][i]) {
-                            //error in games list
-                            ws.close()
-                            break;
+                    if (games[gameCode].infos) {
+                        for (let i = 0; i < games[ws.gameCode].players.length; i++) {
+                            if (!games[ws.gameCode].players[i]) {
+                                //error in games list
+                                ws.close()
+                                break;
+                            }
+                            if (games[ws.gameCode].players[i] != ws) {
+                                games[ws.gameCode].players[i].send(JSON.stringify({
+                                    title: title,
+                                    body: body
+                                }))
+                            }
                         }
-                        if (games[ws.gameCode][i] != ws) {
-                            games[ws.gameCode][i].send(JSON.stringify({
-                                title: title,
-                                body: body
-                            }))
+                    }else{
+                        for (let i = 0; i < games[ws.gameCode].length; i++) {
+                            if (!games[ws.gameCode][i]) {
+                                //error in games list
+                                ws.close()
+                                break;
+                            }
+                            if (games[ws.gameCode][i] != ws) {
+                                games[ws.gameCode][i].send(JSON.stringify({
+                                    title: title,
+                                    body: body
+                                }))
+                            }
                         }
                     }
                 }
@@ -170,9 +186,9 @@ app.get("/training", (req, res) => {
     res.sendFile(__dirname + '/views/training.html')
 });
 
-app.get("/lobby", (req, res) => {
-    res.sendFile(__dirname + '/views/lobby.html')
-});
+// app.get("/lobby", (req, res) => {
+//     res.sendFile(__dirname + '/views/lobby.html')
+// });
 
 app.get("/games", (req, res) => {
     res.sendFile(__dirname + '/views/gamesList.html')
@@ -181,21 +197,21 @@ app.get("/games", (req, res) => {
 app.get("/gamesList", (req, res) => {
     var resGames = []
     for(let gameCode of Object.keys(games)){
-        if (games[gameCode].infos && games[gameCode].players.length < game[gameCode].infos.size) {
+        if (games[gameCode].players.length < games[gameCode].infos.size && !games[gameCode].infos.private) {
             resGames.push({code: gameCode, infos: games[gameCode].infos})
         }
     }
     res.json(resGames)
 });
 
-app.get("/duoGame", (req, res) => {
-    var gameCode = req.query.code
-    if (games[gameCode]) {
-        res.sendFile(__dirname + '/views/duoGame.html')
-    } else {
-        res.redirect("/lobby")
-    }
-});
+// app.get("/duoGame", (req, res) => {
+//     var gameCode = req.query.code
+//     if (games[gameCode]) {
+//         res.sendFile(__dirname + '/views/duoGame.html')
+//     } else {
+//         res.redirect("/lobby")
+//     }
+// });
 
 app.get("/multi", (req, res) => {
     var gameCode = req.query.code
@@ -213,9 +229,10 @@ app.get("/multi", (req, res) => {
 app.post("/createGame", (req, res) => {
     var gameName = req.body.gameName
     var gameSize = req.body.gameSize
+    var private = req.body.private != undefined
         //si ce nom existe deja return
     if (games[gameName]) return res.redirect('/')
-    gameCode = launchGame(gameName, gameSize)
+    gameCode = launchGame(gameName, gameSize, private)
     return res.redirect(`/multi?code=${gameCode}`)
 })
 
@@ -223,36 +240,36 @@ server.listen(PORT, () => {
     console.log(`Server is running on PORT: ${PORT}`);
 });
 
-function launchDuoGame() {
-    var gameCode = generate_token(10)
-    var itt = 0;
-    var tokenLenght = 10
-    while (games[gameCode]) {
-        if (itt > 10) {
-            tokenLenght++
-            itt = 0
-        }
-        gameCode = generate_token(tokenLenght)
-        itt++
-    }
-    //choisis un premier joueur aleatoirement
-    var player1 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
-    playerInLobby.splice(playerInLobby.indexOf(player1), 1)
-    var player2 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
+// function launchDuoGame() {
+//     var gameCode = generate_token(10)
+//     var itt = 0;
+//     var tokenLenght = 10
+//     while (games[gameCode]) {
+//         if (itt > 10) {
+//             tokenLenght++
+//             itt = 0
+//         }
+//         gameCode = generate_token(tokenLenght)
+//         itt++
+//     }
+//     //choisis un premier joueur aleatoirement
+//     var player1 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
+//     playerInLobby.splice(playerInLobby.indexOf(player1), 1)
+//     var player2 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
 
-    games[gameCode] = [0, 0]
+//     games[gameCode] = [0, 0]
 
-    player1.send(JSON.stringify({
-        title: "gameUrl",
-        body: `/duoGame?code=${gameCode}`
-    }))
-    player2.send(JSON.stringify({
-        title: "gameUrl",
-        body: `/duoGame?code=${gameCode}`
-    }))
-}
-
-function launchGame(gameCode, gameSize) {
+//     player1.send(JSON.stringify({
+//         title: "gameUrl",
+//         body: `/duoGame?code=${gameCode}`
+//     }))
+//     player2.send(JSON.stringify({
+//         title: "gameUrl",
+//         body: `/duoGame?code=${gameCode}`
+//     }))
+// }
+//lance une partie avec un code unique 
+function launchGame(gameCode, gameSize, private) {
     //génère un token inexistant si la partie n'a pas de nom
     if (!gameCode) {
         gameCode = generate_token(10)
@@ -272,13 +289,15 @@ function launchGame(gameCode, gameSize) {
     games[gameCode] = {
         infos: {
             size: gameSize,
-            mode: "battle"
+            mode: "battle",
+            private: private,
+            status: "waiting"
         },
         players: []
     }
     return gameCode
 }
-
+//génère un code unique
 function generate_token(length) {
     //edit the token allowed characters
     var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
