@@ -65,7 +65,10 @@ wss.on('connection', (ws) => {
                         for (let i = 0; i < game.players.length; i++) {
                             game.players[i].send(JSON.stringify({
                                 title: "newPlayer",
-                                body: game.players.length
+                                body: {
+                                    size: game.infos.size,
+                                    nbInGame: game.players.length
+                                }
                             }))
                         }
                     } else {
@@ -110,6 +113,9 @@ wss.on('connection', (ws) => {
                     client.send(JSON.stringify({
                         title: "opponentLeftGame"
                     }))
+                }
+                if (games[gameCode].players.length <= 0) {
+                    delete games[gameCode]
                 }
             } else {
                 games[gameCode].splice(games[gameCode].indexOf(ws), 1)
@@ -162,19 +168,10 @@ app.get("/duoGame", (req, res) => {
 app.get("/multi", (req, res) => {
     var gameCode = req.query.code
     if (games[gameCode]) {
-        res.sendFile(__dirname + '/views/multi.html')
-    } else {
-        res.redirect("/")
-    }
-});
-
-app.get("/multiCreator", (req, res) => {
-    var gameCode = req.query.code
-    if (games[gameCode]) {
         if (games[gameCode].players.length <= 0) {
-            return res.sendFile(__dirname + '/views/gameCreator.html')
+            return res.sendFile(__dirname + '/views/multiCreator.html')
         } else {
-            res.redirect(`/multi?code=${gameCode}`)
+            return res.sendFile(__dirname + '/views/multi.html')
         }
     } else {
         return res.redirect("/")
@@ -187,7 +184,11 @@ app.post("/createGame", (req, res) => {
         //si ce nom existe deja return
     if (games[gameName]) return res.redirect('/')
     gameCode = launchGame(gameName, gameSize)
-    return res.redirect(`/multiCreator?code=${gameCode}`)
+    return res.redirect(`/multi?code=${gameCode}`)
+})
+
+app.post("/launchMultiGame", (req, res) => {
+    console.log(req)
 })
 
 server.listen(PORT, () => {

@@ -18,7 +18,7 @@ ws.onmessage = function(message) {
     message = JSON.parse(message.data)
     switch (message.title) {
         case "newPlayer":
-            document.getElementById("playersNb").innerHTML = message.body
+            document.getElementById("playersNb").innerHTML = `${message.body.nbInGame} / ${message.body.size}`
             break;
         default:
             break;
