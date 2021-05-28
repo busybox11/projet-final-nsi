@@ -1,4 +1,5 @@
 var ws = new WebSocket(`ws:${window.location.host}//`, "protocolOne");
+var oppponentGrid = []
 ws.onopen = function() {
     var url = new URL(window.location.href);
     var gameCode = url.searchParams.get("code");
@@ -20,265 +21,10 @@ ws.onmessage = function(message) {
         case "updatePlayers":
             document.getElementById("playersNb").innerHTML = `${message.body.nbInGame} / ${message.body.size}`
             break;
-        
+
         case "beginMultiGame":
-            document.getElementById("game").innerHTML = `
-            <div class="flex inline-flex gap-x-4 justify-center w-full">
-            <div>
-                <div class="bg-gray-300 px-2 pt-1 w-full text-black font-joystix">HOLD</div>
-                <div id="tetris-hold" class="grid grid-cols-4 h-auto mb-auto border-4 border-gray-300 p-4">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-            <div id="tetris-game" class="grid grid-cols-10 w-80 border-4 border-gray-700">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <div class="flex flex-col gap-y-4">
-                <div class="mb-auto">
-                    <div class="bg-gray-300 px-2 pt-1 w-full text-black font-joystix">NEXT</div>
-                    <div id="tetris-nextPiece" class="grid grid-cols-4 h-auto border-4 border-gray-300 p-4">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-                <div class="leading-4">
-                    <span class="font-joystix text-gray-400">Points</span>
-                    <h1 id="score" class="text-5xl font-bold font-joystix">0</h1>
-                </div>
-                <div class="leading-4">
-                    <span class="font-joystix text-gray-400">Level</span>
-                    <h1 id="level" class="text-5xl font-bold font-joystix">1</h1>
-                </div>
-            </div>
-        </div>`
+            document.getElementById("waiting").classList.add("hidden")
+            document.getElementById("game").classList.remove("hidden")
             beginTetrisGame()
             break;
 
@@ -292,7 +38,13 @@ ws.onmessage = function(message) {
             break;
 
         case "tetrisGrid":
-            console.log(message.body)
+            oppponentGrid = message.body.grid
+            for (let y = 1; y < oppponentGrid.length; y++) {
+                for (let x = 0; x < oppponentGrid[y].length; x++) {
+                    var index = (y - 1) * (oppponentGrid[y].length) + x
+                    document.getElementById("opponent-tetris-game").children[index].className = tetrominosColors[oppponentGrid[y][x]]
+                }
+            }
             break;
 
         default:
@@ -328,36 +80,36 @@ setInterval(function() {
             }
         }
         //show the next piece
-        // for (let y = 0; y < 4; y++) {
-        //     for (let x = 0; x < 4; x++) {
-        //         document.getElementById("tetris-nextPiece").children[y * 4 + x].className = "h-8 w-8"
-        //     }
-        // }
-        // for (let y = 0; y < nextPiece.length; y++) {
-        //     for (let x = 0; x < nextPiece[y].length; x++) {
-        //         var index = y * 4 + x
-        //         document.getElementById("tetris-nextPiece").children[index].className = tetrominosColors[nextPiece[y][x]]
-        //     }
-        // }
+        for (let y = 0; y < 4; y++) {
+            for (let x = 0; x < 4; x++) {
+                document.getElementById("tetris-nextPiece").children[y * 4 + x].className = "h-8 w-8"
+            }
+        }
+        for (let y = 0; y < nextPiece.length; y++) {
+            for (let x = 0; x < nextPiece[y].length; x++) {
+                var index = y * 4 + x
+                document.getElementById("tetris-nextPiece").children[index].className = tetrominosColors[nextPiece[y][x]]
+            }
+        }
         //show the hold piece
-        // if (pasthold != holdPiece) {
-        //     pasthold = copy2Darr(holdPiece)
-        //     for (let y = 0; y < 4; y++) {
-        //         for (let x = 0; x < 4; x++) {
-        //             document.getElementById("tetris-hold").children[y * 4 + x].className = "h-8 w-8";
-        //         }
-        //     }
-        //     for (let y = 0; y < holdPiece.length; y++) {
-        //         for (let x = 0; x < holdPiece[y].length; x++) {
-        //             var index = y * 4 + x
-        //             if (!canHold && holdPiece[y][x]) {
-        //                 document.getElementById("tetris-hold").children[index].className = "tetromino-block ring-gray-500 bg-gray-700"
-        //             } else{
-        //                 document.getElementById("tetris-hold").children[index].className = tetrominosColors[holdPiece[y][x]]
-        //             }
-        //         }
-        //     }
-        // }
+        if (pasthold != holdPiece) {
+            pasthold = copy2Darr(holdPiece)
+            for (let y = 0; y < 4; y++) {
+                for (let x = 0; x < 4; x++) {
+                    document.getElementById("tetris-hold").children[y * 4 + x].className = "h-8 w-8";
+                }
+            }
+            for (let y = 0; y < holdPiece.length; y++) {
+                for (let x = 0; x < holdPiece[y].length; x++) {
+                    var index = y * 4 + x
+                    if (!canHold && holdPiece[y][x]) {
+                        document.getElementById("tetris-hold").children[index].className = "tetromino-block ring-gray-500 bg-gray-700"
+                    } else {
+                        document.getElementById("tetris-hold").children[index].className = tetrominosColors[holdPiece[y][x]]
+                    }
+                }
+            }
+        }
         // document.getElementById("level").innerHTML = currentLevel + 1;
         ws.send(JSON.stringify({
             title: "tetrisGrid",
@@ -380,5 +132,5 @@ function gameover() {
 }
 
 function updateScore() {
-    // document.getElementById("score").innerHTML = score
+    document.getElementById("score").innerHTML = score
 }

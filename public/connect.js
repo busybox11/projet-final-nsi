@@ -26,7 +26,7 @@ function loadUserName() {
         var newname = prompt("Pseudo ? Annuler pour être anonyme")
         if (newname) {
             while (newname.length <= 0 || newname.length > 20) {
-                newname = prompt("Taper un pseudo plus court ou taper en un tout court")
+                newname = prompt("Tapez un pseudo plus court ou tapez en un tout court !")
             }
             localStorage.setItem("userName", newname)
             userName = newname
