@@ -179,7 +179,13 @@ app.get("/games", (req, res) => {
 });
 
 app.get("/gamesList", (req, res) => {
-    res.json(games)
+    var resGames = []
+    for(let gameCode of Object.keys(games)){
+        if (games[gameCode].infos && games[gameCode].players.length < game[gameCode].infos.size) {
+            resGames.push({code: gameCode, infos: games[gameCode].infos})
+        }
+    }
+    res.json(resGames)
 });
 
 app.get("/duoGame", (req, res) => {
