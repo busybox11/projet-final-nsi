@@ -108,21 +108,21 @@ wss.on('connection', (ws) => {
                                 }))
                             }
                         }
-                    }else{
-                        for (let i = 0; i < games[ws.gameCode].length; i++) {
-                            if (!games[ws.gameCode][i]) {
-                                //error in games list
-                                ws.close()
-                                break;
-                            }
-                            if (games[ws.gameCode][i] != ws) {
-                                games[ws.gameCode][i].send(JSON.stringify({
-                                    title: title,
-                                    body: body
-                                }))
-                            }
-                        }
-                    }
+                    }//else{
+                    //     for (let i = 0; i < games[ws.gameCode].length; i++) {
+                    //         if (!games[ws.gameCode][i]) {
+                    //             //error in games list
+                    //             ws.close()
+                    //             break;
+                    //         }
+                    //         if (games[ws.gameCode][i] != ws) {
+                    //             games[ws.gameCode][i].send(JSON.stringify({
+                    //                 title: title,
+                    //                 body: body
+                    //             }))
+                    //         }
+                    //     }
+                    // }
                 }
                 break;
         }

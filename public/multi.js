@@ -22,7 +22,6 @@ ws.onmessage = function(message) {
             break;
         
         case "beginMultiGame":
-            alert("begining")
             document.getElementById("game").innerHTML = `
             <div class="flex inline-flex gap-x-4 justify-center w-full">
             <div>
@@ -292,6 +291,10 @@ ws.onmessage = function(message) {
             window.location.replace("/")
             break;
 
+        case "tetrisGrid":
+            console.log(message.body)
+            break;
+
         default:
             break;
     }
@@ -299,7 +302,6 @@ ws.onmessage = function(message) {
 ws.onclose = function() {
     window.location.replace("/")
 }
-
 var pastgrid = []
 var pasthold = []
 setInterval(function() {
@@ -358,7 +360,7 @@ setInterval(function() {
         // }
         // document.getElementById("level").innerHTML = currentLevel + 1;
         ws.send(JSON.stringify({
-            title: "tetris-grid",
+            title: "tetrisGrid",
             body: grid
         }));
     }
