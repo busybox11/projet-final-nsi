@@ -64,7 +64,7 @@ wss.on('connection', (ws) => {
                         game.players.push(ws)
                         for (let i = 0; i < game.players.length; i++) {
                             game.players[i].send(JSON.stringify({
-                                title: "newPlayer",
+                                title: "updatePlayers",
                                 body: {
                                     size: game.infos.size,
                                     nbInGame: game.players.length
@@ -77,6 +77,17 @@ wss.on('connection', (ws) => {
                     }
                 } else {
                     ws.close()
+                }
+                break;
+
+            case "launchMultiGame":
+                if(ws.gameCode && games[ws.gameCode]){
+                    if (games[gameCode].players.length <= 1 )return ws.send(JSON.stringify({title: "errorLaunchingGame", body: "you are alone"}))
+                    for (let client of games[gameCode].players) {
+                        client.send(JSON.stringify({
+                            title: "beginMultiGame"
+                        }))
+                    }
                 }
                 break;
 
@@ -107,17 +118,28 @@ wss.on('connection', (ws) => {
         } else if (ws.gameCode && games[ws.gameCode]) {
             var gameCode = ws.gameCode
                 //retire le ws de la partie
-            if (games[gameCode].infos) {
-                games[gameCode].players.splice(games[gameCode].players.indexOf(ws), 1)
-                for (let client of games[gameCode].players) {
-                    client.send(JSON.stringify({
-                        title: "opponentLeftGame"
-                    }))
-                }
-                if (games[gameCode].players.length <= 0) {
+            if (games[gameCode].infos) {//si c'est une partie multi
+                if (games[gameCode].players.indexOf(ws) == 0) {//si le createur abandonne la partie
+                    games[gameCode].players.splice(games[gameCode].players.indexOf(ws), 1)
+                    for (let client of games[gameCode].players) {
+                        client.send(JSON.stringify({
+                            title: "creatorLeftTheGame"
+                        }))
+                    }
                     delete games[gameCode]
+                }else{
+                    games[gameCode].players.splice(games[gameCode].players.indexOf(ws), 1)
+                    for (let client of games[gameCode].players) {
+                        client.send(JSON.stringify({
+                            title: "updatePlayers",
+                            body: {
+                                size: games[gameCode].infos.size,
+                                nbInGame: games[gameCode].players.length
+                            }
+                        }))
+                    }
                 }
-            } else {
+            } else {//si c'est un partie duo
                 games[gameCode].splice(games[gameCode].indexOf(ws), 1)
                 for (let client of games[gameCode]) {
                     client.send(JSON.stringify({
@@ -140,10 +162,6 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
 });
 
-app.get("/tetris", (req, res) => {
-    res.sendFile(__dirname + '/views/tetris.html')
-});
-
 app.get("/params", (req, res) => {
     res.sendFile(__dirname + '/views/params.html')
 });
@@ -154,6 +172,14 @@ app.get("/training", (req, res) => {
 
 app.get("/lobby", (req, res) => {
     res.sendFile(__dirname + '/views/lobby.html')
+});
+
+app.get("/games", (req, res) => {
+    res.sendFile(__dirname + '/views/gamesList.html')
+});
+
+app.get("/gamesList", (req, res) => {
+    res.json(games)
 });
 
 app.get("/duoGame", (req, res) => {
@@ -185,11 +211,6 @@ app.post("/createGame", (req, res) => {
     if (games[gameName]) return res.redirect('/')
     gameCode = launchGame(gameName, gameSize)
     return res.redirect(`/multi?code=${gameCode}`)
-})
-
-app.post("/launchMultiGame", (req, res) => {
-    console.log(req)
-    return res.json("yes")
 })
 
 server.listen(PORT, () => {

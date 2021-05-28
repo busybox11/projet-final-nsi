@@ -16,10 +16,25 @@ ws.onopen = function() {
 }
 ws.onmessage = function(message) {
     message = JSON.parse(message.data)
+    console.log(message)
     switch (message.title) {
-        case "newPlayer":
+        case "updatePlayers":
             document.getElementById("playersNb").innerHTML = `${message.body.nbInGame} / ${message.body.size}`
             break;
+        
+        case "beginMultiGame":
+            alert("begining")
+            break;
+
+        case "errorLaunchingGame":
+            alert(message.body)
+            break;
+
+        case "creatorLeftTheGame":
+            alert("désolé le createur a quitté la partie vous allez être redirigé")
+            window.location.replace("/")
+            break;
+
         default:
             break;
     }
