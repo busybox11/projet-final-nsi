@@ -144,9 +144,9 @@ class Piece {
         if (result) {
             nbCantDrop = 0
             grid = result
-        }else if(nbCantDrop < 1){
+        } else if (nbCantDrop < 1) {
             nbCantDrop++
-        }else {
+        } else {
             nbCantDrop = 0
             var linesCut = 0;
             for (let y = 1; y < grid.length; y++) {
@@ -318,12 +318,12 @@ class Piece {
         // var mindist = 10
         // for (let x = 0; x < bottomY.length; x++) {
         //     var dist = 0
-            // while (grid[this.y + this.shape.length + bottomY[x] + dist][this.x + x] == 0 && this.y + this.shape.length + bottomY[x] + dist < gridH - 1) {
-            //     dist++
-            // }
-            // if (dist < mindist) {
-            //     mindist = dist
-            // }
+        // while (grid[this.y + this.shape.length + bottomY[x] + dist][this.x + x] == 0 && this.y + this.shape.length + bottomY[x] + dist < gridH - 1) {
+        //     dist++
+        // }
+        // if (dist < mindist) {
+        //     mindist = dist
+        // }
 
         // }
         // for (let y = 0; y < this.shape.length; y++) {
@@ -426,6 +426,7 @@ setInterval(function() {
 
 const allEqual = arr => arr.every(val => val === arr[0]);
 
+//cut the sides of the array who contain 0 in all line and column
 function cutShape(arr) {
     var newarr = copy2Darr(arr)
     for (let y = newarr.length - 1; y >= 0; y--) {
@@ -447,6 +448,7 @@ function cutShape(arr) {
     return newarr
 }
 
+//cut the bottom side of the array (cut the 0 elements)
 function cutBottomShape(arr) {
     var newarr = copy2Darr(arr)
     for (let y = newarr.length - 1; y >= 0; y--) {
@@ -459,24 +461,7 @@ function cutBottomShape(arr) {
     return newarr
 }
 
-function cutRightShape(arr) {
-    var newarr = copy2Darr(arr)
-    for (let x = newarr[0].length - 1; x >= 0; x--) {
-        var arrVertical = []
-        for (let y = 0; y < newarr.length; y++) {
-            arrVertical.push(newarr[y][x])
-        }
-        if (allEqual(arrVertical) && arrVertical[0] == 0) {
-            for (let y = 0; y < newarr.length; y++) {
-                newarr[y].splice(x, 1)
-            }
-        } else {
-            x = 0
-        }
-    }
-    return newarr
-}
-
+//tourne un array de 90 degrés
 function rotateArr(matrix) {
     var newArr = Array.from(matrix)
     const n = newArr.length;
@@ -494,6 +479,7 @@ function rotateArr(matrix) {
     return newArr
 }
 
+//copy une double array
 function copy2Darr(arr) {
     var newArr = []
     for (let i = 0; i < arr.length; i++) {
