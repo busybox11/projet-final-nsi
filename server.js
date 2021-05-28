@@ -81,12 +81,36 @@ wss.on('connection', (ws) => {
                 break;
 
             case "launchMultiGame":
-                if(ws.gameCode && games[ws.gameCode]){
-                    if (games[gameCode].players.length <= 1 )return ws.send(JSON.stringify({title: "errorLaunchingGame", body: "you are alone"}))
+                if (ws.gameCode && games[ws.gameCode]) {
+                    if (games[gameCode].players.length <= 1) return ws.send(JSON.stringify({ title: "errorLaunchingGame", body: "you are alone" }))
                     for (let client of games[gameCode].players) {
                         client.send(JSON.stringify({
                             title: "beginMultiGame"
                         }))
+                    }
+                }
+                break;
+
+            case "tetrisGrid":
+                if (ws.gameCode && games[ws.gameCode]) {
+                    if (games[ws.gameCode].infos) {
+                        if (games[ws.gameCode].players.indexOf(ws) >= games[ws.gameCode].players.length - 1) {
+                            games[ws.gameCode].players[0].send(JSON.stringify({
+                                title: title,
+                                body: {
+                                    playerName: ws.playerName,
+                                    grid: body
+                                }
+                            }))
+                        } else {
+                            games[ws.gameCode].players[games[ws.gameCode].players.indexOf(ws) + 1].send(JSON.stringify({
+                                title: title,
+                                body: {
+                                    playerName: ws.playerName,
+                                    grid: body
+                                }
+                            }))
+                        }
                     }
                 }
                 break;
@@ -108,7 +132,7 @@ wss.on('connection', (ws) => {
                                 }))
                             }
                         }
-                    }//else{
+                    } //else{
                     //     for (let i = 0; i < games[ws.gameCode].length; i++) {
                     //         if (!games[ws.gameCode][i]) {
                     //             //error in games list
@@ -134,8 +158,8 @@ wss.on('connection', (ws) => {
         } else if (ws.gameCode && games[ws.gameCode]) {
             var gameCode = ws.gameCode
                 //retire le ws de la partie
-            if (games[gameCode].infos) {//si c'est une partie multi
-                if (games[gameCode].players.indexOf(ws) == 0) {//si le createur abandonne la partie
+            if (games[gameCode].infos) { //si c'est une partie multi
+                if (games[gameCode].players.indexOf(ws) == 0) { //si le createur abandonne la partie
                     games[gameCode].players.splice(games[gameCode].players.indexOf(ws), 1)
                     for (let client of games[gameCode].players) {
                         client.send(JSON.stringify({
@@ -143,7 +167,7 @@ wss.on('connection', (ws) => {
                         }))
                     }
                     delete games[gameCode]
-                }else{
+                } else {
                     games[gameCode].players.splice(games[gameCode].players.indexOf(ws), 1)
                     for (let client of games[gameCode].players) {
                         client.send(JSON.stringify({
@@ -155,18 +179,18 @@ wss.on('connection', (ws) => {
                         }))
                     }
                 }
-            } else {//si c'est un partie duo
-                games[gameCode].splice(games[gameCode].indexOf(ws), 1)
-                for (let client of games[gameCode]) {
-                    client.send(JSON.stringify({
-                        title: "opponentLeftGame"
-                    }))
-                }
-                if (games[ws.gameCode].length <= 1) {
-                    delete games[gameCode][0].gameCode
-                    delete games[gameCode]
-                }
-            }
+            } // else { //si c'est une partie duo
+            //     games[gameCode].splice(games[gameCode].indexOf(ws), 1)
+            //     for (let client of games[gameCode]) {
+            //         client.send(JSON.stringify({
+            //             title: "opponentLeftGame"
+            //         }))
+            //     }
+            //     if (games[ws.gameCode].length <= 1) {
+            //         delete games[gameCode][0].gameCode
+            //         delete games[gameCode]
+            //     }
+            // }
         }
     });
 });
@@ -193,12 +217,12 @@ app.get("/training", (req, res) => {
 app.get("/games", (req, res) => {
     res.sendFile(__dirname + '/views/gamesList.html')
 });
-
+//return to the client all the games available
 app.get("/gamesList", (req, res) => {
     var resGames = []
-    for(let gameCode of Object.keys(games)){
+    for (let gameCode of Object.keys(games)) {
         if (games[gameCode].players.length < games[gameCode].infos.size && !games[gameCode].infos.private) {
-            resGames.push({code: gameCode, infos: games[gameCode].infos})
+            resGames.push({ code: gameCode, infos: games[gameCode].infos })
         }
     }
     res.json(resGames)
@@ -231,7 +255,7 @@ app.post("/createGame", (req, res) => {
     var gameSize = req.body.gameSize
     var private = req.body.private != undefined
         //si ce nom existe deja return
-    if (games[gameName]) return res.redirect('/')
+    if (games[gameName]) return res.redirect('/games')
     gameCode = launchGame(gameName, gameSize, private)
     return res.redirect(`/multi?code=${gameCode}`)
 })
