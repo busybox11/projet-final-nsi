@@ -189,6 +189,7 @@ app.post("/createGame", (req, res) => {
 
 app.post("/launchMultiGame", (req, res) => {
     console.log(req)
+    return res.json("yes")
 })
 
 server.listen(PORT, () => {
