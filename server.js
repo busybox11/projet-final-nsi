@@ -67,7 +67,8 @@ wss.on('connection', (ws) => {
                                 title: "updatePlayers",
                                 body: {
                                     size: game.infos.size,
-                                    nbInGame: game.players.length
+                                    nbInGame: game.players.length,
+                                    playerName: ws.playerName
                                 }
                             }))
                         }
@@ -94,23 +95,42 @@ wss.on('connection', (ws) => {
             case "tetrisGrid":
                 if (ws.gameCode && games[ws.gameCode]) {
                     if (games[ws.gameCode].infos) {
-                        if (games[ws.gameCode].players.indexOf(ws) >= games[ws.gameCode].players.length - 1) {
-                            games[ws.gameCode].players[0].send(JSON.stringify({
-                                title: title,
-                                body: {
-                                    playerName: ws.playerName,
-                                    grid: body
-                                }
-                            }))
-                        } else {
-                            games[ws.gameCode].players[games[ws.gameCode].players.indexOf(ws) + 1].send(JSON.stringify({
-                                title: title,
-                                body: {
-                                    playerName: ws.playerName,
-                                    grid: body
-                                }
-                            }))
+                        for (let i = 0; i < games[ws.gameCode].players.length; i++) {
+                            if (!games[ws.gameCode].players[i]) {
+                                //error in games list
+                                ws.close()
+                                break;
+                            }
+                            if (games[ws.gameCode].players[i] != ws) {
+                                games[ws.gameCode].players[i].send(JSON.stringify({
+                                    title: title,
+                                    body: {
+                                        playerName: ws.playerName,
+                                        grid: body.grid,
+                                        score: body.score
+                                    }
+                                }))
+                            }
                         }
+                        // if (games[ws.gameCode].players.indexOf(ws) >= games[ws.gameCode].players.length - 1) {
+                        //     games[ws.gameCode].players[0].send(JSON.stringify({
+                        //         title: title,
+                        //         body: {
+                        //             playerName: ws.playerName,
+                        //             grid: body.grid,
+                        //             score: body.score
+                        //         }
+                        //     }))
+                        // } else {
+                        //     games[ws.gameCode].players[games[ws.gameCode].players.indexOf(ws) + 1].send(JSON.stringify({
+                        //         title: title,
+                        //         body: {
+                        //             playerName: ws.playerName,
+                        //             grid: body.grid,
+                        //             score: body.score
+                        //         }
+                        //     }))
+                        // }
                     }
                 }
                 break;
@@ -171,10 +191,11 @@ wss.on('connection', (ws) => {
                     games[gameCode].players.splice(games[gameCode].players.indexOf(ws), 1)
                     for (let client of games[gameCode].players) {
                         client.send(JSON.stringify({
-                            title: "updatePlayers",
+                            title: "playerLeave",
                             body: {
                                 size: games[gameCode].infos.size,
-                                nbInGame: games[gameCode].players.length
+                                nbInGame: games[gameCode].players.length,
+                                playerName: ws.playerName
                             }
                         }))
                     }

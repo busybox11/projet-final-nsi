@@ -1,3 +1,4 @@
+//initialise toutes les pieces et leurs couleurs
 var tetrominosColors = [
     "h-8 w-8",
     "tetromino-block ring-yellow-700 bg-yellow-900",
@@ -53,13 +54,14 @@ var Q = [
 ]
 
 var keys = {
-    "left": 37,
-    "right": 39,
-    "down": 40,
-    "rotate": 38,
-    "place": 32,
-    "hold": 16
-}
+        "left": 37,
+        "right": 39,
+        "down": 40,
+        "rotate": 38,
+        "place": 32,
+        "hold": 16
+    }
+    //recupere les commandes choisis par le joueur
 if (localStorage.getItem("inputTetris")) {
     keys = JSON.parse(localStorage.getItem("inputTetris"))
 }
@@ -345,6 +347,7 @@ class Piece {
     }
 }
 
+//lance la partie
 function beginTetrisGame() {
     //init the grid
     for (let y = 0; y < gridH; y++) {
