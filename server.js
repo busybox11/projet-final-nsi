@@ -9,6 +9,7 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 var playerInLobby = [];
+var playersName = []
 var games = {}
 
 wss.on('connection', (ws) => {
@@ -257,6 +258,40 @@ app.get("/gamesList", (req, res) => {
 //         res.redirect("/lobby")
 //     }
 // });
+
+app.post("/changePlayerName", (req, res) => {
+    var newName = req.body.newName
+    var oldName = req.body.oldName
+        //si ce nom existe deja return
+    if (playersName.includes(newName)) return res.redirect("/")
+    else { //si il avait un ancien nom on le supprime de la liste et on ajoute ensuite le nouveau
+        playersName.splice(playersName.indexOf(oldName), 1)
+        playersName.push(newName)
+        console.log(playersName)
+        return res.redirect("/")
+    }
+})
+
+app.get("/getPlayersName", (req, res) => {
+    res.json(playersName)
+})
+
+app.get("/getAnonymousPlayerName", (req, res) => {
+    var newName = `Player${generate_token(10)}`
+    var itt = 0;
+    var tokenLenght = 10
+    while (playersName.includes(newName)) {
+        if (itt > 10) {
+            tokenLenght++
+            itt = 0
+        }
+        newName = `Player${generate_token(tokenLenght)}`
+        itt++
+    }
+    playersName.push(newName)
+    console.log(playersName)
+    res.json(newName)
+})
 
 app.get("/multi", (req, res) => {
     var gameCode = req.query.code
