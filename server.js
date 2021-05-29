@@ -8,7 +8,6 @@ const bodyParser = require('body-parser')
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-var playerInLobby = [];
 var playersName = []
 var games = {}
 
@@ -18,60 +17,43 @@ wss.on('connection', (ws) => {
         var title = message.title
         var body = message.body
         switch (title) {
-            // case "newPlayerInLobby":
-            //     playerInLobby.push(ws)
-            //     ws.send(JSON.stringify({
-            //         title: "playerInLobbyNb",
-            //         body: playerInLobby.length
-            //     }));
-            //     if (playerInLobby.length >= 2) {
-            //         launchDuoGame()
-            //     }
-            //     break;
-
-            // case "connectToTheDuoGame":
-            //     //si le code exist
-            //     if (games[body.gameCode]) {
-            //         ws.playerName = body.playerName
-            //         ws.gameCode = body.gameCode
-            //         if (!games[body.gameCode][0]) {
-            //             games[body.gameCode][0] = ws
-            //         } else if (!games[body.gameCode][1]) {
-            //             games[body.gameCode][1] = ws
-            //             games[body.gameCode][0].send(JSON.stringify({
-            //                 title: "beginGame",
-            //                 body: ws.playerName
-            //             }))
-            //             ws.send(JSON.stringify({
-            //                 title: "beginGame",
-            //                 body: games[body.gameCode][0].playerName
-            //             }))
-            //         } else {
-            //             //partie pleine
-            //             ws.close()
-            //         }
-            //     } else {
-            //         ws.close()
-            //     }
-            //     break;
-
             case "connectToTheGame":
                 //si le code exist
                 if (games[body.gameCode]) {
                     var game = games[body.gameCode]
+                    var playersNameGame = []
                     ws.playerName = body.playerName
                     ws.gameCode = body.gameCode
+                    ws.status = "waiting"
+                    for (let player of game.players) {
+                        if (player.playerName == ws.playerName) {
+                            ws.close();
+                            break;
+                        }
+                        if (player != ws) playersNameGame.push(player.playerName)
+                    }
                     if (game.players.length < game.infos.size) {
                         game.players.push(ws)
                         for (let i = 0; i < game.players.length; i++) {
-                            game.players[i].send(JSON.stringify({
-                                title: "updatePlayers",
-                                body: {
-                                    size: game.infos.size,
-                                    nbInGame: game.players.length,
-                                    playerName: ws.playerName
-                                }
-                            }))
+                            if (game.players[i] != ws) {
+                                game.players[i].send(JSON.stringify({
+                                    title: "updatePlayers",
+                                    body: {
+                                        size: game.infos.size,
+                                        playersNb: game.players.length,
+                                        playerName: ws.playerName
+                                    }
+                                }))
+                            } else {
+                                game.players[i].send(JSON.stringify({
+                                    title: "joinGame",
+                                    body: {
+                                        size: game.infos.size,
+                                        playersNb: game.players.length,
+                                        playersNameGame: playersNameGame
+                                    }
+                                }))
+                            }
                         }
                     } else {
                         //partie pleine
@@ -86,8 +68,12 @@ wss.on('connection', (ws) => {
                 if (ws.gameCode && games[ws.gameCode]) {
                     if (games[gameCode].players.length <= 1) return ws.send(JSON.stringify({ title: "errorLaunchingGame", body: "you are alone" }))
                     for (let client of games[gameCode].players) {
+                        client.status = "playing"
                         client.send(JSON.stringify({
-                            title: "beginMultiGame"
+                            title: "beginMultiGame",
+                            body: {
+                                playersNb: games[ws.gameCode].players.length
+                            }
                         }))
                     }
                 }
@@ -95,44 +81,73 @@ wss.on('connection', (ws) => {
 
             case "tetrisGrid":
                 if (ws.gameCode && games[ws.gameCode]) {
-                    if (games[ws.gameCode].infos) {
-                        for (let i = 0; i < games[ws.gameCode].players.length; i++) {
-                            if (!games[ws.gameCode].players[i]) {
-                                //error in games list
-                                ws.close()
-                                break;
-                            }
-                            if (games[ws.gameCode].players[i] != ws) {
-                                games[ws.gameCode].players[i].send(JSON.stringify({
-                                    title: title,
-                                    body: {
-                                        playerName: ws.playerName,
-                                        grid: body.grid,
-                                        score: body.score
-                                    }
-                                }))
-                            }
+                    if (games[ws.gameCode].players.length > 3) break;
+                    if (ws.status != "playing") break;
+                    for (let i = 0; i < games[ws.gameCode].players.length; i++) {
+                        if (!games[ws.gameCode].players[i]) {
+                            //error in games list
+                            ws.close()
+                            break;
                         }
-                        // if (games[ws.gameCode].players.indexOf(ws) >= games[ws.gameCode].players.length - 1) {
-                        //     games[ws.gameCode].players[0].send(JSON.stringify({
-                        //         title: title,
-                        //         body: {
-                        //             playerName: ws.playerName,
-                        //             grid: body.grid,
-                        //             score: body.score
-                        //         }
-                        //     }))
-                        // } else {
-                        //     games[ws.gameCode].players[games[ws.gameCode].players.indexOf(ws) + 1].send(JSON.stringify({
-                        //         title: title,
-                        //         body: {
-                        //             playerName: ws.playerName,
-                        //             grid: body.grid,
-                        //             score: body.score
-                        //         }
-                        //     }))
-                        // }
+                        if (games[ws.gameCode].players[i] != ws) {
+                            games[ws.gameCode].players[i].send(JSON.stringify({
+                                title: title,
+                                body: {
+                                    playerName: ws.playerName,
+                                    grid: body.grid,
+                                    score: body.score
+                                }
+                            }))
+                        }
                     }
+                }
+                break;
+
+            case "makeALine":
+                if (ws.gameCode && games[ws.gameCode]) {
+                    if (ws.status != "playing") break;
+                    for (let i = 0; i < games[ws.gameCode].players.length; i++) {
+                        if (!games[ws.gameCode].players[i]) {
+                            //error in games list
+                            ws.close()
+                            break;
+                        }
+                        if (games[ws.gameCode].players[i] != ws) {
+                            games[ws.gameCode].players[i].send(JSON.stringify({
+                                title: title,
+                                body: {
+                                    playerName: ws.playerName,
+                                    grid: body.grid,
+                                    score: body.score
+                                }
+                            }))
+                        }
+
+                    }
+                }
+                break;
+
+            case "gameover":
+                if (!ws.gameCode || !games[ws.gameCode]) break;
+                ws.status = "spectator"
+                for (let i = 0; i < games[ws.gameCode].players.length; i++) {
+                    if (!games[ws.gameCode].players[i]) {
+                        //error in games list
+                        ws.close()
+                        break;
+                    }
+                    if (games[ws.gameCode].players[i] != ws) {
+                        games[ws.gameCode].players[i].send(JSON.stringify({
+                            title: "playerLeave",
+                            body: {
+                                playerName: ws.playerName,
+                                playersNb: games[ws.gameCode].players.length
+                            }
+                        }))
+                    }
+                }
+                if (games[ws.gameCode].players.length <= 1) {
+                    console.log("plus qu'un joueur en partie")
                 }
                 break;
 
@@ -153,30 +168,13 @@ wss.on('connection', (ws) => {
                                 }))
                             }
                         }
-                    } //else{
-                    //     for (let i = 0; i < games[ws.gameCode].length; i++) {
-                    //         if (!games[ws.gameCode][i]) {
-                    //             //error in games list
-                    //             ws.close()
-                    //             break;
-                    //         }
-                    //         if (games[ws.gameCode][i] != ws) {
-                    //             games[ws.gameCode][i].send(JSON.stringify({
-                    //                 title: title,
-                    //                 body: body
-                    //             }))
-                    //         }
-                    //     }
-                    // }
+                    }
                 }
                 break;
         }
     });
     ws.on("close", () => {
-        //eject from the lobby players array when he leave the lobby page
-        if (playerInLobby.indexOf(ws) >= 0) {
-            playerInLobby.splice(playerInLobby.indexOf(ws), 1)
-        } else if (ws.gameCode && games[ws.gameCode]) {
+        if (ws.gameCode && games[ws.gameCode]) {
             var gameCode = ws.gameCode
                 //retire le ws de la partie
             if (games[gameCode].infos) { //si c'est une partie multi
@@ -195,24 +193,13 @@ wss.on('connection', (ws) => {
                             title: "playerLeave",
                             body: {
                                 size: games[gameCode].infos.size,
-                                nbInGame: games[gameCode].players.length,
+                                playersNb: games[gameCode].players.length,
                                 playerName: ws.playerName
                             }
                         }))
                     }
                 }
-            } // else { //si c'est une partie duo
-            //     games[gameCode].splice(games[gameCode].indexOf(ws), 1)
-            //     for (let client of games[gameCode]) {
-            //         client.send(JSON.stringify({
-            //             title: "opponentLeftGame"
-            //         }))
-            //     }
-            //     if (games[ws.gameCode].length <= 1) {
-            //         delete games[gameCode][0].gameCode
-            //         delete games[gameCode]
-            //     }
-            // }
+            }
         }
     });
 });
@@ -232,10 +219,6 @@ app.get("/training", (req, res) => {
     res.sendFile(__dirname + '/views/training.html')
 });
 
-// app.get("/lobby", (req, res) => {
-//     res.sendFile(__dirname + '/views/lobby.html')
-// });
-
 app.get("/games", (req, res) => {
     res.sendFile(__dirname + '/views/gamesList.html')
 });
@@ -249,15 +232,6 @@ app.get("/gamesList", (req, res) => {
     }
     res.json(resGames)
 });
-
-// app.get("/duoGame", (req, res) => {
-//     var gameCode = req.query.code
-//     if (games[gameCode]) {
-//         res.sendFile(__dirname + '/views/duoGame.html')
-//     } else {
-//         res.redirect("/lobby")
-//     }
-// });
 
 app.post("/changePlayerName", (req, res) => {
     var newName = req.body.newName

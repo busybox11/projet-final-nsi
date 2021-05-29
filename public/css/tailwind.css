@@ -1,7 +1,10 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
 .tetromino-block {
     @apply h-8 w-8 ring-4 ring-inset;
+}
+
+.tetromino-little-block {
+    @apply h-2 w-2 ring-4 ring-inset;
 }

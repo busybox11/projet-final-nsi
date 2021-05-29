@@ -5,7 +5,7 @@ ws.onopen = function() {
     var gameCode = url.searchParams.get("code");
     var userName = localStorage.getItem("userName")
     if (!userName) {
-        userName = "anonymous"
+        loadUserName()
     }
     ws.send(JSON.stringify({
         title: "connectToTheGame",
@@ -19,7 +19,7 @@ ws.onmessage = function(message) {
     message = JSON.parse(message.data)
     switch (message.title) {
         case "updatePlayers":
-            document.getElementById("playersNb").innerHTML = `${message.body.nbInGame} / ${message.body.size}`
+            document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
             document.getElementById("opponentsGame").innerHTML += `
         <div id="${message.body.playerName}-tetris-game" class="grid grid-cols-10 w-auto h-auto border-4 border-gray-700">
             <div></div>
@@ -225,13 +225,223 @@ ws.onmessage = function(message) {
         </div>`
             break;
 
-        case "playerLeave":
-            document.getElementById("playersNb").innerHTML = `${message.body.nbInGame} / ${message.body.size}`
-            document.getElementById("opponentsGame").remove(document.getElementById(`${message.body.playerName}-tetris-game`))
+        case "joinGame":
+            document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
+            for (let name of message.body.playersNameGame) {
+                document.getElementById("opponentsGame").innerHTML += `
+        <div id="${name}-tetris-game" class="grid grid-cols-10 w-auto h-auto border-4 border-gray-700">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>`
+            }
             break;
 
+        case "playerLeave":
+            document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
+            document.getElementById("opponentsGame").removeChild(document.getElementById(`${message.body.playerName}-tetris-game`));
+            resizePlayersGridArrangement(message.body)
+            break;
 
         case "beginMultiGame":
+            resizePlayersGridArrangement(message.body)
             document.getElementById("waiting").classList.add("hidden")
             document.getElementById("game").classList.remove("hidden")
             beginTetrisGame()
@@ -251,12 +461,12 @@ ws.onmessage = function(message) {
             for (let y = 1; y < oppponentGrid.length; y++) {
                 for (let x = 0; x < oppponentGrid[y].length; x++) {
                     var index = (y - 1) * (oppponentGrid[y].length) + x
-                    document.getElementById(`${message.body.playerName}-tetris-game`).children[index].className = tetrominosColors[oppponentGrid[y][x]]
-                    document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.remove("tetromino-block")
-                    document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.remove("w-8")
-                    document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.remove("h-8")
-                    document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.add("w-2")
-                    document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.add("h-2")
+                    document.getElementById(`${message.body.playerName}-tetris-game`).children[index].className = tetrominosLittleColors[oppponentGrid[y][x]]
+                        // document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.remove("tetromino-block")
+                        // document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.remove("w-8")
+                        // document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.remove("h-8")
+                        // document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.add("w-2")
+                        // document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.add("h-2")
                 }
             }
             break;
@@ -348,6 +558,23 @@ function gameover() {
     alert("perdu")
 }
 
-function updateScore() {
+function makeALine() {
     document.getElementById("score").innerHTML = score
+    ws.send(JSON.stringify({
+        title: "makeALine",
+        body: {
+            grid: grid,
+            score: score
+        }
+    }))
+}
+
+function resizePlayersGridArrangement(body) {
+    if (body.playersNb <= 2) {
+        document.getElementById("playerGame").classList.remove("justify-center")
+        document.getElementById("playerGame").classList.add("justify-start")
+
+        document.getElementById("opponentsGame").className = ""
+        document.getElementById("opponentsGame").children[0].classList.add("justify-end")
+    }
 }

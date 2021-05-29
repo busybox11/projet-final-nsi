@@ -11,6 +11,19 @@ var tetrominosColors = [
     "tetromino-block ring-gray-700 bg-gray-900"
 ]
 
+var tetrominosLittleColors = [
+    "h-2 w-2",
+    "tetromino-little-block ring-yellow-700 bg-yellow-900",
+    "tetromino-little-block ring-red-700 bg-red-900",
+    "tetromino-little-block ring-blue-700 bg-blue-900",
+    "tetromino-little-block ring-purple-700 bg-purple-900",
+    "tetromino-little-block ring-indigo-700 bg-indigo-900",
+    "tetromino-little-block ring-green-700 bg-green-900",
+    "tetromino-little-block ring-pink-700 bg-pink-900",
+    "tetromino-little-block ring-gray-700 bg-gray-900"
+]
+
+
 var L = [
     [0, 0, 1],
     [1, 1, 1],
@@ -181,7 +194,7 @@ class Piece {
                         }
                     }
                 }
-                updateScore()
+                makeALine()
             }
             pieceFalling = new Piece(nextPiece)
             canFastDown = false

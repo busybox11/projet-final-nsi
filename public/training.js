@@ -49,7 +49,7 @@ setInterval(function() {
                     var index = y * 4 + x
                     if (!canHold && holdPiece[y][x]) {
                         document.getElementById("tetris-hold").children[index].className = "tetromino-block ring-gray-500 bg-gray-700"
-                    } else{
+                    } else {
                         document.getElementById("tetris-hold").children[index].className = tetrominosColors[holdPiece[y][x]]
                     }
                 }
@@ -64,6 +64,6 @@ function gameover() {
     alert("perdu")
 }
 
-function updateScore() {
+function makeALine() {
     document.getElementById("score").innerHTML = score
 }

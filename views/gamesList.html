@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Twotris - Games</title>
 </head>
+
 <body>
     <div id="gamesList">
     </div>
@@ -20,7 +22,7 @@
 
                 <label for="gameSize" class="block text-sm font-medium">Taille de la partie</label>
                 <input required type="number" name="gameSize" id="gameSize" min="2" value="2" class="mt-1 mb-2 px-2 py-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm text-black border-gray-300 rounded-md">
-                
+
                 <label for="private" class="block text-sm font-medium">Private</label>
                 <input type="checkbox" name="private" id="private" class="mt-1 mb-2 px-2 py-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm text-black border-gray-300 rounded-md">
             </div>
@@ -29,6 +31,8 @@
             </button>
         </div>
     </form>
+    <script src="./connect.js"></script>
     <script src="./gamesList.js"></script>
 </body>
+
 </html>
