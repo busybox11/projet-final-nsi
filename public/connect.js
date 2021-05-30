@@ -37,6 +37,10 @@ function loadUserName() {
         playerName = JSON.parse(xmlHttp.responseText);
         localStorage.setItem('userName', playerName)
     }
-    document.getElementById("connectedUserName").innerHTML = playerName
-    document.getElementById("oldName").value = playerName
+    try {
+        document.getElementById("connectedUserName").innerHTML = playerName
+        document.getElementById("oldName").value = playerName
+    } catch {
+        //
+    }
 }

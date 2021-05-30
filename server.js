@@ -227,7 +227,7 @@ app.get("/gamesList", (req, res) => {
     var resGames = []
     for (let gameCode of Object.keys(games)) {
         if (games[gameCode].players.length < games[gameCode].infos.size && !games[gameCode].infos.private) {
-            resGames.push({ code: gameCode, infos: games[gameCode].infos })
+            resGames.push({ code: gameCode, infos: games[gameCode].infos, playersNb: games[gameCode].players.length })
         }
     }
     res.json(resGames)

@@ -1,5 +1,6 @@
 var ws = new WebSocket(`ws:${window.location.host}//`, "protocolOne");
 var oppponentGrid = []
+var playersNb = 0
 ws.onopen = function() {
     var url = new URL(window.location.href);
     var gameCode = url.searchParams.get("code");
@@ -461,12 +462,11 @@ ws.onmessage = function(message) {
             for (let y = 1; y < oppponentGrid.length; y++) {
                 for (let x = 0; x < oppponentGrid[y].length; x++) {
                     var index = (y - 1) * (oppponentGrid[y].length) + x
-                    document.getElementById(`${message.body.playerName}-tetris-game`).children[index].className = tetrominosLittleColors[oppponentGrid[y][x]]
-                        // document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.remove("tetromino-block")
-                        // document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.remove("w-8")
-                        // document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.remove("h-8")
-                        // document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.add("w-2")
-                        // document.getElementById(`${message.body.playerName}-tetris-game`).children[index].classList.add("h-2")
+                    if (playersNb <= 2) {
+                        document.getElementById(`${message.body.playerName}-tetris-game`).children[index].className = tetrominosColors[oppponentGrid[y][x]]
+                    } else {
+                        document.getElementById(`${message.body.playerName}-tetris-game`).children[index].className = tetrominosLittleColors[oppponentGrid[y][x]]
+                    }
                 }
             }
             break;
@@ -570,7 +570,8 @@ function makeALine() {
 }
 
 function resizePlayersGridArrangement(body) {
-    if (body.playersNb <= 2) {
+    playersNb = body.playersNb
+    if (playersNb <= 2) {
         document.getElementById("playerGame").classList.remove("justify-center")
         document.getElementById("playerGame").classList.add("justify-start")
 
