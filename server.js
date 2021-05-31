@@ -151,6 +151,10 @@ wss.on('connection', (ws) => {
                 }
                 break;
 
+            case "malus":
+                
+                break;
+
             default:
                 //renvoie le message aux autres joueurs
                 if (ws.gameCode && games[ws.gameCode]) {
@@ -271,9 +275,9 @@ app.get("/multi", (req, res) => {
     var gameCode = req.query.code
     if (games[gameCode]) {
         if (games[gameCode].players.length <= 0) {
-            return res.sendFile(__dirname + '/views/multiCreator.html')
+            return res.sendFile(__dirname + `/views/multiCreator${games[gameCode].infos.mode}.html`)
         } else {
-            return res.sendFile(__dirname + '/views/multi.html')
+            return res.sendFile(__dirname + `/views/multi${games[gameCode].infos.mode}.html`)
         }
     } else {
         return res.redirect("/")
@@ -283,10 +287,11 @@ app.get("/multi", (req, res) => {
 app.post("/createGame", (req, res) => {
     var gameName = req.body.gameName
     var gameSize = req.body.gameSize
+    var gameMode = req.body.gameMode
     var private = req.body.private != undefined
         //si ce nom existe deja return
     if (games[gameName]) return res.redirect('/games')
-    gameCode = launchGame(gameName, gameSize, private)
+    gameCode = launchGame(gameName, gameSize, gameMode, private)
     return res.redirect(`/multi?code=${gameCode}`)
 })
 
@@ -294,36 +299,7 @@ server.listen(PORT, () => {
     console.log(`Server is running on PORT: ${PORT}`);
 });
 
-// function launchDuoGame() {
-//     var gameCode = generate_token(10)
-//     var itt = 0;
-//     var tokenLenght = 10
-//     while (games[gameCode]) {
-//         if (itt > 10) {
-//             tokenLenght++
-//             itt = 0
-//         }
-//         gameCode = generate_token(tokenLenght)
-//         itt++
-//     }
-//     //choisis un premier joueur aleatoirement
-//     var player1 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
-//     playerInLobby.splice(playerInLobby.indexOf(player1), 1)
-//     var player2 = playerInLobby[Math.floor(Math.random() * playerInLobby.length)]
-
-//     games[gameCode] = [0, 0]
-
-//     player1.send(JSON.stringify({
-//         title: "gameUrl",
-//         body: `/duoGame?code=${gameCode}`
-//     }))
-//     player2.send(JSON.stringify({
-//         title: "gameUrl",
-//         body: `/duoGame?code=${gameCode}`
-//     }))
-// }
-//lance une partie avec un code unique 
-function launchGame(gameCode, gameSize, private) {
+function launchGame(gameCode, gameSize, gameMode, private) {
     //génère un token inexistant si la partie n'a pas de nom
     if (!gameCode) {
         gameCode = generate_token(10)
@@ -343,7 +319,7 @@ function launchGame(gameCode, gameSize, private) {
     games[gameCode] = {
         infos: {
             size: gameSize,
-            mode: "battle",
+            mode: gameMode,
             private: private,
             status: "waiting"
         },
@@ -351,9 +327,9 @@ function launchGame(gameCode, gameSize, private) {
     }
     return gameCode
 }
+
 //génère un code unique
 function generate_token(length) {
-    //edit the token allowed characters
     var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
     var b = [];
     for (var i = 0; i < length; i++) {

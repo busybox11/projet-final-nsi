@@ -4,21 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://db.onlinewebfonts.com/c/a17af96c10647b3403e18a0e94283536?family=Joystix" rel="stylesheet" type="text/css">
-
     <link rel="stylesheet" href="css/style.css">
-    <title>Twotris</title>
+    <title>Twotris - Multi</title>
 </head>
 
-<body class="bg-black text-white flex flex-col h-screen w-screen px-12 py-6">
-    <div id="screen" class="">
-    <h3 class="text-3xl font-semibold text-gray-500 font-joystix">Mode entraînement</h3>
-    <button onclick="beginTetrisGame()">replay</button>
-    <div class="flex w-full h-full">
-        <div class="flex inline-flex gap-x-4 m-auto transform scale-75 md:scale-90 lg:scale-100">
+<body class="bg-black text-white h-full relative">
+    <div id="waiting" class="h-screen relative overflow-hidden">
+        <img src='https://t3.ftcdn.net/jpg/03/24/08/20/360_F_324082017_07zHI5vADcE9XxfIKpdmnJOOrj6HcIRS.jpg' class="h-full w-full object-cover filter blur-md md:blur-lg brightness-75 transform scale-105">
+        <div class="flex flex-col align-center justify-center text-center absolute top-0 left-0 z-10 h-full w-full">
+            <h1 class="text-4xl md:text-8xl font-bold font-joystix">Waiting...</h1>
+            <h3 class="text-xl md:text-2xl font-bold text-gray-300 font-joystix">The creator will launch the game soonly</h3>
+            <h4 id="playersNb" class="text-xl md:text-2xl font-semibold font-joystix text-gray-500 mb-8"></h4>
+        </div>
+    </div>
+    <div id="game" class="hidden flex inline-flex gap-x-8 justify-center w-full">
+        <div id="playerGame" class="flex inline-flex gap-x-4 justify-center w-full">
             <div>
                 <div class="bg-gray-300 px-2 pt-1 w-full text-black font-joystix">HOLD</div>
                 <div id="tetris-hold" class="grid grid-cols-4 h-auto mb-auto border-4 border-gray-300 p-4">
@@ -264,28 +266,19 @@
                         <div></div>
                     </div>
                 </div>
-                <div class="relative">
-                    <div class="absolute bottom-0 flex flex-col space-y-2">
-                        <div class="leading-4">
-                            <span class="font-joystix text-gray-400">Points</span>
-                            <h1 id="score" class="text-5xl font-bold font-joystix">0</h1>
-                        </div>
-                        <div class="leading-4">
-                            <span class="font-joystix text-gray-400">Level</span>
-                            <h1 id="level" class="text-5xl font-bold font-joystix">1</h1>
-                        </div>
-                    </div>
+                <div class="leading-4">
+                    <span class="font-joystix text-gray-400">Points</span>
+                    <h1 id="score" class="text-5xl font-bold font-joystix">0</h1>
                 </div>
             </div>
         </div>
-    </div></div>
-    <div id="pause" class="absolute top-0 left-0 hidden z-100 w-screen h-screen ">
-        <div class="h-screen flex justify-center">
-            <div class="w-40 flex m-20 bg-white justify-start"></div>
-            <div class="w-40 flex m-20 bg-white justify-end"></div></div>
+        <div id="opponentsGame" class="absolute top-0 left-0 h-40 w-screen grid grid-cols-10">
+        </div>
     </div>
+    <script src="./HackTimer.js"></script>
+    <script src="./connect.js"></script>
     <script src="./tetris.js"></script>
-    <script src="./training.js"></script>
+    <script src="./multi.js"></script>
 </body>
 
 </html>

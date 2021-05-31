@@ -23,7 +23,6 @@ var tetrominosLittleColors = [
     "tetromino-little-block ring-gray-700 bg-gray-900"
 ]
 
-
 var L = [
     [0, 0, 1],
     [1, 1, 1],
@@ -72,7 +71,8 @@ var keys = {
         "down": 40,
         "rotate": 38,
         "place": 32,
-        "hold": 16
+        "hold": 16,
+        "pause": 84
     }
     //recupere les commandes choisis par le joueur
 if (localStorage.getItem("inputTetris")) {
@@ -123,6 +123,8 @@ var pieceFalling, nextPiece, holdPiece
 var timeLapseFall = levelsInfos[currentLevel]
 var ws = new WebSocket("ws://localhost:3000", "protocolOne");
 var isgameover = true;
+var pause = false;
+var canpause = false
 var frameCount = 0;
 var timePast = 0;
 var canFastDown = true
@@ -361,7 +363,8 @@ class Piece {
 }
 
 //lance la partie
-function beginTetrisGame() {
+function beginTetrisGame(pauseAuthorized = false) {
+    canpause = pauseAuthorized;
     //init the grid
     for (let y = 0; y < gridH; y++) {
         grid[y] = []
@@ -380,6 +383,15 @@ function beginTetrisGame() {
 }
 
 function keydown(event) {
+    if (event.keyCode == keys["pause"][0]) {
+        pause = !pause
+        try {
+           setPause()
+        } catch (error) {
+            
+        }
+    }
+    if (pause && canpause) return
     if (event.keyCode == keys["down"][0] && canFastDown) {
         timeLapseFall = 2
     }
@@ -425,6 +437,7 @@ function keyup(event) {
 }
 //function executed every frame
 setInterval(function() {
+    if (pause && canpause) return
     if (!isgameover) {
         if (frameCount % timeLapseFall == 0) {
             if (pieceFalling) {

@@ -10,7 +10,8 @@ window.onload = function() {
             "down": [40, "ArrowDown"],
             "rotate": [38, "ArrowUp"],
             "place": [32, "Space"],
-            "hold": [16, "Shift"]
+            "hold": [16, "Shift"],
+            "pause": [84, "t"]
         }))
     }
 }

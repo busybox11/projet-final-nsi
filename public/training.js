@@ -1,6 +1,6 @@
 var pastgrid = []
 var pasthold = []
-beginTetrisGame()
+beginTetrisGame(true)
 setInterval(function() {
     if (!isgameover && pastgrid != grid) {
         pastgrid = copy2Darr(grid)
@@ -66,4 +66,14 @@ function gameover() {
 
 function makeALine() {
     document.getElementById("score").innerHTML = score
+}
+
+function setPause(){
+    if (document.getElementById("pause").className.includes("hidden")) {
+        document.getElementById("pause").classList.remove("hidden")
+        document.getElementById("screen").className = "filter blur-2xl"
+    }else{
+        document.getElementById("pause").classList.add("hidden")
+        document.getElementById("screen").className = ""
+    }
 }

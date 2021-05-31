@@ -8,6 +8,7 @@ window.onload = function() {
     document.getElementById("rotateKey").innerHTML = inputTetris["rotate"][1]
     document.getElementById("placeKey").innerHTML = inputTetris["place"][1]
     document.getElementById("holdKey").innerHTML = inputTetris["hold"][1]
+    document.getElementById("pauseKey").innerHTML = inputTetris["pause"][1]
 }
 var target
 function changeKey(event) {
