@@ -375,8 +375,7 @@ function beginTetrisGame(pauseAuthorized = false) {
     canFastDown = true
     canHold = true
     nbCantDrop = 0
-
-    //init the grid
+        //init the grid
     for (let y = 0; y < gridH; y++) {
         grid[y] = []
         fallingLineGrid[y] = []

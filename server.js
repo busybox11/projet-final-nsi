@@ -10,6 +10,7 @@ const wss = new WebSocket.Server({ server });
 
 var playersName = []
 var games = {}
+var modes = ["battle", "rumble"]
 
 wss.on('connection', (ws) => {
     ws.on('message', (message) => {
@@ -114,7 +115,7 @@ wss.on('connection', (ws) => {
                         }
                         if (games[ws.gameCode].players[i] != ws) {
                             games[ws.gameCode].players[i].send(JSON.stringify({
-                                title: title,
+                                title: "tetrisGrid",
                                 body: {
                                     playerName: ws.playerName,
                                     grid: body.grid,
@@ -152,7 +153,7 @@ wss.on('connection', (ws) => {
                 break;
 
             case "malus":
-                
+
                 break;
 
             default:
@@ -273,7 +274,7 @@ app.get("/getAnonymousPlayerName", (req, res) => {
 
 app.get("/multi", (req, res) => {
     var gameCode = req.query.code
-    if (games[gameCode]) {
+    if (games[gameCode] && modes.includes(games[gameCode].infos.mode)) {
         if (games[gameCode].players.length <= 0) {
             return res.sendFile(__dirname + `/views/multiCreator${games[gameCode].infos.mode}.html`)
         } else {
