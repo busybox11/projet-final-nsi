@@ -368,6 +368,13 @@ function beginTetrisGame(pauseAuthorized = false) {
     score = 0;
     makeALine()
     currentLevel = 0;
+    isgameover = true;
+    pause = false;
+    frameCount = 0;
+    timePast = 0;
+    canFastDown = true
+    canHold = true
+    nbCantDrop = 0
 
     //init the grid
     for (let y = 0; y < gridH; y++) {
@@ -387,13 +394,9 @@ function beginTetrisGame(pauseAuthorized = false) {
 }
 
 function keydown(event) {
-    if (event.keyCode == keys["pause"][0]) {
+    if (event.keyCode == keys["pause"][0] && canpause) {
         pause = !pause
-        try {
-           setPause()
-        } catch (error) {
-            
-        }
+        setPause()
     }
     if (pause && canpause) return
     if (event.keyCode == keys["down"][0] && canFastDown) {
