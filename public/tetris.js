@@ -365,6 +365,10 @@ class Piece {
 //lance la partie
 function beginTetrisGame(pauseAuthorized = false) {
     canpause = pauseAuthorized;
+    score = 0;
+    makeALine()
+    currentLevel = 0;
+
     //init the grid
     for (let y = 0; y < gridH; y++) {
         grid[y] = []
