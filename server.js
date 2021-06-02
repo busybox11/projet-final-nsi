@@ -137,12 +137,18 @@ wss.on('connection', (ws) => {
                         ws.close()
                         break;
                     }
+                    var playersNb = 0;
+                    for (let i = 0; i < games[ws.gameCode].players.length; i++) {
+                        if (games[ws.gameCode].players[i].status == "playing") {
+                            playersNb++
+                        }
+                    }
                     if (games[ws.gameCode].players[i] != ws) {
                         games[ws.gameCode].players[i].send(JSON.stringify({
                             title: "playerLeave",
                             body: {
                                 playerName: ws.playerName,
-                                playersNb: games[ws.gameCode].players.length
+                                playersNb: playersNb
                             }
                         }))
                     }
@@ -246,6 +252,11 @@ app.post("/changePlayerName", (req, res) => {
         console.log(playersName)
         return res.redirect("/")
     }
+})
+
+app.post("/test", (req, res) => {
+    console.log(req.query)
+    return res.json({test: "tet"})
 })
 
 app.get("/getPlayersName", (req, res) => {

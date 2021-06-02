@@ -571,6 +571,10 @@ function makeALine() {
 
 function resizePlayersGridArrangement(body) {
     playersNb = body.playersNb
+    console.log(playersNb)
+    if (playersNb <= 1) {
+        youWin()
+    }
     if (playersNb <= 2) {
         document.getElementById("playerGame").classList.remove("justify-center")
         document.getElementById("playerGame").classList.add("justify-start")
@@ -578,4 +582,11 @@ function resizePlayersGridArrangement(body) {
         document.getElementById("opponentsGame").className = ""
         document.getElementById("opponentsGame").children[0].classList.add("justify-end")
     }
+}
+
+function youWin(){
+    alert("you win !!!")
+    isgameover = true
+    document.getElementById("waiting").classList.remove("hidden")
+    document.getElementById("game").classList.add("hidden")
 }
