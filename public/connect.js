@@ -37,7 +37,6 @@ function loadUserName() {
         playerName = JSON.parse(xmlHttp.responseText);
         localStorage.setItem('userName', playerName)
     }
-    console.log(playerName)
     try {
         document.getElementById("connectedUserName").innerHTML = playerName
         document.getElementById("oldName").value = playerName
