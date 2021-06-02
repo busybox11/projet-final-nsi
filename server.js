@@ -216,10 +216,6 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
 });
 
-app.get("/params", (req, res) => {
-    res.sendFile(__dirname + '/views/params.html')
-});
-
 app.get("/training", (req, res) => {
     res.sendFile(__dirname + '/views/training.html')
 });
