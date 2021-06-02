@@ -128,7 +128,7 @@ wss.on('connection', (ws) => {
                 }
                 break;
 
-            case "gameover":
+            case "gameOver":
                 if (!ws.gameCode || !games[ws.gameCode]) break;
                 ws.status = "spectator"
                 for (let i = 0; i < games[ws.gameCode].players.length; i++) {
@@ -153,8 +153,23 @@ wss.on('connection', (ws) => {
                         }))
                     }
                 }
-                if (games[ws.gameCode].players.length <= 1) {
-                    console.log("plus qu'un joueur en partie")
+                if (games[ws.gameCode].players.length <= 1) {//si il reste un seul joueur en partie
+                    for (let i = 0; i < games[ws.gameCode].players.length; i++) {
+                        if (!games[ws.gameCode].players[i]) {
+                            //error in games list
+                            ws.close()
+                            break;
+                        }
+                        if (games[ws.gameCode].players[i] != ws) {
+                            games[ws.gameCode].players[i].send(JSON.stringify({
+                                title: "winner",
+                                body: {
+                                    playerName: ws.playerName,
+                                    playersNb: playersNb
+                                }
+                            }))
+                        }
+                    }
                 }
                 break;
 
@@ -254,11 +269,6 @@ app.post("/changePlayerName", (req, res) => {
     }
 })
 
-app.post("/test", (req, res) => {
-    console.log(req.query)
-    return res.json({test: "tet"})
-})
-
 app.get("/getPlayersName", (req, res) => {
     res.json(playersName)
 })
@@ -276,7 +286,6 @@ app.get("/getAnonymousPlayerName", (req, res) => {
         itt++
     }
     playersName.push(newName)
-    console.log(playersName)
     res.json(newName)
 })
 

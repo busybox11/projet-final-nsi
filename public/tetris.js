@@ -354,7 +354,7 @@ class Piece {
     erase() {
         for (let y = 0; y < this.shape.length; y++) {
             for (let x = 0; x < this.shape[y].length; x++) {
-                if (grid[y + this.y][x + this.x] == this.colorNb && this.shape[y][x] == this.colorNb) {
+                if (y+this.y < gridH && x+this.x < gridW && grid[y + this.y][x + this.x] == this.colorNb && this.shape[y][x] == this.colorNb) {
                     grid[y + this.y][x + this.x] = 0
                 }
             }

@@ -37,16 +37,10 @@ function loadUserName() {
         playerName = JSON.parse(xmlHttp.responseText);
         localStorage.setItem('userName', playerName)
     }
-    fetch(`/test?name=${playerName}`, {
-      method: "POST", 
-      body: JSON.stringify({})
-    }).then(res => {
-      console.log("Request complete! response:", res);
-    });
     try {
         document.getElementById("connectedUserName").innerHTML = playerName
         document.getElementById("oldName").value = playerName
     } catch (error) {
-        console.log(error)
+        //
     }
 }
