@@ -19,6 +19,11 @@ ws.onopen = function() {
 ws.onmessage = function(message) {
     message = JSON.parse(message.data)
     switch (message.title) {
+        case "nameAlreadyUsed":
+            localStorage.removeItem("userName")
+            window.location.replace("/")
+            break;
+
         case "updatePlayers":
             document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
             document.getElementById("opponentsGame").innerHTML += `
@@ -471,6 +476,12 @@ ws.onmessage = function(message) {
             }
             break;
 
+        case "winner":
+            document.getElementById("waiting").classList.remove("hidden")
+            document.getElementById("game").classList.add("hidden")
+            document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
+            break;
+
         default:
             break;
     }
@@ -571,11 +582,14 @@ function makeALine() {
 
 function resizePlayersGridArrangement(body) {
     playersNb = body.playersNb
-    console.log(playersNb)
     if (playersNb <= 1) {
-        youWin()
-    }
-    if (playersNb <= 2) {
+        if (!isgameover) {
+            youWin()
+        } else {
+            document.getElementById("waiting").classList.remove("hidden")
+            document.getElementById("game").classList.add("hidden")
+        }
+    } else if (playersNb == 2) {
         document.getElementById("playerGame").classList.remove("justify-center")
         document.getElementById("playerGame").classList.add("justify-start")
 
@@ -584,9 +598,17 @@ function resizePlayersGridArrangement(body) {
     }
 }
 
-function youWin(){
+function youWin() {
     alert("you win !!!")
     isgameover = true
+    ws.send(JSON.stringify({
+        title: "gameOver",
+        body: {
+            score: score,
+            time: timePast,
+            level: currentLevel
+        }
+    }))
     document.getElementById("waiting").classList.remove("hidden")
     document.getElementById("game").classList.add("hidden")
 }

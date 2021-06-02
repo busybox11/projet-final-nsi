@@ -28,6 +28,9 @@ wss.on('connection', (ws) => {
                     ws.status = "waiting"
                     for (let player of game.players) {
                         if (player.playerName == ws.playerName) {
+                            ws.send(JSON.stringify({
+                                title: "nameAlreadyUsed"
+                            }))
                             ws.close();
                             break;
                         }
@@ -131,6 +134,25 @@ wss.on('connection', (ws) => {
             case "gameOver":
                 if (!ws.gameCode || !games[ws.gameCode]) break;
                 ws.status = "spectator"
+                if (games[ws.gameCode].players.length <= 1) { //si il reste un seul joueur en partie
+                    for (let i = 0; i < games[ws.gameCode].players.length; i++) {
+                        if (!games[ws.gameCode].players[i]) {
+                            //error in games list
+                            ws.close()
+                            break;
+                        }
+                        games[ws.gameCode].players[i].send(JSON.stringify({
+                            title: "winner",
+                            body: {
+                                playerName: ws.playerName,
+                                playersNb: games[ws.gameCode].players.length,
+                                size: games[ws.gameCode].infos.size
+                            }
+                        }))
+
+                    }
+                    break;
+                }
                 for (let i = 0; i < games[ws.gameCode].players.length; i++) {
                     if (!games[ws.gameCode].players[i]) {
                         //error in games list
@@ -151,24 +173,6 @@ wss.on('connection', (ws) => {
                                 playersNb: playersNb
                             }
                         }))
-                    }
-                }
-                if (games[ws.gameCode].players.length <= 1) {//si il reste un seul joueur en partie
-                    for (let i = 0; i < games[ws.gameCode].players.length; i++) {
-                        if (!games[ws.gameCode].players[i]) {
-                            //error in games list
-                            ws.close()
-                            break;
-                        }
-                        if (games[ws.gameCode].players[i] != ws) {
-                            games[ws.gameCode].players[i].send(JSON.stringify({
-                                title: "winner",
-                                body: {
-                                    playerName: ws.playerName,
-                                    playersNb: playersNb
-                                }
-                            }))
-                        }
                     }
                 }
                 break;
@@ -264,7 +268,6 @@ app.post("/changePlayerName", (req, res) => {
     else { //si il avait un ancien nom on le supprime de la liste et on ajoute ensuite le nouveau
         playersName.splice(playersName.indexOf(oldName), 1)
         playersName.push(newName)
-        console.log(playersName)
         return res.redirect("/")
     }
 })

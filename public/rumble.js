@@ -1,3 +1,3 @@
-function slowTime(){
-    
+function slowTime() {
+    timeLapseFall = 1
 }
