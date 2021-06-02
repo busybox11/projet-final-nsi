@@ -11,12 +11,15 @@ window.onload = function() {
     document.getElementById("pauseKey").innerHTML = inputTetris["pause"][1]
 }
 var target
+
 function changeKey(event) {
     target = event.target.id
+    document.getElementById("pressKey").classList.remove("hidden")
     document.addEventListener("keydown", keypressed)
 }
 
-function keypressed(e){
+function keypressed(e) {
+    document.getElementById("pressKey").classList.add("hidden")
     document.removeEventListener("keydown", keypressed)
     var name = e.key
     if (!name.trim().length) name = e.code

@@ -1,20 +1,19 @@
 var playerName
 var players
 
-window.onload = function() {
-    loadUserName()
-    if (!localStorage.getItem("inputTetris")) {
-        localStorage.setItem("inputTetris", JSON.stringify({
-            "left": [37, "ArrowLeft"],
-            "right": [39, "ArrowRight"],
-            "down": [40, "ArrowDown"],
-            "rotate": [38, "ArrowUp"],
-            "place": [32, "Space"],
-            "hold": [16, "Shift"],
-            "pause": [84, "t"]
-        }))
-    }
+loadUserName()
+if (!localStorage.getItem("inputTetris")) {
+    localStorage.setItem("inputTetris", JSON.stringify({
+        "left": [37, "ArrowLeft"],
+        "right": [39, "ArrowRight"],
+        "down": [40, "ArrowDown"],
+        "rotate": [38, "ArrowUp"],
+        "place": [32, "Space"],
+        "hold": [16, "Shift"],
+        "pause": [84, "t"]
+    }))
 }
+
 
 function changeName() {
     var xmlHttp = new XMLHttpRequest();
@@ -38,10 +37,11 @@ function loadUserName() {
         playerName = JSON.parse(xmlHttp.responseText);
         localStorage.setItem('userName', playerName)
     }
+    console.log(playerName)
     try {
         document.getElementById("connectedUserName").innerHTML = playerName
         document.getElementById("oldName").value = playerName
-    } catch {
-        //
+    } catch (error) {
+        console.log(error)
     }
 }

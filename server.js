@@ -242,6 +242,7 @@ app.post("/changePlayerName", (req, res) => {
     var newName = req.body.newName
     var oldName = req.body.oldName
         //si ce nom existe deja return
+    if (newName.length < 3 || newName.length > 20) return res.redirect("/")
     if (playersName.includes(newName)) return res.redirect("/")
     else { //si il avait un ancien nom on le supprime de la liste et on ajoute ensuite le nouveau
         playersName.splice(playersName.indexOf(oldName), 1)
