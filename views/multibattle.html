@@ -10,7 +10,7 @@
     <title>Twotris - Multi</title>
 </head>
 
-<body class="bg-black text-white h-full relative">
+<body class="bg-black text-white h-screen w-screen ">
     <div id="waiting" class="h-screen relative overflow-hidden">
         <img src='https://t3.ftcdn.net/jpg/03/24/08/20/360_F_324082017_07zHI5vADcE9XxfIKpdmnJOOrj6HcIRS.jpg' class="h-full w-full object-cover filter blur-md md:blur-lg brightness-75 transform scale-105">
         <div class="flex flex-col align-center justify-center text-center absolute top-0 left-0 z-10 h-full w-full">
@@ -19,260 +19,269 @@
             <h4 id="playersNb" class="text-xl md:text-2xl font-semibold font-joystix text-gray-500 mb-8"></h4>
         </div>
     </div>
-    <div id="game" class="hidden flex inline-flex gap-x-8 justify-center w-full">
-        <div id="playerGame" class="flex inline-flex gap-x-4 justify-center ">
-            <div>
-                <div class="bg-gray-300 px-2 pt-1 w-full text-black font-joystix">HOLD</div>
-                <div id="tetris-hold" class="grid grid-cols-4 h-auto mb-auto border-4 border-gray-300 p-4">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-            <div id="tetris-game" class="grid grid-cols-10 w-80 border-4 border-gray-700">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <div class="flex flex-col gap-y-4">
-                <div class="mb-auto">
-                    <div class="bg-gray-300 px-2 pt-1 w-full text-black font-joystix">NEXT</div>
-                    <div id="tetris-nextPiece" class="grid grid-cols-4 h-auto border-4 border-gray-300 p-4">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+    <div id="game" class="flex flex-col gap-x-8 justify-center w-full h-full hidden">
+        <div id="opponentsGame" class="flex flex-wrap overflow-hidden justify-center content-center">
+        <div id="playerGame" class="absolute top-0 left-0 flex w-full h-full">
+            <div class="flex inline-flex gap-x-4 m-auto transform scale-75 md:scale-90 lg:scale-100 bg-gray-800 p-8 rounded-2xl bg-opacity-80">
+                <div>
+                    <div class="bg-gray-300 px-2 pt-1 w-full text-black font-joystix">HOLD</div>
+                    <div id="tetris-hold" class="grid grid-cols-4 h-auto mb-auto border-4 border-gray-300 p-4">
+                        <div class="h-8 w-8"></div>
+                        <div class="tetromino-block ring-gray-500 bg-gray-700"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="tetromino-block ring-gray-500 bg-gray-700"></div>
+                        <div class="tetromino-block ring-gray-500 bg-gray-700"></div>
+                        <div class="tetromino-block ring-gray-500 bg-gray-700"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
                     </div>
                 </div>
-                <div class="leading-4">
-                    <span class="font-joystix text-gray-400">Points</span>
-                    <h1 id="score" class="text-5xl font-bold font-joystix">0</h1>
+                <div id="tetris-game" class="grid grid-cols-10 w-80 border-4 border-gray-700">
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-yellow-700 bg-yellow-900"></div>
+                    <div class="tetromino-block ring-yellow-700 bg-yellow-900"></div>
+                    <div class="tetromino-block ring-yellow-700 bg-yellow-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-yellow-700 bg-yellow-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-pink-700 bg-pink-900"></div>
+                    <div class="tetromino-block ring-pink-700 bg-pink-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-green-700 bg-green-900"></div>
+                    <div class="tetromino-block ring-green-700 bg-green-900"></div>
+                    <div class="tetromino-block ring-blue-700 bg-blue-900"></div>
+                    <div class="tetromino-block ring-pink-700 bg-pink-900"></div>
+                    <div class="tetromino-block ring-pink-700 bg-pink-900"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-green-700 bg-green-900"></div>
+                    <div class="tetromino-block ring-green-700 bg-green-900"></div>
+                    <div class="tetromino-block ring-blue-700 bg-blue-900"></div>
+                    <div class="tetromino-block ring-blue-700 bg-blue-900"></div>
+                    <div class="tetromino-block ring-blue-700 bg-blue-900"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                </div>
+                <div class="flex flex-col gap-y-4">
+                    <div class="mb-auto">
+                        <div class="bg-gray-300 px-2 pt-1 w-full text-black font-joystix">NEXT</div>
+                        <div id="tetris-nextPiece" class="grid grid-cols-4 h-auto border-4 border-gray-300 p-4">
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                            <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                            <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                            <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute bottom-0 flex flex-col space-y-2">
+                            <div class="leading-4">
+                                <span class="font-joystix text-gray-400">Points</span>
+                                <h1 id="score" class="text-5xl font-bold font-joystix">2560</h1>
+                            </div>
+                            <div class="leading-4">
+                                <span class="font-joystix text-gray-400">Level</span>
+                                <h1 id="level" class="text-5xl font-bold font-joystix">3</h1>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="opponentsGame" class="absolute top-0 left-0 h-40 w-screen grid grid-rows-5">
         </div>
     </div>
     <script src="./HackTimer.js"></script>

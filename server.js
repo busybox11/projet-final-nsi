@@ -70,9 +70,8 @@ wss.on('connection', (ws) => {
 
             case "launchMultiGame":
                 if (ws.gameCode && games[ws.gameCode]) {
-                    if (games[gameCode].players.length <= 1) return ws.send(JSON.stringify({ title: "errorLaunchingGame", body: "you are alone" }))
-                    console.log(games[gameCode])
-                    for (let client of games[gameCode].players) {
+                    if (games[ws.gameCode].players.length <= 1) return ws.send(JSON.stringify({ title: "errorLaunchingGame", body: "you are alone" }))
+                    for (let client of games[ws.gameCode].players) {
                         client.status = "playing"
                         client.send(JSON.stringify({
                             title: "beginMultiGame",
@@ -136,9 +135,11 @@ wss.on('connection', (ws) => {
                 if (!ws.gameCode || !games[ws.gameCode]) break;
                 ws.status = "spectator";
                 var playersPlayingNb = 0;
+                var winner
                 for (let i = 0; i < games[ws.gameCode].players.length; i++) {
                     if (games[ws.gameCode].players[i].status == "playing") {
                         playersPlayingNb++
+                        winner = games[ws.gameCode].players[i].playerName
                     }
                 }
                 if (playersPlayingNb <= 1) { //si il reste un seul joueur en partie
@@ -151,7 +152,7 @@ wss.on('connection', (ws) => {
                         games[ws.gameCode].players[i].send(JSON.stringify({
                             title: "winner",
                             body: {
-                                playerName: ws.playerName,
+                                playerName: winner,
                                 playersNb: games[ws.gameCode].players.length,
                                 size: games[ws.gameCode].infos.size
                             }

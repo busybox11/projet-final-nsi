@@ -1,10 +1,11 @@
 var ws = new WebSocket(`ws:${window.location.host}//`, "protocolOne");
 var oppponentGrid = []
 var playersNb = 0
+var userName
 ws.onopen = function() {
     var url = new URL(window.location.href);
     var gameCode = url.searchParams.get("code");
-    var userName = localStorage.getItem("userName")
+    userName = localStorage.getItem("userName")
     if (!userName) {
         loadUserName()
     }
@@ -27,416 +28,56 @@ ws.onmessage = function(message) {
         case "updatePlayers":
             document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
             document.getElementById("opponentsGame").innerHTML += `
-        <div id="${message.body.playerName}-tetris-game" class="grid grid-cols-10 grid-rows-20 w-48 h-96 border-4 border-gray-700">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>`
+            <div id="${message.body.playerName}-tetris-game" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>`
             break;
 
         case "joinGame":
             document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
             for (let name of message.body.playersNameGame) {
                 document.getElementById("opponentsGame").innerHTML += `
-        <div id="${name}-tetris-game" class="grid grid-cols-10 w-auto h-auto border-4 border-gray-700">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>`
+                <div id="${message.body.playerName}-tetris-game" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                    <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+                </div>`
             }
             break;
 
@@ -477,9 +118,11 @@ ws.onmessage = function(message) {
             break;
 
         case "winner":
+            if (message.body.playerName == userName) {
+                youWin()
+            }
             document.getElementById("waiting").classList.remove("hidden")
             document.getElementById("game").classList.add("hidden")
-            console.log(message.body.size)
             document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
             break;
 
@@ -601,16 +244,4 @@ function resizePlayersGridArrangement(body) {
 
 function youWin() {
     alert("you win !!!")
-    console.log("win")
-    isgameover = true
-    ws.send(JSON.stringify({
-        title: "gameOver",
-        body: {
-            score: score,
-            time: timePast,
-            level: currentLevel
-        }
-    }))
-    document.getElementById("waiting").classList.remove("hidden")
-    document.getElementById("game").classList.add("hidden")
 }
