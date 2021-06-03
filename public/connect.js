@@ -21,7 +21,7 @@ function changeName() {
     xmlHttp.send(null);
     players = JSON.parse(xmlHttp.responseText);
     var newName = document.getElementById("newName").value
-    if (!players.includes(newName)) {
+    if (!players.includes(newName) && newName.trim().length >= 3 && newName.trim().length <= 20) {
         localStorage.setItem('userName', newName)
         return true
     }

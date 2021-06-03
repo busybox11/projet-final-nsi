@@ -264,7 +264,7 @@ app.post("/changePlayerName", (req, res) => {
     var newName = req.body.newName
     var oldName = req.body.oldName
         //si ce nom existe deja return
-    if (newName.length < 3 || newName.length > 20) return res.redirect("/")
+    if (newName.trim().length < 3 || newName.trim().length > 20) return res.redirect("/")
     if (playersName.includes(newName)) return res.redirect("/")
     else { //si il avait un ancien nom on le supprime de la liste et on ajoute ensuite le nouveau
         playersName.splice(playersName.indexOf(oldName), 1)
@@ -313,6 +313,8 @@ app.post("/createGame", (req, res) => {
     var private = req.body.private != undefined
         //si ce nom existe deja return
     if (games[gameName]) return res.redirect('/games')
+    if(gameName.length>20 ||gameName.length<3)return res.redirect('/games')
+    if(gameName.match(/^[^a-zA-Z0-9]+$/) ? true : false) return res.redirect('/games')
     gameCode = launchGame(gameName, gameSize, gameMode, private)
     return res.redirect(`/multi?code=${gameCode}`)
 })
