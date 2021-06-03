@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://db.onlinewebfonts.com/c/a17af96c10647b3403e18a0e94283536?family=Joystix" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Twotris - Multi</title>
+</head>
+
+<body class="bg-black text-white h-screen w-screen px-12 py-6">
+    <div id="game" class="flex flex-col gap-x-8 justify-center w-full h-full">
+        <div id="opponentsGame" class="flex flex-wrap overflow-hidden justify-center content-center">
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+            <div id="opp-tetris-1" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+            </div>
+        </div>
+        <div id="playerGame" class="absolute top-0 left-0 flex w-full h-full">
+            <div class="flex inline-flex gap-x-4 m-auto transform scale-75 md:scale-90 lg:scale-100 bg-gray-800 p-8 rounded-2xl bg-opacity-80">
+                <div>
+                    <div class="bg-gray-300 px-2 pt-1 w-full text-black font-joystix">HOLD</div>
+                    <div id="tetris-hold" class="grid grid-cols-4 h-auto mb-auto border-4 border-gray-300 p-4">
+                        <div class="h-8 w-8"></div>
+                        <div class="tetromino-block ring-gray-500 bg-gray-700"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="tetromino-block ring-gray-500 bg-gray-700"></div>
+                        <div class="tetromino-block ring-gray-500 bg-gray-700"></div>
+                        <div class="tetromino-block ring-gray-500 bg-gray-700"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                        <div class="h-8 w-8"></div>
+                    </div>
+                </div>
+                <div id="tetris-game" class="grid grid-cols-10 w-80 border-4 border-gray-700">
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-yellow-700 bg-yellow-900"></div>
+                    <div class="tetromino-block ring-yellow-700 bg-yellow-900"></div>
+                    <div class="tetromino-block ring-yellow-700 bg-yellow-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="h-8 w-8"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-yellow-700 bg-yellow-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-pink-700 bg-pink-900"></div>
+                    <div class="tetromino-block ring-pink-700 bg-pink-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-green-700 bg-green-900"></div>
+                    <div class="tetromino-block ring-green-700 bg-green-900"></div>
+                    <div class="tetromino-block ring-blue-700 bg-blue-900"></div>
+                    <div class="tetromino-block ring-pink-700 bg-pink-900"></div>
+                    <div class="tetromino-block ring-pink-700 bg-pink-900"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-indigo-700 bg-indigo-900"></div>
+                    <div class="tetromino-block ring-purple-700 bg-purple-900"></div>
+                    <div class="tetromino-block ring-green-700 bg-green-900"></div>
+                    <div class="tetromino-block ring-green-700 bg-green-900"></div>
+                    <div class="tetromino-block ring-blue-700 bg-blue-900"></div>
+                    <div class="tetromino-block ring-blue-700 bg-blue-900"></div>
+                    <div class="tetromino-block ring-blue-700 bg-blue-900"></div>
+                    <div class="h-8 w-8 bg-gray-900"></div>
+                </div>
+                <div class="flex flex-col gap-y-4">
+                    <div class="mb-auto">
+                        <div class="bg-gray-300 px-2 pt-1 w-full text-black font-joystix">NEXT</div>
+                        <div id="tetris-nextPiece" class="grid grid-cols-4 h-auto border-4 border-gray-300 p-4">
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                            <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                            <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                            <div class="tetromino-block ring-red-700 bg-red-900"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                            <div class="h-8 w-8"></div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute bottom-0 flex flex-col space-y-2">
+                            <div class="leading-4">
+                                <span class="font-joystix text-gray-400">Points</span>
+                                <h1 id="score" class="text-5xl font-bold font-joystix">2560</h1>
+                            </div>
+                            <div class="leading-4">
+                                <span class="font-joystix text-gray-400">Level</span>
+                                <h1 id="level" class="text-5xl font-bold font-joystix">3</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="./HackTimer.js"></script>
+    <script src="./connect.js"></script>
+    <script src="./tetris.js"></script>
+    <script src="./multi.js"></script> -->
+</body>
+
+</html>

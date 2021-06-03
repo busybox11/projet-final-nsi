@@ -27,7 +27,7 @@ ws.onmessage = function(message) {
         case "updatePlayers":
             document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
             document.getElementById("opponentsGame").innerHTML += `
-        <div id="${message.body.playerName}-tetris-game" class="grid grid-cols-10 w-auto h-auto border-4 border-gray-700">
+        <div id="${message.body.playerName}-tetris-game" class="grid grid-cols-10 grid-rows-20 w-48 h-96 border-4 border-gray-700">
             <div></div>
             <div></div>
             <div></div>
