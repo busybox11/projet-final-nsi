@@ -36,6 +36,7 @@ wss.on('connection', (ws) => {
                         }
                         if (player != ws) playersNameGame.push(player.playerName)
                     }
+                    console.log(game.players.length)
                     if (game.players.length < game.infos.size) {
                         game.players.push(ws)
                         for (let i = 0; i < game.players.length; i++) {
