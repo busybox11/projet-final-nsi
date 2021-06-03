@@ -71,6 +71,7 @@ wss.on('connection', (ws) => {
             case "launchMultiGame":
                 if (ws.gameCode && games[ws.gameCode]) {
                     if (games[gameCode].players.length <= 1) return ws.send(JSON.stringify({ title: "errorLaunchingGame", body: "you are alone" }))
+                    console.log(games[gameCode])
                     for (let client of games[gameCode].players) {
                         client.status = "playing"
                         client.send(JSON.stringify({

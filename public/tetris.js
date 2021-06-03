@@ -121,7 +121,6 @@ var fallingLineGrid = []
 var canPushPiece = true
 var pieceFalling, nextPiece, holdPiece
 var timeLapseFall = levelsInfos[currentLevel]
-var ws = new WebSocket("ws://localhost:3000", "protocolOne");
 var isgameover = true;
 var pause = false;
 var canpause = false
