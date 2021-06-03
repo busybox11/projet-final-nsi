@@ -169,6 +169,7 @@ wss.on('connection', (ws) => {
                         break;
                     }
                     if (games[ws.gameCode].players[i] != ws) {
+                        console.log(playersPlayingNb)
                         games[ws.gameCode].players[i].send(JSON.stringify({
                             title: "playerLeave",
                             body: {

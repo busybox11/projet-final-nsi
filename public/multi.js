@@ -82,8 +82,9 @@ ws.onmessage = function(message) {
             break;
 
         case "playerLeave":
+            console.log(message.body.playersNb)
             document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
-            document.getElementById("opponentsGame").removeChild(document.getElementById(`${message.body.playerName}-tetris-game`));
+            document.getElementById(`${message.body.playerName}-tetris-game`).parentElement.removeChild(document.getElementById(`${message.body.playerName}-tetris-game`))
             resizePlayersGridArrangement(message.body)
             break;
 
@@ -226,6 +227,7 @@ function makeALine() {
 
 function resizePlayersGridArrangement(body) {
     playersNb = body.playersNb
+    console.log(playersNb)
     if (playersNb <= 1) {
         if (!isgameover) {
             youWin()
@@ -238,7 +240,9 @@ function resizePlayersGridArrangement(body) {
         document.getElementById("playerGame").classList.add("justify-start")
 
         document.getElementById("opponentsGame").className = ""
-        document.getElementById("opponentsGame").children[0].classList.add("justify-end")
+        document.getElementById("opponentsGame").children[0].className = "grid grid-cols-10 w-80 border-4 border-gray-700"
+        document.getElementById("windowGame").innerHTML += document.getElementById("opponentsGame").innerHTML
+        document.getElementById("opponentsGame").innerHTML = ""
     }
 }
 
