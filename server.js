@@ -305,6 +305,10 @@ app.get("/multi", (req, res) => {
     }
 });
 
+app.get("/multiph", (req, res) => {
+    return res.sendFile(__dirname + `/views/multiph.html`)
+});
+
 app.post("/createGame", (req, res) => {
     var gameName = req.body.gameName
     var gameSize = req.body.gameSize
