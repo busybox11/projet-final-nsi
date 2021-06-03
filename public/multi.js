@@ -479,6 +479,7 @@ ws.onmessage = function(message) {
         case "winner":
             document.getElementById("waiting").classList.remove("hidden")
             document.getElementById("game").classList.add("hidden")
+            console.log(message.body.size)
             document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
             break;
 
@@ -600,6 +601,7 @@ function resizePlayersGridArrangement(body) {
 
 function youWin() {
     alert("you win !!!")
+    console.log("win")
     isgameover = true
     ws.send(JSON.stringify({
         title: "gameOver",

@@ -134,8 +134,14 @@ wss.on('connection', (ws) => {
 
             case "gameOver":
                 if (!ws.gameCode || !games[ws.gameCode]) break;
-                ws.status = "spectator"
-                if (games[ws.gameCode].players.length <= 1) { //si il reste un seul joueur en partie
+                ws.status = "spectator";
+                var playersPlayingNb = 0;
+                for (let i = 0; i < games[ws.gameCode].players.length; i++) {
+                    if (games[ws.gameCode].players[i].status == "playing") {
+                        playersPlayingNb++
+                    }
+                }
+                if (playersPlayingNb <= 1) { //si il reste un seul joueur en partie
                     for (let i = 0; i < games[ws.gameCode].players.length; i++) {
                         if (!games[ws.gameCode].players[i]) {
                             //error in games list
@@ -150,7 +156,7 @@ wss.on('connection', (ws) => {
                                 size: games[ws.gameCode].infos.size
                             }
                         }))
-
+                        ws.status="waiting"
                     }
                     break;
                 }
@@ -160,18 +166,13 @@ wss.on('connection', (ws) => {
                         ws.close()
                         break;
                     }
-                    var playersNb = 0;
-                    for (let i = 0; i < games[ws.gameCode].players.length; i++) {
-                        if (games[ws.gameCode].players[i].status == "playing") {
-                            playersNb++
-                        }
-                    }
                     if (games[ws.gameCode].players[i] != ws) {
                         games[ws.gameCode].players[i].send(JSON.stringify({
                             title: "playerLeave",
                             body: {
                                 playerName: ws.playerName,
-                                playersNb: playersNb
+                                playersNb: playersPlayingNb,
+                                size: games[ws.gameCode].infos.size
                             }
                         }))
                     }
@@ -313,7 +314,7 @@ app.post("/createGame", (req, res) => {
     var private = req.body.private != undefined
         //si ce nom existe deja return
     if (games[gameName]) return res.redirect('/games')
-    if(gameName.length>20 ||gameName.length<3)return res.redirect('/games')
+    if(gameName.length>20)return res.redirect('/games')
     if(gameName.match(/^[^a-zA-Z0-9]+$/) ? true : false) return res.redirect('/games')
     gameCode = launchGame(gameName, gameSize, gameMode, private)
     return res.redirect(`/multi?code=${gameCode}`)
