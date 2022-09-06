@@ -158,7 +158,7 @@ wss.on('connection', (ws) => {
                                 size: games[ws.gameCode].infos.size
                             }
                         }))
-                        ws.status="waiting"
+                        ws.status = "waiting"
                     }
                     break;
                 }
@@ -321,8 +321,8 @@ app.post("/createGame", (req, res) => {
     var private = req.body.private != undefined
         //si ce nom existe deja return
     if (games[gameName]) return res.redirect('/games')
-    if(gameName.length>20)return res.redirect('/games')
-    if(gameName.match(/^[^a-zA-Z0-9]+$/) ? true : false) return res.redirect('/games')
+    if (gameName.length > 20) return res.redirect('/games')
+    if (gameName.match(/^[^a-zA-Z0-9]+$/) ? true : false) return res.redirect('/games')
     gameCode = launchGame(gameName, gameSize, gameMode, private)
     return res.redirect(`/multi?code=${gameCode}`)
 })
