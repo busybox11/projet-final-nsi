@@ -86,7 +86,7 @@ wss.on('connection', (ws) => {
             case "tetrisGrid":
                 if (ws.gameCode && games[ws.gameCode]) {
                     if (ws.status != "playing") break;
-                    for (let i = 0; i < games[ws.gameCode].players.length && i <= 3; i++) {
+                    for (let i = 0; i < games[ws.gameCode].players.length; i++) {
                         if (!games[ws.gameCode].players[i]) {
                             //error in games list
                             ws.close()
