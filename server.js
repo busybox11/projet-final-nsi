@@ -19,13 +19,14 @@ wss.on('connection', (ws) => {
         var body = message.body
         switch (title) {
             case "connectToTheGame":
-                //si le code exist
+                //si le code existe
                 if (games[body.gameCode]) {
                     var game = games[body.gameCode]
                     var playersNameGame = []
                     ws.playerName = body.playerName
                     ws.gameCode = body.gameCode
                     ws.status = "waiting"
+                    console.log(game.players, ws.playerName)
                     for (let player of game.players) {
                         if (player.playerName == ws.playerName) {
                             ws.send(JSON.stringify({
@@ -36,7 +37,6 @@ wss.on('connection', (ws) => {
                         }
                         if (player != ws) playersNameGame.push(player.playerName)
                     }
-                    console.log(game.players.length)
                     if (game.players.length < game.infos.size) {
                         game.players.push(ws)
                         for (let i = 0; i < game.players.length; i++) {
@@ -86,9 +86,8 @@ wss.on('connection', (ws) => {
 
             case "tetrisGrid":
                 if (ws.gameCode && games[ws.gameCode]) {
-                    if (games[ws.gameCode].players.length > 3) break;
                     if (ws.status != "playing") break;
-                    for (let i = 0; i < games[ws.gameCode].players.length; i++) {
+                    for (let i = 0; i < games[ws.gameCode].players.length && i <= 3; i++) {
                         if (!games[ws.gameCode].players[i]) {
                             //error in games list
                             ws.close()

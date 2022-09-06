@@ -23,4 +23,4 @@ function refreshGamesList() {
         }
     }
 }
-setInterval(refreshGamesList, 5000)
+setInterval(refreshGamesList, 2000)

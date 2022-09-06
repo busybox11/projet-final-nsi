@@ -48,7 +48,7 @@ ws.onmessage = function(message) {
                 <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
                 <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
                 <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
-                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="tetromino-little-block ring-red-700 bg-red-900"></div>
+                <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
             </div>`
             break;
 
@@ -56,7 +56,7 @@ ws.onmessage = function(message) {
             document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
             for (let name of message.body.playersNameGame) {
                 document.getElementById("opponentsGame").innerHTML += `
-                <div id="${message.body.playerName}-tetris-game" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
+                <div id="${name}-tetris-game" class="grid grid-cols-10 w-24 h-44 border-4 border-gray-700 mx-8 my-4">
                     <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
                     <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
                     <div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div><div class="h-2 w-2"></div>
@@ -82,7 +82,6 @@ ws.onmessage = function(message) {
             break;
 
         case "playerLeave":
-            console.log(message.body.playersNb)
             document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
             document.getElementById(`${message.body.playerName}-tetris-game`).parentElement.removeChild(document.getElementById(`${message.body.playerName}-tetris-game`))
             resizePlayersGridArrangement(message.body)
@@ -132,6 +131,7 @@ ws.onmessage = function(message) {
     }
 }
 ws.onclose = function() {
+    console.log("test")
     window.location.replace("/")
 }
 var pastgrid = []

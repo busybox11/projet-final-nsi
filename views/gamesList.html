@@ -11,7 +11,9 @@
 </head>
 
 <body class="bg-black text-white h-full relative px-12 py-6">
-    <h3 class="text-3xl font-semibold text-gray-500 font-joystix mb-4"><a class="hover:text-gray-300" href="/"><</a> Multiplayer</h3>
+    <h3 class="text-3xl font-semibold text-gray-500 font-joystix mb-4">
+        <a class="hover:text-gray-300" href="/">
+            <</a> Multiplayer</h3>
 
     <div id="gamesList" class="w-full flex flex-col space-y-4 mb-4">
     </div>
@@ -50,7 +52,7 @@
                                 <label for="gameMode">Mode de jeu</label>
                                 <select type="select" name="gameMode" id="gameMode" class="text-black">
                                     <option value="battle">Bataille</option>
-                                    <option value="rumble">Rumble</option>
+                                    <!--<option value="rumble">Rumble</option>-->
                                 </select>
                             </div>
                         </div>
@@ -66,7 +68,7 @@
     <script type="text/javascript">
         function blockSpecialChar(e) {
             var k = e.keyCode;
-            return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8   || (k >= 48 && k <= 57));
+            return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
         }
     </script>
     <script src="./connect.js"></script>
