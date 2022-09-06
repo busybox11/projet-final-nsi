@@ -212,6 +212,7 @@ function gameover() {
         }
     }))
     alert("perdu")
+    window.location.href = "/games"
 }
 
 function makeALine() {
@@ -248,4 +249,19 @@ function resizePlayersGridArrangement(body) {
 
 function youWin() {
     alert("you win !!!")
+    window.location.href = "/games"
 }
+
+window.addEventListener(
+    "keydown",
+    (e) => {
+        if (
+            ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(
+                e.code
+            )
+        ) {
+            e.preventDefault();
+        }
+    },
+    false
+);

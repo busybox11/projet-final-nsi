@@ -26,7 +26,6 @@ wss.on('connection', (ws) => {
                     ws.playerName = body.playerName
                     ws.gameCode = body.gameCode
                     ws.status = "waiting"
-                    console.log(game.players, ws.playerName)
                     for (let player of game.players) {
                         if (player.playerName == ws.playerName) {
                             ws.send(JSON.stringify({
