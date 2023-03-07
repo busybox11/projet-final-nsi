@@ -1,4 +1,4 @@
-var ws = new WebSocket(`ws:${window.location.host}//`, "protocolOne");
+var ws = new WebSocket(`wss:${window.location.host}//`, "protocolOne");
 var oppponentGrid = []
 ws.onopen = function() {
     var url = new URL(window.location.href);

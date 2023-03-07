@@ -1,8 +1,8 @@
-var ws = new WebSocket(`ws:${window.location.host}//`, "protocolOne");
+var ws = new WebSocket(`wss:${window.location.host}//`, "protocolOne");
 var oppponentGrid = []
 var playersNb = 0
 var userName
-var gamedBegin=false
+var gamedBegin = false
 ws.onopen = function() {
     var url = new URL(window.location.href);
     var gameCode = url.searchParams.get("code");
@@ -86,12 +86,12 @@ ws.onmessage = function(message) {
         case "playerLeave":
             document.getElementById("playersNb").innerHTML = `${message.body.playersNb} / ${message.body.size}`
             document.getElementById(`${message.body.playerName}-tetris-game`).parentElement.removeChild(document.getElementById(`${message.body.playerName}-tetris-game`))
-            if(gamedBegin)resizePlayersGridArrangement(message.body)
+            if (gamedBegin) resizePlayersGridArrangement(message.body)
             break;
 
         case "beginMultiGame":
             resizePlayersGridArrangement(message.body)
-            gamedBegin =true
+            gamedBegin = true
             document.getElementById("waiting").classList.add("hidden")
             document.getElementById("game").classList.remove("hidden")
             beginTetrisGame()
@@ -255,7 +255,7 @@ function youWin() {
     document.getElementById("endGameStatus").innerHTML = "Winner !"
 }
 
-function backToGames(){
+function backToGames() {
     window.location.href = "/games"
 }
 
